@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, UserLoginForm
 from django.contrib.auth import login, get_user_model
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -9,7 +9,6 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.core.mail import EmailMessage
 from .tokens import account_activation_token
-from django.http import JsonResponse
 
 
 def user_register(request):
@@ -64,8 +63,26 @@ def activate(request, uidb64, token):
         user.save()
 
         messages.success(request, 'Спасибо за ваше подтверждение почты. Сейчас можете зайти в свой аккаунт.')
-        return redirect('signup')
+        return redirect('signin')
     else:
         messages.error(request, 'Ссылка не коректна!')
 
     return redirect('signup')
+
+
+def user_login(request):
+    if request.method == 'POST':
+        form = UserLoginForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('account')
+        else:
+            messages.error(request, 'Ошибка авторизации')
+    else:
+        form = UserLoginForm()
+    return render(request, 'signin.html', {'form': form})
+
+
+def account(request):
+    return render(request, 'account.html')
