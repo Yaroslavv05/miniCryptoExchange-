@@ -1,0 +1,29 @@
+* {
+        margin: 0px;
+    }
+      /* Add some styles for the navbar and footer */
+body {
+display: flex;
+flex-direction: column;
+min-height: 100vh;
+}
+.navbar {
+background-color: #333;
+color: #fff;
+padding: 10px;
+}
+.navbar a {
+color: #fff;
+text-decoration: none;
+margin: 0 10px;
+}
+.content {
+padding: 20px;
+flex: 1;
+}
+.footer {
+background-color: #333;
+color: #fff;
+padding: 10px;
+margin-top: auto;
+}

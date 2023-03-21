@@ -1,10 +1,29 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>Должно все четко работать</h1>
-</body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <title>My Website</title>
+  </head>
+  <body>
+    <!-- Create the navbar -->
+    <nav class="navbar">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+
+    <!-- Create the content area -->
+    <div class="content">
+      <h1>Welcome to my website</h1>
+      <p>This is some sample content for my website.</p>
+    </div>
+
+    <!-- Create the footer -->
+    <footer class="footer">
+      <p>&copy; 2023 My Website. All rights reserved.</p>
+    </footer>
+  </body>
 </html>
