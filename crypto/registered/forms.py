@@ -32,3 +32,9 @@ class UserRegisterForm(UserCreationForm):
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(label="Имя пользователя:", widget=forms.TextInput(attrs={"class": 'form-control'}))
     password = forms.CharField(label="Пароль:", widget=forms.PasswordInput(attrs={"class": 'form-control'}))
+
+
+class KYCForm(forms.Form):
+    fio = forms.CharField(label="ФИО", widget=forms.TextInput(attrs={"class": 'form-control'}))
+    phone_number = forms.CharField(label="Номер телефона", widget=forms.TextInput(attrs={"class": 'form-control'}))
+    passport = forms.CharField(label="Паспорт", widget=forms.FileInput(attrs={'class': 'form-control'}))

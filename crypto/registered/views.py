@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import UserRegisterForm, UserLoginForm
+from .forms import UserRegisterForm, UserLoginForm, KYCForm
 from django.contrib.auth import login, get_user_model
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -9,6 +9,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.core.mail import EmailMessage
 from .tokens import account_activation_token
+from .models import KCYModel
 
 
 def user_register(request):
@@ -85,4 +86,19 @@ def user_login(request):
 
 
 def account(request):
-    return render(request, 'account.html')
+    fio = KCYModel.objects.last()
+    return render(request, 'account.html', {'fio': fio})
+
+
+def KYC(request):
+    if request.method == 'POST':
+        form = KYCForm(request.POST, request.FILES)
+        if form.is_valid():
+            fio = form.cleaned_data['fio']
+            KCYModel.objects.create(fio=fio)
+            return redirect('account')
+        else:
+            messages.error(request, 'Ошибка верификации!')
+    else:
+        form = KYCForm()
+    return render(request, 'kyc.html', {'form': form})

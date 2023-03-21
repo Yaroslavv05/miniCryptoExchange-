@@ -1,10 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Your account</title>
-</head>
-<body>
-
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  </head>
+  <body>
+  {% if request.user.is_authenticated %}
+  {% if fio %}
+  <div class="alert alert-success" role="alert">
+    Проверка будет длится 1-2 дня!
+  </div>
+  {% else %}
+  <div class="alert alert-warning" role="alert">
+    Что бы был больше объем торговли надо пройти верификацию <a href="{% url 'kyc' %}">KYC</a>
+  </div>
+  {% endif %}
+  <h1 style="text-align: center;">Общий баланс</h1>
+  <p style="font-size: 30px"><b>0.0 BTC</b> ≈ $0.0000000</p>
+  <br>
+        <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+              {% for i in name_coin %}
+            <td>{{ i }}</td>
+            {% endfor %}
+          </tr>
+        </thead>
+          <thead>
+          <tr>
+            <th scope="col">Amount</th>
+               {% for i in col_vo_coin %}
+            <td>{{ i }}</td>
+            {% endfor %}
+          </tr>
+        </thead>
+          <thead>
+          <tr>
+            <th scope="col">Price</th>
+              {% for i in price %}
+            <td>{{ i }}</td>
+            {% endfor %}
+          </tr>
+        </thead>
+          <thead>
+          <tr>
+            <th scope="col">24H Change</th>
+              {% for i in changes %}
+              {% if i < 0 %}
+              <td style="color: red;">{{ i }} %</td>
+              {% else %}
+              <td style="color: green ;">+ {{ i }} %</td>
+              {% endif %}
+            {% endfor %}
+          </tr>
+        </thead>
+      </table>
+  {% endif %}
+  </body>
 </html>
