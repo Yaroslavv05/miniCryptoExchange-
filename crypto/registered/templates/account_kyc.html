@@ -1,15 +1,9 @@
 {% extends 'base.html' %}
 {% block CONTENT %}
   {% if request.user.is_authenticated %}
-  {% if fio %}
   <div class="alert alert-success" role="alert">
     Проверка будет длится 1-2 дня!
   </div>
-  {% else %}
-  <div class="alert alert-warning" role="alert">
-    Что бы был больше объем торговли надо пройти верификацию <a href="{% url 'kyc' %}">KYC</a>
-  </div>
-  {% endif %}
   <h1 style="text-align: center;">Общий баланс</h1>
   <p style="font-size: 30px"><b>0.0 BTC</b> ≈ $0.0000000</p>
   <br>

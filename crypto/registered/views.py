@@ -86,17 +86,18 @@ def user_login(request):
 
 
 def account(request):
-    fio = KCYModel.objects.last()
-    return render(request, 'account.html', {'fio': fio})
+    return render(request, 'account.html')
+
+
+def account_kyc(request):
+    return render(request, 'account_kyc.html')
 
 
 def KYC(request):
     if request.method == 'POST':
         form = KYCForm(request.POST, request.FILES)
         if form.is_valid():
-            fio = form.cleaned_data['fio']
-            KCYModel.objects.create(fio=fio)
-            return redirect('account')
+            return redirect('account_kyc')
         else:
             messages.error(request, 'Ошибка верификации!')
     else:
