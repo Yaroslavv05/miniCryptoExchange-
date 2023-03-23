@@ -8,7 +8,7 @@
   </head>
   <body>
   {% if request.user.is_authenticated %}
-  {% if fio %}
+  {% if request.user.fio %}
   <div class="alert alert-success" role="alert">
     Проверка будет длится 1-2 дня!
   </div>
