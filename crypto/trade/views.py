@@ -3,16 +3,28 @@ import binance
 from django.http import JsonResponse
 
 
+def divine_number(number_str: str, length: int = 0) -> str:
+    left_side = f'{int(number_str.split(".")[0]):,}'
+    if length >= 1:
+        right_side = number_str.split(".")[1][:length]
+        if right_side[1] == '0':
+            right_side = '1'
+        return f'{left_side.replace(",", "")}.{right_side}'
+    return left_side
+
+
 def index(request):
     client = binance.Client()
     # print(client.get_all_tickers())
     # print(client.get_symbol_info('XRPUSDT')['baseAsset'])
     # print(client.get_symbol_info('XRPUSDT')['priceChangePercent'])
     # print(client.get_ticker())
-    data_price = [i[1] for i in client.get_klines(symbol='BTCUSDT', interval='1m')][:100]
+    data_price = [i[1] for i in client.get_klines(symbol='ADAUSDT', interval='1m')][:100]
     data = {'data': data_price}
-    min_data = int(min(data['data']).split('.')[0])
-    max_data = int(max(data['data']).split('.')[0])
+    min_data = divine_number(min(data['data']), 4)
+    max_data = divine_number(max(data['data']), 4)
+    min_data = str(float(min_data) - (float(min_data) * 0.1 / 100))
+    max_data = str(float(max_data) + (float(max_data) * 0.1 / 100))
     data_len = []
     for i in reversed(range(len(data_price))):
         data_len.append(str(i+1) + 'm ago')
