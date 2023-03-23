@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block CONTENT %}
+<div style="width: 800px; height: 400px">
+    <canvas id="myChart"></canvas>
+</div>
+
+<script>
+		function updateElement() {
+        $.ajax({
+            url: "",
+            success: function(data) {
+            	console.log(data.data)
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: data.data_len,
+                        datasets: [{
+                            label: 'Bitcoin Price',
+                            data: data.data,
+                            borderColor: 'rgb(255, 99, 132)',
+                            fill: false
+                        }]
+                    },
+                    options: {
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: 'Min and Max Settings'
+      }
+    },
+    scales: {
+      y: {
+        min: data.min_data,
+        max: data.max_data,
+      },
+    }
+  },
+
+    });
+
+
+
+            }
+        });
+    }
+
+    setInterval(updateElement, 1000 * 3); // Call updateElement every 3 minutes
+
+</script>
+
+
+{% endblock %}
