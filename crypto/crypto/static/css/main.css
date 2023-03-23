@@ -7,12 +7,12 @@ display: flex;
 flex-direction: column;
 min-height: 100vh;
 }
-.navbar {
+#nav {
 background-color: #333;
 color: #fff;
 padding: 10px;
 }
-.navbar a {
+#nav a {
 color: #fff;
 text-decoration: none;
 margin: 0 10px;
