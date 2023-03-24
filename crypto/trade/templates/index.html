@@ -43,18 +43,44 @@
 
 </style>
 <div class="container">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(function() {
+      function update_price_change() {
+        $.ajax({
+          url: "{% url 'get_price_change' %}",
+          dataType: "json",
+          success: function(data) {
+            $('#price').text('$' + data.price);
+            if (data.change >= 0) {
+              $('#change').html('<span style="color: green;">+' + data.change + '%</span>');
+            } else {
+              $('#change').html('<span style="color: red;">' + data.change + '%</span>');
+            }
+          }
+        });
+      }
+
+      setInterval(update_price_change, 3000); // update every 5 seconds
+    });
+    </script>
     <nav class="navbar">
         <div class="navbar-brand">
-          <span>BTCUSDT</span>
+          <span>{{ symbol }}</span>
         </div>
         <div class="navbar-price" id="price">
-          $29,000.00
+          ${{ price }}
         </div>
         <div class="navbar-change">
-            <span style="color: green;" id="change">+10%</span>
+          {% if change > 0 %}
+          <span style="color: green;" id="change">+{{ change }}%</span>
+          {% else %}
+          <span style="color: red;" id="change">{{ change }}%</span>
+          {% endif %}
         </div>
         <form class="search-form" style="width: 20%;" method="post">
-          <input type="text" placeholder="BTCUSDT">
+            {% csrf_token %}
+            {{ form.name_coin }}
         </form>
       </nav>
     <div style="width: 800px; height: 400px; margin: 0 auto;">
@@ -97,133 +123,39 @@
         }
 
         setInterval(updateElement, 1000 * 3); // Call updateElement every 3 minutes
-
     </script>
     <div class="form-wrapper">
         <div class="form-container">
-          <form class="buy-form">
+          <form class="buy-form" method="post">
+              {% csrf_token %}
             <div class="form-group">
-              <span>Avbl</span> <b>0.0 USDT</b>
+                <label>Price ({{ currency }})</label>
+              {{ buy_form.price }}
             </div>
             <div class="form-group">
-              <input placeholder = "Price (BTC)" type="text" id="buy-price" name="buy-price">
+                <label>Amount ({{ asset }})</label>
+              {{ buy_form.amount }}
             </div>
-            <div class="form-group">
-              <input placeholder="Amount (USDT)" type="text" id="buy-amount" name="buy-amount">
-            </div>
-            <div class="form-group">
-              <input placeholder="Total (USDT)" type="text" id="buy-total" name="buy-total" readonly>
-            </div>
-            <button type="submit" class="btn btn-success">Buy BTC</button>
+<!--            <div class="form-group">-->
+<!--              <input placeholder="Total ({{ currency }})" type="text" id="buy-total" name="buy-total" readonly>-->
+<!--            </div>-->
+            <button type="submit" class="btn btn-success">Buy {{ asset }}</button>
           </form>
           <form class="sell-form">
             <div class="form-group">
-              <span>Avbl</span> <b>0.0 BTC</b>
+                <label>Price ({{ currency }})</label>
+              <input type="text" id="sell-price" name="sell-price">
             </div>
             <div class="form-group">
-              <input placeholder="Price (BTC)" type="text" id="sell-price" name="sell-price">
+                <label>Amount ({{ asset }})</label>
+              <input type="text" id="sell-amount" name="sell-amount">
             </div>
-            <div class="form-group">
-              <input placeholder="Amount (USDT)" type="text" id="sell-amount" name="sell-amount">
-            </div>
-            <div class="form-group">
-              <input placeholder="Total (USDT)" type="text" id="sell-total" name="sell-total" readonly>
-            </div>
-            <button type="submit" class="btn btn-danger">Sell BTC</button>
+<!--            <div class="form-group">-->
+<!--              <input placeholder="Total ({{ currency }})" type="text" id="sell-total" name="sell-total" readonly>-->
+<!--            </div>-->
+            <button type="submit" class="btn btn-danger">Sell {{ asset }}</button>
           </form>
         </div>
       </div>
 </div>
-<!--    <style>-->
-<!--      table {-->
-<!--        border-collapse: collapse;-->
-<!--        width: 100%;-->
-<!--      }-->
-<!--      th, td {-->
-<!--        text-align: left;-->
-<!--        padding: 8px;-->
-<!--      }-->
-<!--      th {-->
-<!--        background-color: #4CAF50;-->
-<!--        color: white;-->
-<!--      }-->
-<!--      tr:nth-child(even) {-->
-<!--        background-color: #f2f2f2;-->
-<!--      }-->
-<!--    </style>-->
-<!--<h1>Top 8 Cryptocurrencies</h1>-->
-<!--    <table>-->
-<!--      <tr>-->
-<!--        <th>Rank</th>-->
-<!--        <th>Name</th>-->
-<!--        <th>Symbol</th>-->
-<!--        <th>Market Cap</th>-->
-<!--        <th>Price</th>-->
-<!--        <th>Change (24h)</th>-->
-<!--      </tr>-->
-<!--      <tr>-->
-<!--        <td>1</td>-->
-<!--        <td>Bitcoin</td>-->
-<!--        <td>BTC</td>-->
-<!--        <td>$1.04T</td>-->
-<!--        <td>${{ data.prises.BTCUSDT }}</td>-->
-<!--        <td>+2.05%</td>-->
-<!--      </tr>-->
-<!--      <tr>-->
-<!--        <td>2</td>-->
-<!--        <td>Ethereum</td>-->
-<!--        <td>ETH</td>-->
-<!--        <td>$200B</td>-->
-<!--        <td>$1,500</td>-->
-<!--        <td>+3.50%</td>-->
-<!--      </tr>-->
-<!--      <tr>-->
-<!--        <td>3</td>-->
-<!--        <td>Binance Coin</td>-->
-<!--        <td>BNB</td>-->
-<!--        <td>$70B</td>-->
-<!--        <td>$460</td>-->
-<!--        <td>+4.75%</td>-->
-<!--      </tr>-->
-<!--      <tr>-->
-<!--        <td>4</td>-->
-<!--        <td>Tether</td>-->
-<!--        <td>USDT</td>-->
-<!--        <td>$41B</td>-->
-<!--        <td>$1.00</td>-->
-<!--        <td>-0.01%</td>-->
-<!--      </tr>-->
-<!--      <tr>-->
-<!--        <td>5</td>-->
-<!--        <td>Cardano</td>-->
-<!--        <td>ADA</td>-->
-<!--        <td>$39B</td>-->
-<!--        <td>$1.20</td>-->
-<!--        <td>+1.75%</td>-->
-<!--      </tr>-->
-<!--      <tr>-->
-<!--        <td>6</td>-->
-<!--        <td>XRP</td>-->
-<!--        <td>XRP</td>-->
-<!--        <td>$25B</td>-->
-<!--        <td>$0.50</td>-->
-<!--        <td>+2.15%</td>-->
-<!--      </tr>-->
-<!--      <tr>-->
-<!--        <td>7</td>-->
-<!--        <td>Polkadot</td>-->
-<!--        <td>DOT</td>-->
-<!--        <td>$25B</td>-->
-<!--        <td>$25.00</td>-->
-<!--        <td>+1.80%</td>-->
-<!--      </tr>-->
-<!--      <tr>-->
-<!--        <td>8</td>-->
-<!--        <td>Uniswap</td>-->
-<!--        <td>UNI</td>-->
-<!--        <td>$14B</td>-->
-<!--        <td>$30.00</td>-->
-<!--        <td>+2.20%</td>-->
-<!--      </tr>-->
-<!--    </table>-->
 {% endblock %}

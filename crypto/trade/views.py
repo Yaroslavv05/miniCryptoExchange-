@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import binance
 from django.http import JsonResponse
+from django.contrib import messages
+from .forms import SearchCoinForm, BUYForm
 
 
 def divine_number(number_str: str, length: int = 0) -> str:
@@ -13,37 +15,132 @@ def divine_number(number_str: str, length: int = 0) -> str:
     return left_side
 
 
-def index(request):
+def get_price_change(request):
     client = binance.Client()
-    # print(client.get_all_tickers())
-    # print(client.get_symbol_info('XRPUSDT')['baseAsset'])
-    # print(client.get_symbol_info('XRPUSDT')['priceChangePercent'])
-    # print(client.get_ticker())
-    data_price = [i[1] for i in client.get_klines(symbol='ADAUSDT', interval='1m')][:100]
+    is_first = True if request.COOKIES['is_first'] == 'True' else False
+    if not is_first:
+        info = client.get_ticker(symbol=request.COOKIES['name'])
+        data = {
+            'price': divine_number(info['lastPrice'], 4),
+            'change': round(float(info['priceChangePercent']), 2),
+        }
+    else:
+        info = client.get_ticker(symbol='BTCUSDT')
+        data = {
+            'price': divine_number(info['lastPrice'], 4),
+            'change': round(float(info['priceChangePercent']), 2),
+        }
+    return JsonResponse(data)
+
+
+def spot(request):
+    name = 'BTCUSDT'
+    if request.method == 'POST':
+        form = SearchCoinForm(request.POST)
+        if form.is_valid():
+            name_coin = form.cleaned_data['name_coin']
+            response = redirect('spot_coin')
+            response.set_cookie('name', name_coin)
+            response.set_cookie('is_first', False)
+            return response
+        else:
+            for error in list(form.errors.values()):
+                messages.error(request, error)
+    else:
+        form = SearchCoinForm()
+    if request.method == 'POST':
+        buy_form = BUYForm(request.POST)
+        if buy_form.is_valid():
+            price = buy_form.cleaned_data['price']
+            amount = buy_form.cleaned_data['amount']
+            response = redirect('pay')
+            response.set_cookie('price', price)
+            response.set_cookie('amount', amount)
+            return response
+        else:
+            for error in list(form.errors.values()):
+                messages.error(request, error)
+    else:
+        buy_form = BUYForm()
+    client = binance.Client()
+    data_price = [i[1] for i in client.get_klines(symbol=name, interval='1m')][:100]
     data = {'data': data_price}
     min_data = divine_number(min(data['data']), 4)
     max_data = divine_number(max(data['data']), 4)
     min_data = str(float(min_data) - (float(min_data) * 0.1 / 100))
     max_data = str(float(max_data) + (float(max_data) * 0.1 / 100))
     data_len = []
+    info = client.get_ticker(symbol=name)
+    asset = client.get_symbol_info(symbol=name)
     for i in reversed(range(len(data_price))):
-        data_len.append(str(i+1) + 'm ago')
+        data_len.append(str(i + 1) + 'm ago')
     data = {'min_data': min_data, 'max_data': max_data, 'data': data['data'][:100], 'data_len': data_len}
-    # data = {
-    #     'BTC': client.get_symbol_info('BTCUSDT'),
-    #     'ETH': client.get_symbol_info('ETHUSDT'),
-    #     'BNB': client.get_symbol_info('BNBUSDT'),
-    #     'USDT': client.get_symbol_info('USDT'),
-    #     'ADA': client.get_symbol_info('ADAUSDT'),
-    #     'XRP': client.get_symbol_info('XRPUSDT'),
-    #     'DOT': client.get_symbol_info('DOTUSDT'),
-    #     'UNI': client.get_symbol_info('UNIUSDT'),
-    #     'MATIC': client.get_symbol_info('MATICUSDT'),
-    #     'DOGE': client.get_symbol_info('DOGEUSDT'),
-    #         }
     if is_ajax(request=request):
         return JsonResponse(data, status=200)
-    return render(request, 'index.html')
+    return render(request, 'index.html',
+                  {'form': form, 'symbol': info['symbol'], 'price': divine_number(info['lastPrice'], 4),
+                   'change': round(float(info['priceChangePercent']), 2), 'asset': asset['baseAsset'],
+                   'currency': asset['quoteAsset'], 'buy_form': buy_form})
+
+
+def spot_coin(request):
+    if request.method == 'POST':
+        form = SearchCoinForm(request.POST)
+        if form.is_valid():
+            name_coin = form.cleaned_data['name_coin']
+            response = redirect('spot_coin')
+            response.set_cookie('name', name_coin)
+            response.set_cookie('is_first', False)
+            return response
+        else:
+            for error in list(form.errors.values()):
+                messages.error(request, error)
+    else:
+        form = SearchCoinForm()
+    if request.method == 'POST':
+        buy_form = BUYForm(request.POST)
+        if buy_form.is_valid():
+            price = buy_form.cleaned_data['price']
+            amount = buy_form.cleaned_data['amount']
+            response = redirect('pay')
+            response.set_cookie('price', price)
+            response.set_cookie('amount', amount)
+            return response
+        else:
+            for error in list(form.errors.values()):
+                messages.error(request, error)
+    else:
+        buy_form = BUYForm()
+    client = binance.Client()
+    data_price = [i[1] for i in client.get_klines(symbol=request.COOKIES['name'], interval='1m')][:100]
+    data = {'data': data_price}
+    min_data = divine_number(min(data['data']), 4)
+    max_data = divine_number(max(data['data']), 4)
+    min_data = str(float(min_data) - (float(min_data) * 0.1 / 100))
+    max_data = str(float(max_data) + (float(max_data) * 0.1 / 100))
+    data_len = []
+    info = client.get_ticker(symbol=request.COOKIES['name'])
+    asset = client.get_symbol_info(symbol=request.COOKIES['name'])
+    for i in reversed(range(len(data_price))):
+        data_len.append(str(i + 1) + 'm ago')
+    data = {'min_data': min_data, 'max_data': max_data, 'data': data['data'][:100], 'data_len': data_len}
+    if is_ajax(request=request):
+        return JsonResponse(data, status=200)
+    return render(request, 'index.html',
+                  {'form': form, 'symbol': info['symbol'], 'price': divine_number(info['lastPrice'], 4),
+                   'change': round(float(info['priceChangePercent']), 2), 'asset': asset['baseAsset'],
+                   'currency': asset['quoteAsset'], 'buy_form': buy_form})
+
+
+def pay(request):
+    name_coin = request.COOKIES['name']
+    price = request.COOKIES['price']
+    amount = request.COOKIES['amount']
+    suuma = float(price) * float(amount)
+    client = binance.Client()
+    info = client.get_ticker(symbol=request.COOKIES['name'])
+    asset = client.get_symbol_info(symbol=request.COOKIES['name'])
+    return render(request, 'Pay.html', {'name_coin': name_coin, 'price': price, 'amount': amount, 'summa': suuma, 'asset': asset['baseAsset'], 'currency': asset['quoteAsset']})
 
 
 def is_ajax(request):

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Payment</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			text-align: center;
+			background-color: #f9f9f9;
+		}
+
+		h1 {
+			margin-top: 50px;
+			font-size: 36px;
+			color: #333;
+		}
+
+		#wallet-address {
+			font-size: 24px;
+			color: #0066cc;
+			padding: 5px 10px;
+			border: 2px solid #0066cc;
+			border-radius: 5px;
+			background-color: #fff;
+			display: inline-block;
+			margin: 20px auto;
+		}
+
+		#name_coin {
+			font-size: 24px;
+			color: #0066cc;
+			padding: 5px 10px;
+			border: 2px solid #0066cc;
+			border-radius: 5px;
+			background-color: #fff;
+			display: inline-block;
+			margin: 20px auto;
+		}
+
+		#price {
+			font-size: 24px;
+			color: #0066cc;
+			padding: 5px 10px;
+			border: 2px solid #0066cc;
+			border-radius: 5px;
+			background-color: #fff;
+			display: inline-block;
+			margin: 20px auto;
+		}
+
+		#Amount {
+			font-size: 24px;
+			color: #0066cc;
+			padding: 5px 10px;
+			border: 2px solid #0066cc;
+			border-radius: 5px;
+			background-color: #fff;
+			display: inline-block;
+			margin: 20px auto;
+		}
+
+		#summa {
+			font-size: 24px;
+			color: #0066cc;
+			padding: 5px 10px;
+			border: 2px solid #0066cc;
+			border-radius: 5px;
+			background-color: #fff;
+			display: inline-block;
+			margin: 20px auto;
+		}
+
+		button {
+			font-size: 20px;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			background-color: #0066cc;
+			color: #fff;
+			cursor: pointer;
+			margin: 20px 10px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Покупка {{ asset }}</h1>
+	<div>
+        <p>Монета: <span id="name_coin">{{ name_coin }}</span></p>
+        <p>По цене: <span id="price">{{ price }} {{ currency }}</span></p>
+        <p>Количество: <span id="Amount">{{ amount }} {{ asset }}</span></p>
+		<p>На сумму: <span id="summa">{{ summa }} {{ currency }}</span></p>
+		<p>Адрес кошелька: <span id="wallet-address">0x1234567890123456789012345678901234567890</span><button onclick="copyToClipboard()">Копировать</button></p>
+		<button class="btn btn-primary">Я оплатил</button>
+	</div>
+    <script>
+        function copyToClipboard() {
+			var address = document.getElementById('wallet-address').textContent;
+			navigator.clipboard.writeText(address);
+			alert("Address copied to clipboard!");
+		}
+    </script>
+</body>
+</html>

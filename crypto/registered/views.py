@@ -77,7 +77,7 @@ def user_login(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('account')
+            return redirect('main')
         else:
             messages.error(request, 'Ошибка авторизации')
     else:
