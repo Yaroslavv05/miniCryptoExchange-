@@ -12,7 +12,8 @@ class BUYForm(forms.Form):
     price = forms.CharField(widget=forms.TextInput(attrs={
         'type': 'text',
         'id': 'buy-price',
-        'name': 'buy-price'
+        'name': 'buy-price',
+        'value': '29000'
     }))
     amount = forms.CharField(widget=forms.TextInput(attrs={
         'type': 'text',
