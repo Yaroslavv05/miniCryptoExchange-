@@ -87,41 +87,41 @@
         <canvas id="myChart"></canvas>
     </div>
     <script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: [],
+                                datasets: [{
+                                    label: 'Hide',
+                                    data: [],
+                                    borderColor: 'rgb(255, 99, 132)',
+                                    fill: false
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                scales: {
+
+                                }
+                              },
+
+                            });
             function updateElement() {
             $.ajax({
                 url: "",
                 success: function(data) {
                     console.log(data.data)
-                    var ctx = document.getElementById('myChart').getContext('2d');
-                    var myChart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: data.data_len,
-                            datasets: [{
-                                label: 'Hide',
-                                data: data.data,
-                                borderColor: 'rgb(255, 99, 132)',
-                                fill: false
-                            }]
-                        },
-                        options: {
-        responsive: true,
-        scales: {
-          y: {
-            min: data.min_data,
-            max: data.max_data,
-          },
-        }
-      },
-
-        });
-
-
+                    myChart.data.labels = data.data_len;
+                    myChart.data.datasets[0].data = data.data;
+                    myChart.options.scales.y.min = data.min_data;
+                    myChart.options.scales.y.max = data.max_data;
+                    myChart.update();
 
                 }
             });
         }
-
+        updateElement();
         setInterval(updateElement, 1000 * 3); // Call updateElement every 3 minutes
     </script>
     <div class="form-wrapper">

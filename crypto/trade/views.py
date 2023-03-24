@@ -1,3 +1,5 @@
+import random
+
 from django.shortcuts import render, redirect
 import binance
 from django.http import JsonResponse
@@ -8,7 +10,10 @@ from .forms import SearchCoinForm, BUYForm
 def divine_number(number_str: str, length: int = 0) -> str:
     left_side = f'{int(number_str.split(".")[0]):,}'
     if length >= 1:
-        right_side = number_str.split(".")[1][:length]
+        try:
+            right_side = number_str.split(".")[1][:length]
+        except IndexError:
+            return left_side
         if right_side[1] == '0':
             right_side = '1'
         return f'{left_side.replace(",", "")}.{right_side}'
@@ -63,18 +68,20 @@ def spot(request):
     else:
         buy_form = BUYForm()
     client = binance.Client()
-    data_price = [i[1] for i in client.get_klines(symbol=name, interval='1m')][:100]
+    info = client.get_ticker(symbol=name)
+    data_price = [i[4] for i in client.get_klines(symbol=name, interval='1m')][:100]
+    # data_price[-1] = info['lastPrice']
+    # print(client.get_klines(symbol=name, interval='1m'))
     data = {'data': data_price}
     min_data = divine_number(min(data['data']), 4)
     max_data = divine_number(max(data['data']), 4)
     min_data = str(float(min_data) - (float(min_data) * 0.1 / 100))
     max_data = str(float(max_data) + (float(max_data) * 0.1 / 100))
     data_len = []
-    info = client.get_ticker(symbol=name)
     asset = client.get_symbol_info(symbol=name)
     for i in reversed(range(len(data_price))):
         data_len.append(str(i + 1) + 'm ago')
-    data = {'min_data': min_data, 'max_data': max_data, 'data': data['data'][:100], 'data_len': data_len}
+    data = {'min_data': min_data, 'max_data': max_data, 'data': data['data'], 'data_len': data_len}
     if is_ajax(request=request):
         return JsonResponse(data, status=200)
     return render(request, 'index.html',
