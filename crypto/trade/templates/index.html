@@ -61,7 +61,7 @@
         });
       }
 
-      setInterval(update_price_change, 3000); // update every 5 seconds
+      setInterval(update_price_change, 20000); // update every 5 seconds
     });
     </script>
     <nav class="navbar">
@@ -144,7 +144,7 @@
           <form class="sell-form">
             <div class="form-group">
                 <label>Price ({{ currency }})</label>
-              <input type="text" id="sell-price" name="sell-price" value="{{ price }}">
+              <input type="text" id="sell-price" name="sell-price" value="{{ price2 }}">
             </div>
             <div class="form-group">
                 <label>Amount ({{ asset }})</label>

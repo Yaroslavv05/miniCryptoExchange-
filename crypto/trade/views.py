@@ -66,7 +66,9 @@ def spot(request):
             for error in list(form.errors.values()):
                 messages.error(request, error)
     else:
-        buy_form = BUYForm()
+        client = binance.Client()
+        info = client.get_ticker(symbol=name)
+        buy_form = BUYForm(initial_price=float(info['lastPrice']))
     client = binance.Client()
     info = client.get_ticker(symbol=name)
     data_price = [i[4] for i in client.get_klines(symbol=name, interval='1m')][:100]
@@ -87,7 +89,7 @@ def spot(request):
     return render(request, 'index.html',
                   {'form': form, 'symbol': info['symbol'], 'price': divine_number(info['lastPrice'], 4),
                    'change': round(float(info['priceChangePercent']), 2), 'asset': asset['baseAsset'],
-                   'currency': asset['quoteAsset'], 'buy_form': buy_form})
+                   'currency': asset['quoteAsset'], 'buy_form': buy_form, 'price2': float(info['lastPrice'])})
 
 
 def spot_coin(request):
@@ -117,7 +119,9 @@ def spot_coin(request):
             for error in list(form.errors.values()):
                 messages.error(request, error)
     else:
-        buy_form = BUYForm()
+        client = binance.Client()
+        info = client.get_ticker(symbol=request.COOKIES['name'])
+        buy_form = BUYForm(initial_price=float(info['lastPrice']))
     client = binance.Client()
     data_price = [i[1] for i in client.get_klines(symbol=request.COOKIES['name'], interval='1m')][:100]
     data = {'data': data_price}
@@ -136,7 +140,7 @@ def spot_coin(request):
     return render(request, 'index.html',
                   {'form': form, 'symbol': info['symbol'], 'price': divine_number(info['lastPrice'], 4),
                    'change': round(float(info['priceChangePercent']), 2), 'asset': asset['baseAsset'],
-                   'currency': asset['quoteAsset'], 'buy_form': buy_form})
+                   'currency': asset['quoteAsset'], 'buy_form': buy_form, 'price2': float(info['lastPrice'])})
 
 
 def pay(request):
