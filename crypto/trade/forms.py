@@ -6,6 +6,7 @@ class SearchCoinForm(forms.Form):
         'placeholder': 'BTCUSDT',
         'type': 'text'
     }))
+    
 
 
 class BUYForm(forms.Form):

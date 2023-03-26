@@ -12,12 +12,63 @@
     <title>My Website</title>
   </head>
   <body>
-    <!-- Create the navbar -->
-    <nav id="nav" class="navbar">
-      <a href="#">Home</a>
-      <a href="#">About</a>
-      <a href="#">Account</a>
-    </nav>
+    <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'main' %}"><h5>Главная</h5></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'spot' %}"><h5>Графики</h5></a>
+        </li>
+      </ul>
+      <!-- Left links -->
+    </div>
+    <!-- Collapsible wrapper -->
+
+    <!-- Right elements -->
+    <div class="d-flex align-items-center">
+      <div class="dropdown">
+        <a
+          href="{% url 'account' %}"
+          id="navbarDropdownMenuAvatar"
+          role="button"
+          data-mdb-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png"
+            class="rounded-circle"
+            height="25"
+            alt="Black and White Portrait of a Man"
+            loading="lazy"
+          />
+        </a>
+      </div>
+    </div>
+    <!-- Right elements -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
     {% block CONTENT %}
     <!-- Create the content area -->
     <div class="content">
@@ -27,8 +78,8 @@
     {% endblock %}
 
     <!-- Create the footer -->
-<!--    <footer class="footer">-->
-<!--      <p>&copy; 2023 My Website. All rights reserved.</p>-->
-<!--    </footer>-->
+   <footer class="footer">
+     <p>&copy; 2023 CryptoExhange. Все права защищены.</p>
+   </footer>
   </body>
 </html>
