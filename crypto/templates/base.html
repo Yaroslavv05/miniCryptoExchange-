@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -10,76 +10,109 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <link rel="script" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js">
     <title>My Website</title>
-  </head>
-  <body>
-    <!-- Navbar -->
+</head>
+<body>
+<style>
+.dropbtn {
+    background-color: #ffffff;
+    color: white;
+    padding: 9px;
+    font-size: 16px;
+    border: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #6c757d;}
+</style>
+<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <!-- Container wrapper -->
-  <div class="container-fluid">
-    <!-- Toggle button -->
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-mdb-toggle="collapse"
-      data-mdb-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <i class="fas fa-bars"></i>
-    </button>
-
-    <!-- Collapsible wrapper -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <!-- Left links -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'main' %}"><h5>Главная</h5></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'spot' %}"><h5>Графики</h5></a>
-        </li>
-      </ul>
-      <!-- Left links -->
-    </div>
-    <!-- Collapsible wrapper -->
-
-    <!-- Right elements -->
-    <div class="d-flex align-items-center">
-      <div class="dropdown">
-        <a
-          href="{% url 'account' %}"
-          id="navbarDropdownMenuAvatar"
-          role="button"
-          data-mdb-toggle="dropdown"
-          aria-expanded="false"
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+        <!-- Toggle button -->
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-mdb-toggle="collapse"
+                data-mdb-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
         >
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png"
-            class="rounded-circle"
-            height="25"
-            alt="Black and White Portrait of a Man"
-            loading="lazy"
-          />
-        </a>
-      </div>
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'main' %}"><h5>Главная</h5></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'spot' %}"><h5>Графики</h5></a>
+                </li>
+            </ul>
+            <!-- Left links -->
+        </div>
+        <!-- Collapsible wrapper -->
+
+        <!-- Right elements -->
+        <div class="d-flex align-items-center">
+            <div class="dropdown">
+                <button class="dropbtn">
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png"
+                        class="rounded-circle"
+                        height="25"
+                        alt="Black and White Portrait of a Man"
+                        loading="lazy"
+                      />
+                </button>
+                <div class="dropdown-content">
+                    <a href="{% url 'account' %}">Кошелек</a>
+                </div>
+            </div>
+        </div>
+        <!-- Right elements -->
     </div>
-    <!-- Right elements -->
-  </div>
-  <!-- Container wrapper -->
+    <!-- Container wrapper -->
 </nav>
 <!-- Navbar -->
-    {% block CONTENT %}
-    <!-- Create the content area -->
-    <div class="content">
-      <h1>Welcome to my website</h1>
-      <p>This is some sample content for my website.</p>
-    </div>
-    {% endblock %}
+{% block CONTENT %}
+<!-- Create the content area -->
+<div class="content">
+    <h1>Welcome to my website</h1>
+    <p>This is some sample content for my website.</p>
+</div>
+{% endblock %}
 
-    <!-- Create the footer -->
-   <footer class="footer">
-     <p>&copy; 2023 CryptoExhange. Все права защищены.</p>
-   </footer>
-  </body>
+<!-- Create the footer -->
+<footer class="footer">
+    <p>&copy; 2023 CryptoExhange. Все права защищены.</p>
+</footer>
+</body>
 </html>
