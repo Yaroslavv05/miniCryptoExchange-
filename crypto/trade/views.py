@@ -22,17 +22,26 @@ def divine_number(number_str: str, length: int = 0) -> str:
 
 def get_price_change(request):
     client = binance.Client()
-    is_first = True if request.COOKIES['is_first'] == 'True' else False
+    try:
+        is_first = True if request.COOKIES['is_first'] == 'True' else False
+    except KeyError:
+        is_first = False
+    try:
+        name = request.COOKIES['name']
+    except KeyError:
+        name = 'BTCUSDT'
     if not is_first:
-        info = client.get_ticker(symbol=request.COOKIES['name'])
+        data_price = [i[4] for i in client.get_klines(symbol=name, interval='1m')][:100]
+        info = client.get_ticker(symbol=name)
         data = {
-            'price': divine_number(info['lastPrice'], 4),
+            'price': divine_number(data_price[-1], 4),
             'change': round(float(info['priceChangePercent']), 2),
         }
     else:
+        data_price = [i[4] for i in client.get_klines(symbol='BTCUSDT', interval='1m')][:100]
         info = client.get_ticker(symbol='BTCUSDT')
         data = {
-            'price': divine_number(info['lastPrice'], 4),
+            'price': divine_number(data_price[-1], 4),
             'change': round(float(info['priceChangePercent']), 2),
         }
     return JsonResponse(data)
@@ -40,6 +49,7 @@ def get_price_change(request):
 
 def spot(request):
     name = 'BTCUSDT'
+    client = binance.Client()
     if request.method == 'POST':
         form = SearchCoinForm(request.POST)
         if form.is_valid():
@@ -66,13 +76,11 @@ def spot(request):
             for error in list(form.errors.values()):
                 messages.error(request, error)
     else:
-        client = binance.Client()
+        data_price = [i[4] for i in client.get_klines(symbol=name, interval='1m')][:100]
         info = client.get_ticker(symbol=name)
-        buy_form = BUYForm(initial_price=float(info['lastPrice']))
-    client = binance.Client()
+        buy_form = BUYForm(initial_price=float(data_price[-1]))
     info = client.get_ticker(symbol=name)
     data_price = [i[4] for i in client.get_klines(symbol=name, interval='1m')][:100]
-    # data_price[-1] = info['lastPrice']
     # print(client.get_klines(symbol=name, interval='1m'))
     data = {'data': data_price}
     min_data = divine_number(min(data['data']), 4)
@@ -87,12 +95,13 @@ def spot(request):
     if is_ajax(request=request):
         return JsonResponse(data, status=200)
     return render(request, 'index.html',
-                  {'form': form, 'symbol': info['symbol'], 'price': divine_number(info['lastPrice'], 4),
+                  {'form': form, 'symbol': info['symbol'], 'price': divine_number(data_price[-1], 4),
                    'change': round(float(info['priceChangePercent']), 2), 'asset': asset['baseAsset'],
-                   'currency': asset['quoteAsset'], 'buy_form': buy_form, 'price2': float(info['lastPrice'])})
+                   'currency': asset['quoteAsset'], 'buy_form': buy_form, 'price2': float(data_price[-1])})
 
 
 def spot_coin(request):
+    client = binance.Client()
     if request.method == 'POST':
         form = SearchCoinForm(request.POST)
         if form.is_valid():
@@ -119,10 +128,8 @@ def spot_coin(request):
             for error in list(form.errors.values()):
                 messages.error(request, error)
     else:
-        client = binance.Client()
-        info = client.get_ticker(symbol=request.COOKIES['name'])
-        buy_form = BUYForm(initial_price=float(info['lastPrice']))
-    client = binance.Client()
+        data_price = [i[1] for i in client.get_klines(symbol=request.COOKIES['name'], interval='1m')][:100]
+        buy_form = BUYForm(initial_price=float(data_price[-1]))
     data_price = [i[1] for i in client.get_klines(symbol=request.COOKIES['name'], interval='1m')][:100]
     data = {'data': data_price}
     min_data = divine_number(min(data['data']), 4)
@@ -138,9 +145,9 @@ def spot_coin(request):
     if is_ajax(request=request):
         return JsonResponse(data, status=200)
     return render(request, 'index.html',
-                  {'form': form, 'symbol': info['symbol'], 'price': divine_number(info['lastPrice'], 4),
+                  {'form': form, 'symbol': info['symbol'], 'price': divine_number(data_price[-1], 4),
                    'change': round(float(info['priceChangePercent']), 2), 'asset': asset['baseAsset'],
-                   'currency': asset['quoteAsset'], 'buy_form': buy_form, 'price2': float(info['lastPrice'])})
+                   'currency': asset['quoteAsset'], 'buy_form': buy_form, 'price2': float(data_price[-1])})
 
 
 def pay(request):
