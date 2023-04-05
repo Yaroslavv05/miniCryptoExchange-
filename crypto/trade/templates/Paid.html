@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Account Status</title>
+	<style>
+		body {
+			background-color: #f2f2f2;
+			font-family: Arial, sans-serif;
+		}
+
+		.container {
+			width: 80%;
+			max-width: 600px;
+			margin: 0 auto;
+			padding: 20px;
+			background-color: #fff;
+			box-shadow: 0 0 10px rgba(0,0,0,0.2);
+			border-radius: 10px;
+			text-align: center;
+			margin-top: 50px;
+		}
+
+		.status {
+			color: #333;
+			font-size: 36px;
+			margin: 30px 0;
+		}
+
+		.spinner {
+			border: 10px solid #f3f3f3;
+			border-top: 10px solid #3498db;
+			border-radius: 50%;
+			width: 80px;
+			height: 80px;
+			animation: spin 2s linear infinite;
+			margin: 0 auto;
+			display: none;
+		}
+
+		@keyframes spin {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); }
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Ожидайте, пока мы не проверим что деньги пришли</h1>
+		<div class="status">Ожидайте...</div>
+		<div class="spinner"></div>
+		<p>Баланс вашего счета будет обновлен, как только средства будут зачислены.</p>
+		<p>Спасибо за ваше терпение!</p>
+	</div>
+
+	<script>
+		const statusElement = document.querySelector('.status');
+		const spinnerElement = document.querySelector('.spinner');
+
+		// simulate checking account status
+		const checkStatus = setInterval(() => {
+			// make AJAX call to check if funds have been credited
+			const xhr = new XMLHttpRequest();
+			xhr.open('GET', 'check_status.php', true);
+			xhr.onload = () => {
+				if (xhr.status === 200) {
+					const response = JSON.parse(xhr.responseText);
+					if (response.fundsCredited) {
+						// funds have been credited, redirect to account page
+						clearInterval(checkStatus);
+						spinnerElement.style.display = 'none';
+						statusElement.textContent = 'Funds credited!';
+						setTimeout(() => {
+							window.location.href = 'account.php';
+						}, 2000);
+					}
+				}
+			};
+			xhr.send();
+		}, 5000);
+
+		// show spinner while waiting
+		spinnerElement.style.display = 'block';
+	</script>
+</body>
+</html>

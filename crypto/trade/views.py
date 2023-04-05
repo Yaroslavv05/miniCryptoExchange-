@@ -1,11 +1,11 @@
 import random
-
 from django.shortcuts import render, redirect
 import binance
 from django.http import JsonResponse
 from django.contrib import messages
 from .forms import SearchCoinForm, BUYForm
-
+from .config import INFO
+from web3 import Web3
 
 def divine_number(number_str: str, length: int = 0) -> str:
     left_side = f'{int(number_str.split(".")[0]):,}'
@@ -158,7 +158,20 @@ def pay(request):
     client = binance.Client()
     info = client.get_ticker(symbol=request.COOKIES['name'])
     asset = client.get_symbol_info(symbol=request.COOKIES['name'])
-    return render(request, 'Pay.html', {'name_coin': name_coin, 'price': price, 'amount': amount, 'summa': suuma, 'asset': asset['baseAsset'], 'currency': asset['quoteAsset']})
+    return render(request, 'Pay.html', {'name_coin': name_coin, 'price': price, 'amount': amount, 'summa': suuma, 'asset': asset['baseAsset'], 'currency': asset['quoteAsset'], 'number_wallet': INFO[asset['baseAsset']]['wallet']})
+
+
+def paid(request):
+    price = request.COOKIES['price']
+    amount = request.COOKIES['amount']
+    suuma = float(price) * float(amount)
+    client = binance.Client()
+    asset = client.get_symbol_info(symbol=request.COOKIES['name'])
+    web3 = Web3(Web3.HTTPProvider(INFO[asset['baseAsset']]['api']))
+    balance = web3.eth.get_balance(INFO[asset['baseAsset']]['wallet'])
+    if balance == (float(balance) + suuma):
+        redirect('account_kyc')
+    return render(request, 'Paid.html')
 
 
 def is_ajax(request):

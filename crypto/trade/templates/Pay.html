@@ -91,9 +91,15 @@
         <p>По цене: <span id="price">{{ price }} {{ currency }}</span></p>
         <p>Количество: <span id="Amount">{{ amount }} {{ asset }}</span></p>
 		<p>На сумму: <span id="summa">{{ summa }} {{ currency }}</span></p>
-		<p>Адрес кошелька: <span id="wallet-address">0x1234567890123456789012345678901234567890</span><button onclick="copyToClipboard()">Копировать</button></p>
-		<button class="btn btn-primary">Я оплатил</button>
+		<p>Адрес кошелька: <span id="wallet-address">{{ number_wallet }}</span><button onclick="copyToClipboard()">Копировать</button></p>
+		<button id='btn' class="btn btn-primary">Я оплатил</button>
 	</div>
+	<script>
+		const button = document.getElementById("btn");
+		button.addEventListener("click", function() {
+		  window.location.href = "{% url 'paid' %}";
+		});
+	</script>
     <script>
         function copyToClipboard() {
 			var address = document.getElementById('wallet-address').textContent;

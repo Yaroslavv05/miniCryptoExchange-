@@ -4,6 +4,7 @@ from django.http import JsonResponse
 
 client = binance.Client()
 
+
 def index(request):
     # print(client.get_all_tickers())
     # print(client.get_symbol_info('XRPUSDT')['baseAsset'])
