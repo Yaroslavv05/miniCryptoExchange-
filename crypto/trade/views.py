@@ -7,6 +7,7 @@ from .forms import SearchCoinForm, BUYForm
 from .config import INFO
 from web3 import Web3
 
+
 def divine_number(number_str: str, length: int = 0) -> str:
     left_side = f'{int(number_str.split(".")[0]):,}'
     if length >= 1:
@@ -25,7 +26,7 @@ def get_price_change(request):
     try:
         is_first = True if request.COOKIES['is_first'] == 'True' else False
     except KeyError:
-        is_first = False
+        is_first = True
     try:
         name = request.COOKIES['name']
     except KeyError:
@@ -50,6 +51,8 @@ def get_price_change(request):
 def spot(request):
     name = 'BTCUSDT'
     client = binance.Client()
+    data_price = [i[4] for i in client.get_klines(symbol=name, interval='1m')][:100]
+    data_price = [str(float(i) + (float(i) * 0.03)) for i in data_price]
     if request.method == 'POST':
         form = SearchCoinForm(request.POST)
         if form.is_valid():
@@ -76,11 +79,8 @@ def spot(request):
             for error in list(form.errors.values()):
                 messages.error(request, error)
     else:
-        data_price = [i[4] for i in client.get_klines(symbol=name, interval='1m')][:100]
-        info = client.get_ticker(symbol=name)
         buy_form = BUYForm(initial_price=float(data_price[-1]))
     info = client.get_ticker(symbol=name)
-    data_price = [i[4] for i in client.get_klines(symbol=name, interval='1m')][:100]
     # print(client.get_klines(symbol=name, interval='1m'))
     data = {'data': data_price}
     min_data = divine_number(min(data['data']), 4)
@@ -102,6 +102,10 @@ def spot(request):
 
 def spot_coin(request):
     client = binance.Client()
+    data_price = [i[1] for i in client.get_klines(symbol=request.COOKIES['name'], interval='1m')][:100]
+    print(data_price)
+    data_price = [i + (i * 0.03) for i in data_price]
+    print(data_price)
     if request.method == 'POST':
         form = SearchCoinForm(request.POST)
         if form.is_valid():
@@ -128,9 +132,7 @@ def spot_coin(request):
             for error in list(form.errors.values()):
                 messages.error(request, error)
     else:
-        data_price = [i[1] for i in client.get_klines(symbol=request.COOKIES['name'], interval='1m')][:100]
         buy_form = BUYForm(initial_price=float(data_price[-1]))
-    data_price = [i[1] for i in client.get_klines(symbol=request.COOKIES['name'], interval='1m')][:100]
     data = {'data': data_price}
     min_data = divine_number(min(data['data']), 4)
     max_data = divine_number(max(data['data']), 4)

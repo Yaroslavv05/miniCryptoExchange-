@@ -25,6 +25,7 @@ flex: 1;
 background-color: #333;
 color: #fff;
 padding: 10px;
+
 margin-top: auto;
 }
 
@@ -32,7 +33,4 @@ margin-top: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-html {
-    overflow:  hidden;
 }

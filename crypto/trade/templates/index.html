@@ -139,7 +139,12 @@
 <!--            <div class="form-group">-->
 <!--              <input placeholder="Total ({{ currency }})" type="text" id="buy-total" name="buy-total" readonly>-->
 <!--            </div>-->
+              <!-- Вот тут -->
+              {% if request.user.is_authenticated %}
             <button type="submit" class="btn btn-success">Buy {{ asset }}</button>
+              {% else %}
+              <button disabled type="submit" class="btn btn-success">Buy {{ asset }} (Нужно войти)</button>
+            {% endif %}
           </form>
           <form class="sell-form">
             <div class="form-group">
@@ -153,7 +158,11 @@
 <!--            <div class="form-group">-->
 <!--              <input placeholder="Total ({{ currency }})" type="text" id="sell-total" name="sell-total" readonly>-->
 <!--            </div>-->
+              {% if request.user.is_authenticated %}
             <button type="submit" class="btn btn-danger">Sell {{ asset }}</button>
+              {% else %}
+              <button disabled type="submit" class="btn btn-danger">Sell {{ asset }} (Нужно войти)</button>
+            {% endif %}
           </form>
         </div>
       </div>
