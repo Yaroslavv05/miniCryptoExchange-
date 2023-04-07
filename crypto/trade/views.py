@@ -33,6 +33,7 @@ def get_price_change(request):
         name = 'BTCUSDT'
     if not is_first:
         data_price = [i[4] for i in client.get_klines(symbol=name, interval='1m')][:100]
+        data_price = [str(float(i) + (float(i) * 0.03)) for i in data_price]
         info = client.get_ticker(symbol=name)
         data = {
             'price': divine_number(data_price[-1], 4),
@@ -40,7 +41,9 @@ def get_price_change(request):
         }
     else:
         data_price = [i[4] for i in client.get_klines(symbol='BTCUSDT', interval='1m')][:100]
+        data_price = [str(float(i) + (float(i) * 0.03)) for i in data_price]
         info = client.get_ticker(symbol='BTCUSDT')
+        print(type(divine_number(data_price[-1])))
         data = {
             'price': divine_number(data_price[-1], 4),
             'change': round(float(info['priceChangePercent']), 2),
