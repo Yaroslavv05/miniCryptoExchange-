@@ -9,20 +9,29 @@ def index(request):
     # print(client.get_all_tickers())
     # print(client.get_symbol_info('XRPUSDT')['baseAsset'])
     # print(client.get_symbol_info('XRPUSDT')['priceChangePercent'])
-    # print(client.get_ticker())
+    print(client.get_ticker(symbol='BTCUSDT'))
     data = {
-        'BTC': client.get_ticker(symbol='BTCUSDT'),
-        'ETH': client.get_ticker(symbol='ETHUSDT'),
-        'BNB': client.get_ticker(symbol='BNBUSDT'),
-        # 'USDT': client.get_ticker(symbol='USDT'),
-        'ADA': client.get_ticker(symbol='ADAUSDT'),
-        'XRP': client.get_ticker(symbol='XRPUSDT'),
-        'DOT': client.get_ticker(symbol='DOTUSDT'),
-        'UNI': client.get_ticker(symbol='UNIUSDT'),
-        'MATIC': client.get_ticker(symbol='MATICUSDT'),
-        'DOGE': client.get_ticker(symbol='DOGEUSDT'),
-            }
-    # print(client.get_ticker(symbol='BTCUSDT'))
+        'BTC': {'price': round(float(client.get_ticker(symbol='BTCUSDT')['lastPrice']), 4),
+                'per': round(float(client.get_ticker(symbol='BTCUSDT')['priceChangePercent']) + 2.5, 2)},
+        'ETH': {'price': round(float(client.get_ticker(symbol='ETHUSDT')['lastPrice']), 4),
+                'per': round(float(client.get_ticker(symbol='ETHUSDT')['priceChangePercent']) + 2.5, 2)},
+        'BNB': {'price': round(float(client.get_ticker(symbol='BNBUSDT')['lastPrice']), 4),
+                'per': round(float(client.get_ticker(symbol='BNBUSDT')['priceChangePercent']) + 2.5, 2)},
+        'ADA': {'price': round(float(client.get_ticker(symbol='ADAUSDT')['lastPrice']), 4),
+                'per': round(float(client.get_ticker(symbol='ADAUSDT')['priceChangePercent']) + 2.5, 2)},
+        'XRP': {'price': round(float(client.get_ticker(symbol='XRPUSDT')['lastPrice']), 4),
+                'per': round(float(client.get_ticker(symbol='XRPUSDT')['priceChangePercent']) + 2.5, 2)},
+        'DOT': {'price': round(float(client.get_ticker(symbol='DOTUSDT')['lastPrice']), 4),
+                'per': round(float(client.get_ticker(symbol='DOTUSDT')['priceChangePercent']) + 2.5, 2)},
+        'UNI': {'price': round(float(client.get_ticker(symbol='UNIUSDT')['lastPrice']), 4),
+                'per': round(float(client.get_ticker(symbol='UNIUSDT')['priceChangePercent']) + 2.5, 2)},
+        'MATIC': {'price': round(float(client.get_ticker(symbol='MATICUSDT')['lastPrice']), 4),
+                  'per': round(float(client.get_ticker(symbol='MATICUSDT')['priceChangePercent']) + 2.5, 2)},
+        'DOGE': {'price': round(float(client.get_ticker(symbol='DOGEUSDT')['lastPrice']), 4),
+                 'per': round(float(client.get_ticker(symbol='DOGEUSDT')['priceChangePercent']) + 2.5, 2)},
+    }
+    if is_ajax(request=request):
+        return JsonResponse(data, status=200)
     return render(request, 'main/index.html', {'data': data})
 
 

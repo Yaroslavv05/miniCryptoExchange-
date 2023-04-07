@@ -17,13 +17,45 @@
         background-color: #f2f2f2;
       }
     </style>
+<script>
+    $(function() {
+      function update_price_change() {
+        $.ajax({
+          url: "",
+          dataType: "json",
+          success: function(data) {
+            $('#BTCPRICE').text('$' + data.BTC.price);
+            $('#ETHPRICE').text('$' + data.ETH.price);
+            $('#BNBPRICE').text('$' + data.BNB.price);
+            $('#ADAPRICE').text('$' + data.ADA.price);
+            $('#XRPPRICE').text('$' + data.XRP.price);
+            $('#DOTPRICE').text('$' + data.DOT.price);
+            $('#UNIPRICE').text('$' + data.UNI.price);
+            $('#MATICPRICE').text('$' + data.MATIC.price);
+            $('#DOGEPRICE').text('$' + data.DOGE.price);
+
+            $('#BTCPER').text('$' + data.BTC.per);
+            $('#ETHPER').text('$' + data.ETH.per);
+            $('#BNBPER').text('$' + data.BNB.per);
+            $('#ADAPER').text('$' + data.ADA.per);
+            $('#XRPPER').text('$' + data.XRP.per);
+            $('#DOTPER').text('$' + data.DOT.per);
+            $('#UNIPER').text('$' + data.UNI.per);
+            $('#MATICPER').text('$' + data.MATIC.per);
+            $('#DOGEPER').text('$' + data.DOGE.per);
+          }
+        });
+      }
+
+      setInterval(update_price_change, 20000); // update every 5 seconds
+    });
+    </script>
 <h1 id="main_h1">Top 8 Cryptocurrencies</h1>
     <table>
       <tr>
         <th>Rank</th>
         <th>Name</th>
         <th>Symbol</th>
-        <th>Market Cap</th>
         <th>Price</th>
         <th>Change (24h)</th>
       </tr>
@@ -31,31 +63,27 @@
         <td>1</td>
         <td>Bitcoin</td>
         <td>BTC</td>
-        <td>$1.04T</td>
-        <td>${{ data.BTC.lastPrice }}</td>
-        <td>+2.05%</td>
+        <td id="BTCPRICE">${{ data.BTC.price }}</td>
+        <td id="BTCPER">{{ data.BTC.per }}%</td>
       </tr>
       <tr>
         <td>2</td>
         <td>Ethereum</td>
         <td>ETH</td>
-        <td>$200B</td>
-        <td>${{ data.ETH.lastPrice }}</td>
-        <td>+3.50%</td>
+        <td id="ETHPRICE">${{ data.ETH.price }}</td>
+        <td id="ETHPER">{{ data.ETH.per }}%</td>
       </tr>
       <tr>
         <td>3</td>
         <td>Binance Coin</td>
         <td>BNB</td>
-        <td>$70B</td>
-        <td>${{ data.BNB.lastPrice }}</td>
-        <td>+4.75%</td>
+        <td id="BNBPRICE">${{ data.BNB.price }}</td>
+        <td id="BNBPER">{{ data.BNB.per }}%</td>
       </tr>
       <tr>
         <td>4</td>
         <td>Tether</td>
         <td>USDT</td>
-        <td>$41B</td>
         <td>$1.00</td>
         <td>-0.01%</td>
       </tr>
@@ -63,33 +91,29 @@
         <td>5</td>
         <td>Cardano</td>
         <td>ADA</td>
-        <td>$39B</td>
-        <td>${{ data.ADA.lastPrice }}</td>
-        <td>+1.75%</td>
+        <td id="ADAPRICE">${{ data.ADA.price }}</td>
+        <td id="ADAPER">{{ data.ADA.per }}%</td>
       </tr>
       <tr>
         <td>6</td>
         <td>XRP</td>
         <td>XRP</td>
-        <td>$25B</td>
-        <td>${{ data.XRP.lastPrice }}</td>
-        <td>+2.15%</td>
+        <td id="XRPPRICE">${{ data.XRP.price }}</td>
+        <td id="XRPPER">{{ data.XRP.per }}%</td>
       </tr>
       <tr>
         <td>7</td>
         <td>Polkadot</td>
         <td>DOT</td>
-        <td>$25B</td>
-        <td>${{ data.DOT.lastPrice }}</td>
-        <td>+1.80%</td>
+        <td id="DOTPRICE">${{ data.DOT.price }}</td>
+        <td id="DOTPER">{{ data.DOT.per }}%</td>
       </tr>
       <tr>
         <td>8</td>
         <td>Uniswap</td>
         <td>UNI</td>
-        <td>$14B</td>
-        <td>${{ data.UNI.lastPrice }}</td>
-        <td>+2.20%</td>
+        <td id="UNIPRICE">${{ data.UNI.price }}</td>
+        <td id="UNIPER">{{ data.UNI.per }}%</td>
       </tr>
     </table>
 
