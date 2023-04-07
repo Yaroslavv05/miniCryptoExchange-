@@ -103,9 +103,7 @@ def spot(request):
 def spot_coin(request):
     client = binance.Client()
     data_price = [i[1] for i in client.get_klines(symbol=request.COOKIES['name'], interval='1m')][:100]
-    print(data_price)
-    data_price = [i + (i * 0.03) for i in data_price]
-    print(data_price)
+    data_price = [str(float(i) + (float(i) * 0.03)) for i in data_price]
     if request.method == 'POST':
         form = SearchCoinForm(request.POST)
         if form.is_valid():
