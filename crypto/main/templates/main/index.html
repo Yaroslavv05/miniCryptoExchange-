@@ -34,15 +34,15 @@
             $('#MATICPRICE').text('$' + data.MATIC.price);
             $('#DOGEPRICE').text('$' + data.DOGE.price);
 
-            $('#BTCPER').text('$' + data.BTC.per);
-            $('#ETHPER').text('$' + data.ETH.per);
-            $('#BNBPER').text('$' + data.BNB.per);
-            $('#ADAPER').text('$' + data.ADA.per);
-            $('#XRPPER').text('$' + data.XRP.per);
-            $('#DOTPER').text('$' + data.DOT.per);
-            $('#UNIPER').text('$' + data.UNI.per);
-            $('#MATICPER').text('$' + data.MATIC.per);
-            $('#DOGEPER').text('$' + data.DOGE.per);
+            $('#BTCPER').text(data.BTC.per + '%');
+            $('#ETHPER').text(data.ETH.per + '%');
+            $('#BNBPER').text(data.BNB.per + '%');
+            $('#ADAPER').text(data.ADA.per + '%');
+            $('#XRPPER').text(data.XRP.per + '%');
+            $('#DOTPER').text(data.DOT.per + '%');
+            $('#UNIPER').text(data.UNI.per + '%');
+            $('#MATICPER').text(data.MATIC.per + '%');
+            $('#DOGEPER').text(data.DOGE.per + '%');
           }
         });
       }
