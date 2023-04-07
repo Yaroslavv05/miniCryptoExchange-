@@ -150,7 +150,7 @@ def spot_coin(request):
     return render(request, 'index.html',
                   {'form': form, 'symbol': info['symbol'], 'price': divine_number(data_price[-1], 4),
                    'change': round(float(info['priceChangePercent']), 2), 'asset': asset['baseAsset'],
-                   'currency': asset['quoteAsset'], 'buy_form': buy_form, 'price2': float(data_price[-1])})
+                   'currency': asset['quoteAsset'], 'buy_form': buy_form, 'price2': divine_number(data_price[-1], 4)})
 
 
 def pay(request):
