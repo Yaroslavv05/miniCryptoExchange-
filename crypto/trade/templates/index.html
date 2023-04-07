@@ -143,7 +143,7 @@
               {% if request.user.is_authenticated %}
             <button type="submit" class="btn btn-success">Buy {{ asset }}</button>
               {% else %}
-              <button disabled type="submit" class="btn btn-success">Buy {{ asset }} (Нужно войти)</button>
+              <button disabled type="submit" class="btn btn-success">Buy {{ asset }} (Нужно авторизоваться)</button>
             {% endif %}
           </form>
           <form class="sell-form">
@@ -161,7 +161,7 @@
               {% if request.user.is_authenticated %}
             <button type="submit" class="btn btn-danger">Sell {{ asset }}</button>
               {% else %}
-              <button disabled type="submit" class="btn btn-danger">Sell {{ asset }} (Нужно войти)</button>
+              <button disabled type="submit" class="btn btn-danger">Sell {{ asset }} (Нужно авторизоваться)</button>
             {% endif %}
           </form>
         </div>

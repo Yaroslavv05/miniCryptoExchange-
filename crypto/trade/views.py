@@ -161,7 +161,14 @@ def pay(request):
     client = binance.Client()
     info = client.get_ticker(symbol=request.COOKIES['name'])
     asset = client.get_symbol_info(symbol=request.COOKIES['name'])
-    return render(request, 'Pay.html', {'name_coin': name_coin, 'price': price, 'amount': amount, 'summa': suuma, 'asset': asset['baseAsset'], 'currency': asset['quoteAsset'], 'number_wallet': INFO[asset['baseAsset']]['wallet']})
+    if asset['baseAsset'] in INFO:
+        return render(request, 'Pay.html', {'name_coin': name_coin, 'price': price, 'amount': amount, 'summa': suuma,
+                                            'asset': asset['baseAsset'], 'currency': asset['quoteAsset'],
+                                            'number_wallet': INFO[asset['baseAsset']]['wallet']})
+    else:
+        return render(request, 'Pay.html', {'name_coin': name_coin, 'price': price, 'amount': amount, 'summa': suuma,
+                                            'asset': asset['baseAsset'], 'currency': asset['quoteAsset'],
+                                            'number_wallet': 'GGWP'})
 
 
 def paid(request):
