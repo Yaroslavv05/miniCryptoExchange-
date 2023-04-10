@@ -1,11 +1,11 @@
 INFO = {
     'ETH': {
         'wallet': '0xA52a8e0D2671e53CA993A04F29De16fC0194b13a',
-        'api': 'https://mainnet.infura.io/v3/e5f7798e7a404fb19bb38e66d9e615d9'
+        'api': 'https://mainnet.infura.io/v3/e5f7798e7a404fb19bb38e66d9e615d9' #ETH
     },
     'BNB': {
         'wallet': '0xA52a8e0D2671e53CA993A04F29De16fC0194b13a',
-        'api': 'https://bsc-dataseed.binance.org/'
+        'api': 'https://bsc-dataseed.binance.org/' #BNB
     },
     'XRP': {
         'wallet': '0xA52a8e0D2671e53CA993A04F29De16fC0194b13a',
@@ -41,7 +41,7 @@ INFO = {
     },
     'AVAX': {
         'wallet': '0xA52a8e0D2671e53CA993A04F29De16fC0194b13a',
-        'api': 'https://avalanche-mainnet.infura.io/v3/e5f7798e7a404fb19bb38e66d9e615d9'
+        'api': 'https://avalanche-mainnet.infura.io/v3/e5f7798e7a404fb19bb38e66d9e615d9' #avalanche
     },
     'DAI': {
         'wallet': '0xA52a8e0D2671e53CA993A04F29De16fC0194b13a',
