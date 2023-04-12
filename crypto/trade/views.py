@@ -15,8 +15,11 @@ def divine_number(number_str: str, length: int = 0) -> str:
             right_side = number_str.split(".")[1][:length]
         except IndexError:
             return left_side
-        if right_side[1] == '0':
-            right_side = '1'
+        try:
+            if right_side[1] == '0':
+                right_side = '1'
+        except IndexError:
+            pass
         return f'{left_side.replace(",", "")}.{right_side}'
     return left_side
 

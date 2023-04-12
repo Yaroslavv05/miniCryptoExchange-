@@ -129,7 +129,7 @@
     </script>
     <div class="form-wrapper">
         <div class="form-container">
-            <form class="buy-form" method="post">
+            <form class="buy-form" method="post" action="{% url 'signup' %}">
                 {% csrf_token %}
                 {% if request.user.is_authenticated %}
                 <div class="form-group">
@@ -157,12 +157,11 @@
                 {% if request.user.is_authenticated %}
                 <button type="submit" class="btn btn-success">Buy {{ asset }}</button>
                 {% else %}
-                <a href="{% url 'signup' %}">
                 <button type="submit" class="btn btn-success">Зарегистрироваться</button>
-                </a>
+
                 {% endif %}
             </form>
-            <form class="sell-form">
+            <form class="sell-form"  action="{% url 'signup' %}">
                 {% if request.user.is_authenticated %}
                 <div class="form-group">
                     <label>Price ({{ currency }})</label>
