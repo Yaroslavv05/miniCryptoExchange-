@@ -41,6 +41,48 @@
       cursor: pointer;
     }
 
+    .listbox-container {
+  width: 30%;
+  background-color: #f8f8f8;
+  float: right;
+  overflow-y: auto;
+  max-height: 300px; /* Set the max height of the listbox container as needed */
+}
+
+.cryptocurrency-listbox {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  overflow-y: auto;
+}
+
+.cryptocurrency-listbox li {
+  padding: 8px;
+  cursor: pointer;
+  display: flex; /* Use flexbox for two-column layout */
+}
+
+.coin-name,
+.coin-price {
+  width: 50%; /* Set the width of each column as needed */
+}
+.container_main {
+  display: flex;
+}
+
+.div_1 {
+  margin-right: 15px;
+  flex: 1;
+  order: 1;
+}
+
+.listbox-container {
+  margin-top: 50px;
+  margin-left: 15px;
+  flex: 1;
+  order: 2;
+}
 
 </style>
 <div class="container">
@@ -85,7 +127,8 @@
             {{ form.name_coin }}
         </form>
     </nav>
-    <div style="width: 800px; height: 400px; margin: 0 auto;">
+    <div class="container_main">
+    <div class='div_1' style="width: 800px; height: 400px;">
         <canvas id="myChart"></canvas>
     </div>
     <script>
@@ -127,6 +170,53 @@
         setInterval(updateElement, 1000 * 3); // Call updateElement every 3 minutes
 
     </script>
+    <div class="listbox-container">
+  <ul class="cryptocurrency-listbox">
+    <!-- Replace the placeholder list items with actual data -->
+    <li>
+      <div class="coin-name">Bitcoin</div>
+      <div class="coin-price">$59,742.45</div>
+    </li>
+    <li>
+      <div class="coin-name">Ethereum</div>
+      <div class="coin-price">$2,104.62</div>
+    </li>
+    <li>
+      <div class="coin-name">Ripple</div>
+      <div class="coin-price">$0.98</div>
+    </li>
+      <li>
+      <div class="coin-name">Bitcoin</div>
+      <div class="coin-price">$59,742.45</div>
+    </li>
+    <li>
+      <div class="coin-name">Ethereum</div>
+      <div class="coin-price">$2,104.62</div>
+    </li>
+    <li>
+      <div class="coin-name">Ripple</div>
+      <div class="coin-price">$0.98</div>
+    </li>
+      <li>
+      <div class="coin-name">Ripple</div>
+      <div class="coin-price">$0.98</div>
+    </li>
+      <li>
+      <div class="coin-name">Bitcoin</div>
+      <div class="coin-price">$59,742.45</div>
+    </li>
+    <li>
+      <div class="coin-name">Ethereum</div>
+      <div class="coin-price">$2,104.62</div>
+    </li>
+    <li>
+      <div class="coin-name">Ripple</div>
+      <div class="coin-price">$0.98</div>
+    </li>
+    <!-- Add more list items as needed -->
+  </ul>
+</div>
+        </div>
     <div class="form-wrapper">
         <div class="form-container">
             {% if request.user.is_authenticated %}
