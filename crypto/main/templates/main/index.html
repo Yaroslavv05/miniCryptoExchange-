@@ -58,43 +58,75 @@
     </tr>
     <tr>
         <td>Bitcoin (BTC)</td>
-        <td id="BTCPRICE">-</td>
-        <td id="BTCPER">-</td>
+        <td id="BTCPRICE">{{ data.BTC.price }}</td>
+        {% if data.BTC.price > 0 %}
+        <td id="BTCPER">+ {{ data.BTC.per }}%</td>
+        {% else %}
+        <td id="BTCPER">{{ data.BTC.per }}%</td>
+        {% endif %}
     </tr>
     <tr>
         <td>Ethereum (ETH)</td>
-        <td id="ETHPRICE">-</td>
-        <td id="ETHPER">-</td>
+        <td id="ETHPRICE">{{ data.ETH.price }}</td>
+        {% if data.BTC.price > 0 %}
+        <td id="ETHPER">+ {{data.ETH.per }}%</td>
+        {% else %}
+        <td id="ETHPER">{{ data.ETH.per }}%</td>
+        {% endif %}
     </tr>
     <tr>
         <td>Binance Coin (BNB)</td>
-        <td id="BNBPRICE">-</td>
-        <td id="BNBPER">-</td>
+        <td id="BNBPRICE">{{ data.BNB.price }}</td>
+        {% if data.BTC.price > 0 %}
+        <td id="BNBPER">+ {{ data.BNB.per }}%</td>
+        {% else %}
+        <td id="BNBPER">{{ data.BNB.per }}%</td>
+        {% endif %}
     </tr>
     <tr>
         <td>Cardano (ADA)</td>
-        <td id="ADAPRICE">-</td>
-        <td id="ADAPER">-</td>
+        <td id="ADAPRICE">{{ data.ADA.price }}</td>
+        {% if data.BTC.price > 0 %}
+        <td id="ADAPER">+ {{ data.ADA.per }}%</td>
+        {% else %}
+        <td id="ADAPER">{{ data.ADA.per }}%</td>
+        {% endif %}
     </tr>
     <tr>
         <td>Polkadot (DOT)</td>
-        <td id="DOTPRICE">-</td>
-        <td id="DOTPER">-</td>
+        <td id="DOTPRICE">{{ data.DOT.price }}</td>
+        {% if data.BTC.price > 0 %}
+        <td id="DOTPER">+ {{ data.DOT.per }}%</td>
+        {% else %}
+        <td id="DOTPER">{{ data.DOT.per }}%</td>
+        {% endif %}
     </tr>
     <tr>
         <td>Uniswap (UNI)</td>
-        <td id="UNIPRICE">-</td>
-        <td id="UNIPER">-</td>
+        <td id="UNIPRICE">{{ data.UNI.price }}</td>
+        {% if data.BTC.price > 0 %}
+        <td id="UNIPER">+ {{ data.UNI.per }}%</td>
+        {% else %}
+        <td id="UNIPER">{{ data.UNI.per }}%</td>
+        {% endif %}
     </tr>
     <tr>
         <td>Polygon (MATIC)</td>
-        <td id="MATICPRICE">-</td>
-        <td id="MATICPER">-</td>
+        <td id="MATICPRICE">{{ data.MATIC.price }}</td>
+        {% if data.BTC.price > 0 %}
+        <td id="MATICPER">+ {{ data.MATIC.per }}%</td>
+        {% else %}
+        <td id="MATICPER">{{ data.MATIC.per }}%</td>
+        {% endif %}
     </tr>
     <tr>
         <td>Dogecoin (DOGE)</td>
-        <td id="DOGEPRICE">-</td>
-        <td id="DOGEPER">-</td>
+        <td id="DOGEPRICE">{{ data.DOGE.price }}</td>
+        {% if data.BTC.price > 0 %}
+        <td id="DOGEPER">+ {{ data.DOGE.per }}%</td>
+        {% else %}
+        <td id="DOGEPER">{{ data.DOGE.per }}%</td>
+        {% endif %}
     </tr>
 </table>
 
