@@ -3,53 +3,108 @@
   {% if request.user.is_authenticated %}
   {% if fio %}
   <div class="alert alert-success" role="alert">
-    Проверка будет длится 1-2 дня!
+    Проверка будет длиться 1-2 дня!
   </div>
   {% else %}
   <div class="alert alert-warning" role="alert">
-    Что бы был больше объем торговли надо пройти верификацию <a href="{% url 'kyc' %}">KYC</a>
+    Чтобы увеличить объем торговли, необходимо пройти верификацию <a href="{% url 'kyc' %}" class="alert-link">KYC</a>
   </div>
   {% endif %}
-  <h1 style="text-align: center;">Общий баланс</h1>
-  <p style="font-size: 30px"><b>0.0 BTC</b> ≈ $0.0000000</p>
-  <br>
-        <table class="table">
-        <thead>
+  <div class="container mt-5">
+    <h1 class="text-center mb-3">Общий баланс</h1>
+    <p class="text-center mb-5" style="font-size: 30px"><b>0.0 BTC</b> ≈ $0.0000000</p>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover text-center">
+        <thead class="bg-primary text-white">
           <tr>
             <th scope="col">Name</th>
-              {% for i in name_coin %}
-            <td>{{ i }}</td>
-            {% endfor %}
-          </tr>
-        </thead>
-          <thead>
-          <tr>
             <th scope="col">Amount</th>
-               {% for i in col_vo_coin %}
-            <td>{{ i }}</td>
-            {% endfor %}
-          </tr>
-        </thead>
-          <thead>
-          <tr>
             <th scope="col">Price</th>
-              {% for i in price %}
-            <td>{{ i }}</td>
-            {% endfor %}
-          </tr>
-        </thead>
-          <thead>
-          <tr>
             <th scope="col">24H Change</th>
-              {% for i in changes %}
-              {% if i < 0 %}
-              <td style="color: red;">{{ i }} %</td>
-              {% else %}
-              <td style="color: green ;">+ {{ i }} %</td>
-              {% endif %}
-            {% endfor %}
           </tr>
         </thead>
+        <tbody>
+          <tr>
+            <td scope="row">BTC</td>
+            <td>0.0</td>
+            <td>$0.0000000</td>
+            <td class="text-success">+0.00%</td>
+          </tr>
+          <tr>
+            <td scope="row">ETH</td>
+            <td>0.0</td>
+            <td>$0.0000000</td>
+            <td class="text-danger">-0.00%</td>
+          </tr>
+          <tr>
+            <td scope="row">LTC</td>
+            <td>0.0</td>
+            <td>$0.0000000</td>
+            <td class="text-success">+0.00%</td>
+          </tr>
+        </tbody>
       </table>
+    </div>
+  </div>
   {% endif %}
+  <style>
+    /* Additional CSS for design */
+    .alert {
+      margin-top: 20px;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      font-size: 36px;
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    p {
+      font-size: 24px;
+      color: #999;
+    }
+
+    table {
+      margin-top: 50px;
+      font-size: 18px;
+      color: #666;
+      background-color: #f8f9fa;
+    }
+
+    th,
+    td {
+      font-weight: bold;
+      vertical-align: middle;
+    }
+
+    th {
+      color: #fff;
+    }
+
+    td {
+      padding: 15px;
+    }
+
+    th:nth-child(1),
+    td:nth-child(1) {
+      text-align: left;
+    }
+
+    th {
+      background-color: #007bff;
+    }
+
+    .text-danger {
+      color: #ff0000;
+    }
+
+    .text-success {
+      color: #28a745;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+  </style>
 {% endblock %}
