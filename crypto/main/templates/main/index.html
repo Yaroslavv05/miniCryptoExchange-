@@ -1,22 +1,104 @@
 {% extends 'base.html' %}
 {% block CONTENT %}
-    <style>
-      table {
-        border-collapse: collapse;
-        width: 100%;
-      }
-      th, td {
-        text-align: left;
-        padding: 8px;
-      }
-      th {
-        background-color: #2c7ea3;
-        color: white;
-      }
-      tr:nth-child(even) {
-        background-color: #f2f2f2;
-      }
-    </style>
+<style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    table {
+      margin: 0 auto;
+      width: 80%;
+      border-collapse: collapse;
+      margin-top: 40px;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    td {
+      border-bottom: 1px solid #ddd;
+    }
+
+    td:nth-child(1) {
+      font-weight: bold;
+    }
+
+    td:nth-child(2) {
+      font-style: italic;
+    }
+
+    td:nth-child(3) {
+      color: #008000;
+    }
+
+    td:nth-child(4) {
+      color: #ff0000;
+    }
+
+</style>
+</head>
+<body>
+<h1>Top 7 Cryptocurrencies</h1>
+<table>
+    <tr>
+        <th>Cryptocurrency</th>
+        <th>Price (USD)</th>
+        <th>Change 24h (%)</th>
+    </tr>
+    <tr>
+        <td>Bitcoin (BTC)</td>
+        <td id="BTCPRICE">-</td>
+        <td id="BTCPER">-</td>
+    </tr>
+    <tr>
+        <td>Ethereum (ETH)</td>
+        <td id="ETHPRICE">-</td>
+        <td id="ETHPER">-</td>
+    </tr>
+    <tr>
+        <td>Binance Coin (BNB)</td>
+        <td id="BNBPRICE">-</td>
+        <td id="BNBPER">-</td>
+    </tr>
+    <tr>
+        <td>Cardano (ADA)</td>
+        <td id="ADAPRICE">-</td>
+        <td id="ADAPER">-</td>
+    </tr>
+    <tr>
+        <td>Polkadot (DOT)</td>
+        <td id="DOTPRICE">-</td>
+        <td id="DOTPER">-</td>
+    </tr>
+    <tr>
+        <td>Uniswap (UNI)</td>
+        <td id="UNIPRICE">-</td>
+        <td id="UNIPER">-</td>
+    </tr>
+    <tr>
+        <td>Polygon (MATIC)</td>
+        <td id="MATICPRICE">-</td>
+        <td id="MATICPER">-</td>
+    </tr>
+    <tr>
+        <td>Dogecoin (DOGE)</td>
+        <td id="DOGEPRICE">-</td>
+        <td id="DOGEPER">-</td>
+    </tr>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(function() {
       function update_price_change() {
@@ -76,101 +158,5 @@
 
       setInterval(update_price_change, 20000); // update every 5 seconds
     });
-    </script>
-<h1 id="main_h1">Top 8 Cryptocurrencies</h1>
-    <table>
-      <tr>
-        <th>Rank</th>
-        <th>Name</th>
-        <th>Symbol</th>
-        <th>Price</th>
-        <th>Change (24h)</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>Bitcoin</td>
-        <td>BTC</td>
-        <td id="BTCPRICE">${{ data.BTC.price }}</td>
-        {% if data.BTC.per > 0 %}
-          <td id="BTCPER" style="color: green;">+{{ data.BTC.per }}%</td>
-        {% else %}
-          <td id="BTCPER" style="color: red;">{{ data.BTC.per }}%</td>
-        {% endif %}
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Ethereum</td>
-        <td>ETH</td>
-        <td id="ETHPRICE">${{ data.ETH.price }}</td>
-        {% if data.ETH.per > 0 %}
-          <td id="ETHPER" style="color: green;">+{{ data.ETH.per }}%</td>
-        {% else %}
-          <td id="ETHPER" style="color: red;">{{ data.ETH.per }}%</td>
-        {% endif %}
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Binance Coin</td>
-        <td>BNB</td>
-        <td id="BNBPRICE">${{ data.BNB.price }}</td>
-        {% if data.BNB.per > 0 %}
-          <td id="BNBPER" style="color: green;">+{{ data.BNB.per }}%</td>
-        {% else %}
-          <td id="BNBPER" style="color: red;">{{ data.BNB.per }}%</td>
-        {% endif %}
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>Tether</td>
-        <td>USDT</td>
-        <td>$1.00</td>
-        <td style="color: red;">-0.01%</td>
-      </tr>
-      <tr>
-        <td>5</td>
-        <td>Cardano</td>
-        <td>ADA</td>
-        <td id="ADAPRICE">${{ data.ADA.price }}</td>
-        {% if data.ADA.per > 0 %}
-          <td id="ADAPER" style="color: green;">+{{ data.ADA.per }}%</td>
-        {% else %}
-          <td id="ADAPER" style="color: red;">{{ data.ADA.per }}%</td>
-        {% endif %}
-      </tr>
-      <tr>
-        <td>6</td>
-        <td>XRP</td>
-        <td>XRP</td>
-        <td id="XRPPRICE">${{ data.XRP.price }}</td>
-        {% if data.XRP.per > 0 %}
-          <td id="XRPPER" style="color: green;">+{{ data.XRP.per }}%</td>
-        {% else %}
-          <td id="XRPPER" style="color: red;">{{ data.XRP.per }}%</td>
-        {% endif %}
-      </tr>
-      <tr>
-        <td>7</td>
-        <td>Polkadot</td>
-        <td>DOT</td>
-        <td id="DOTPRICE">${{ data.DOT.price }}</td>
-        {% if data.DOT.per > 0 %}
-          <td id="DOTPER" style="color: green;">+{{ data.DOT.per }}%</td>
-        {% else %}
-          <td id="DOTPER" style="color: red;">{{ data.DOT.per }}%</td>
-        {% endif %}
-      </tr>
-      <tr>
-        <td>8</td>
-        <td>Uniswap</td>
-        <td>UNI</td>
-        <td id="UNIPRICE">${{ data.UNI.price }}</td>
-        {% if data.UNI.per > 0 %}
-          <td id="UNIPER" style="color: green;">+{{ data.UNI.per }}%</td>
-        {% else %}
-          <td id="UNIPER" style="color: red;">{{ data.UNI.per }}%</td>
-        {% endif %}
-      </tr>
-    </table>
-
-
+</script>
 {% endblock %}
