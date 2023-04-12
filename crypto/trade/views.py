@@ -96,11 +96,12 @@ def spot(request):
     data = {'min_data': min_data, 'max_data': max_data, 'data': data['data'], 'data_len': data_len}
     if is_ajax(request=request):
         return JsonResponse(data, status=200)
-    return render(request, 'index.html',
+    response = render(request, 'index.html',
                   {'form': form, 'symbol': info['symbol'], 'price': divine_number(data_price[-1], 4),
                    'change': round(float(info['priceChangePercent']), 2), 'asset': asset['baseAsset'],
                    'currency': asset['quoteAsset'], 'buy_form': buy_form, 'price2': float(data_price[-1])})
-
+    response.set_cookie('name', 'BTCUSDT')
+    return response
 
 def spot_coin(request):
     client = binance.Client()

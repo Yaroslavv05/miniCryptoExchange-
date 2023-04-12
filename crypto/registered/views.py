@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import UserRegisterForm, UserLoginForm, KYCForm
-from django.contrib.auth import login, get_user_model
+from django.contrib.auth import login, get_user_model, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.template.loader import render_to_string
@@ -50,6 +50,10 @@ def activateEmail(request, user, to_email):
         messages.error(request,
                        f'Проблема с отправкой письма с подтверждением на {to_email}, посмотрите всели вы написали коректно.')
 
+
+def user_logout(request):
+    logout(request)
+    return render(request, 'main/index.html')
 
 def activate(request, uidb64, token):
     User = get_user_model()
