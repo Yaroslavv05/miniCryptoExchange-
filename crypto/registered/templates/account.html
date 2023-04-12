@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block CONTENT %}
-  {% if request.user.is_authenticated %}
-  {% if fio %}
+  {% if request.user.is_staff %}
   <div class="alert alert-success" role="alert">
     Проверка будет длиться 1-2 дня!
   </div>
@@ -46,7 +45,6 @@
       </table>
     </div>
   </div>
-  {% endif %}
   <style>
     /* Additional CSS for design */
     .alert {

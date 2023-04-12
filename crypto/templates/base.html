@@ -98,7 +98,7 @@
                 </button>
                 <div class="dropdown-content">
                     {% if request.user.is_authenticated %}
-                        <a href="{% url 'account' %}">Кошелек</a>
+                        <a href="{% url 'account' %}">Профиль</a>
                         <a href="{% url 'exit' %}">Выйти</a>
                     {% else %}
                         <a href="{% url 'signup' %}">Зарегестрироваться</a>

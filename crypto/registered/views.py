@@ -89,15 +89,14 @@ def account(request):
     return render(request, 'account.html')
 
 
-def account_kyc(request):
-    return render(request, 'account_kyc.html')
-
-
 def KYC(request):
     if request.method == 'POST':
         form = KYCForm(request.POST, request.FILES)
         if form.is_valid():
-            return redirect('account_kyc')
+            user = User.objects.get(username=request.user.username)
+            user.is_staff = True
+            user.save()
+            return redirect('account')
         else:
             messages.error(request, 'Ошибка верификации!')
     else:
