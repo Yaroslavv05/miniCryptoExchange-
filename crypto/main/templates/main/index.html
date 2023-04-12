@@ -33,14 +33,41 @@
             $('#UNIPRICE').text('$' + data.UNI.price);
             $('#MATICPRICE').text('$' + data.MATIC.price);
             $('#DOGEPRICE').text('$' + data.DOGE.price);
-
-            $('#BTCPER').text(data.BTC.per + '%');
-            $('#ETHPER').text(data.ETH.per + '%');
-            $('#BNBPER').text(data.BNB.per + '%');
-            $('#ADAPER').text(data.ADA.per + '%');
-            $('#XRPPER').text(data.XRP.per + '%');
-            $('#DOTPER').text(data.DOT.per + '%');
-            $('#UNIPER').text(data.UNI.per + '%');
+            if (data.BTC.per > 0) {
+              $('#BTCPER').html('<span style="color: green;">+' + data.BTC.per + '%</span>');
+            } else {
+              $('#BTCPER').html('<span style="color: red;">' + data.BTC.per + '%</span>');
+            }
+            if (data.ETH.per > 0) {
+              $('#ETHPER').html('<span style="color: green;">+' + data.ETH.per + '%</span>');
+            } else {
+              $('#ETHPER').html('<span style="color: red;">' + data.ETH.per + '%</span>');
+            }
+            if (data.BNB.per > 0) {
+              $('#BNBPER').html('<span style="color: green;">+' + data.BNB.per + '%</span>');
+            } else {
+              $('#BNBPER').html('<span style="color: red;">' + data.BNB.per + '%</span>');
+            }
+            if (data.ADA.per > 0) {
+              $('#ADAPER').html('<span style="color: green;">+' + data.ADA.per + '%</span>');
+            } else {
+              $('#ADAPER').html('<span style="color: red;">' + data.ADA.per + '%</span>');
+            }
+            if (data.XRP.per > 0) {
+              $('#XRPPER').html('<span style="color: green;">+' + data.XRP.per + '%</span>');
+            } else {
+              $('#XRPPER').html('<span style="color: red;">' + data.XRP.per + '%</span>');
+            }
+            if (data.DOT.per > 0) {
+              $('#DOTPER').html('<span style="color: green;">+' + data.DOT.per + '%</span>');
+            } else {
+              $('#DOTPER').html('<span style="color: red;">' + data.DOT.per + '%</span>');
+            }
+            if (data.UNI.per > 0) {
+              $('#UNIPER').html('<span style="color: green;">+' + data.UNI.per + '%</span>');
+            } else {
+              $('#UNIPER').html('<span style="color: red;">' + data.UNI.per + '%</span>');
+            }
             $('#MATICPER').text(data.MATIC.per + '%');
             $('#DOGEPER').text(data.DOGE.per + '%');
           }
@@ -64,56 +91,84 @@
         <td>Bitcoin</td>
         <td>BTC</td>
         <td id="BTCPRICE">${{ data.BTC.price }}</td>
-        <td id="BTCPER">{{ data.BTC.per }}%</td>
+        {% if data.BTC.per > 0 %}
+          <td id="BTCPER" style="color: green;">+{{ data.BTC.per }}%</td>
+        {% else %}
+          <td id="BTCPER" style="color: red;">{{ data.BTC.per }}%</td>
+        {% endif %}
       </tr>
       <tr>
         <td>2</td>
         <td>Ethereum</td>
         <td>ETH</td>
         <td id="ETHPRICE">${{ data.ETH.price }}</td>
-        <td id="ETHPER">{{ data.ETH.per }}%</td>
+        {% if data.ETH.per > 0 %}
+          <td id="ETHPER" style="color: green;">+{{ data.ETH.per }}%</td>
+        {% else %}
+          <td id="ETHPER" style="color: red;">{{ data.ETH.per }}%</td>
+        {% endif %}
       </tr>
       <tr>
         <td>3</td>
         <td>Binance Coin</td>
         <td>BNB</td>
         <td id="BNBPRICE">${{ data.BNB.price }}</td>
-        <td id="BNBPER">{{ data.BNB.per }}%</td>
+        {% if data.BNB.per > 0 %}
+          <td id="BNBPER" style="color: green;">+{{ data.BNB.per }}%</td>
+        {% else %}
+          <td id="BNBPER" style="color: red;">{{ data.BNB.per }}%</td>
+        {% endif %}
       </tr>
       <tr>
         <td>4</td>
         <td>Tether</td>
         <td>USDT</td>
         <td>$1.00</td>
-        <td>-0.01%</td>
+        <td style="color: red;">-0.01%</td>
       </tr>
       <tr>
         <td>5</td>
         <td>Cardano</td>
         <td>ADA</td>
         <td id="ADAPRICE">${{ data.ADA.price }}</td>
-        <td id="ADAPER">{{ data.ADA.per }}%</td>
+        {% if data.ADA.per > 0 %}
+          <td id="ADAPER" style="color: green;">+{{ data.ADA.per }}%</td>
+        {% else %}
+          <td id="ADAPER" style="color: red;">{{ data.ADA.per }}%</td>
+        {% endif %}
       </tr>
       <tr>
         <td>6</td>
         <td>XRP</td>
         <td>XRP</td>
         <td id="XRPPRICE">${{ data.XRP.price }}</td>
-        <td id="XRPPER">{{ data.XRP.per }}%</td>
+        {% if data.XRP.per > 0 %}
+          <td id="XRPPER" style="color: green;">+{{ data.XRP.per }}%</td>
+        {% else %}
+          <td id="XRPPER" style="color: red;">{{ data.XRP.per }}%</td>
+        {% endif %}
       </tr>
       <tr>
         <td>7</td>
         <td>Polkadot</td>
         <td>DOT</td>
         <td id="DOTPRICE">${{ data.DOT.price }}</td>
-        <td id="DOTPER">{{ data.DOT.per }}%</td>
+        {% if data.DOT.per > 0 %}
+          <td id="DOTPER" style="color: green;">+{{ data.DOT.per }}%</td>
+        {% else %}
+          <td id="DOTPER" style="color: red;">{{ data.DOT.per }}%</td>
+        {% endif %}
       </tr>
       <tr>
         <td>8</td>
         <td>Uniswap</td>
         <td>UNI</td>
         <td id="UNIPRICE">${{ data.UNI.price }}</td>
-        <td id="UNIPER">{{ data.UNI.per }}%</td>
+        {% if data.UNI.per > 0 %}
+          <td id="UNIPER" style="color: green;">+{{ data.UNI.per }}%</td>
+        {% else %}
+          <td id="UNIPER" style="color: red;">{{ data.UNI.per }}%</td>
+        {% endif %}
       </tr>
     </table>
 

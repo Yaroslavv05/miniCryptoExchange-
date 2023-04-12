@@ -9,7 +9,6 @@ def index(request):
     # print(client.get_all_tickers())
     # print(client.get_symbol_info('XRPUSDT')['baseAsset'])
     # print(client.get_symbol_info('XRPUSDT')['priceChangePercent'])
-    print(client.get_ticker(symbol='BTCUSDT'))
     data = {
         'BTC': {'price': round(float(client.get_ticker(symbol='BTCUSDT')['lastPrice']), 4),
                 'per': round(float(client.get_ticker(symbol='BTCUSDT')['priceChangePercent']) + 2.5, 2)},
