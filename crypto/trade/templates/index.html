@@ -41,6 +41,7 @@
       cursor: pointer;
     }
 
+
 </style>
 <div class="container">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -63,26 +64,27 @@
 
       setInterval(update_price_change, 20000); // update every 5 seconds
     });
+
     </script>
     <nav class="navbar">
         <div class="navbar-brand">
-          <span>{{ symbol }}</span>
+            <span>{{ symbol }}</span>
         </div>
         <div class="navbar-price" id="price">
-          ${{ price }}
+            ${{ price }}
         </div>
         <div class="navbar-change">
-          {% if change > 0 %}
-          <span style="color: green;" id="change">+{{ change }}%</span>
-          {% else %}
-          <span style="color: red;" id="change">{{ change }}%</span>
-          {% endif %}
+            {% if change > 0 %}
+            <span style="color: green;" id="change">+{{ change }}%</span>
+            {% else %}
+            <span style="color: red;" id="change">{{ change }}%</span>
+            {% endif %}
         </div>
         <form class="search-form" style="width: 20%;" method="post">
             {% csrf_token %}
             {{ form.name_coin }}
         </form>
-      </nav>
+    </nav>
     <div style="width: 800px; height: 400px; margin: 0 auto;">
         <canvas id="myChart"></canvas>
     </div>
@@ -123,48 +125,78 @@
         }
         updateElement();
         setInterval(updateElement, 1000 * 3); // Call updateElement every 3 minutes
+
     </script>
     <div class="form-wrapper">
         <div class="form-container">
-          <form class="buy-form" method="post">
-              {% csrf_token %}
-            <div class="form-group">
-                <label>Price ({{ currency }})</label>
-              {{ buy_form.price }}
-            </div>
-            <div class="form-group">
-                <label>Amount ({{ asset }})</label>
-              {{ buy_form.amount }}
-            </div>
-<!--            <div class="form-group">-->
-<!--              <input placeholder="Total ({{ currency }})" type="text" id="buy-total" name="buy-total" readonly>-->
-<!--            </div>-->
-              <!-- Вот тут -->
-              {% if request.user.is_authenticated %}
-            <button type="submit" class="btn btn-success">Buy {{ asset }}</button>
-              {% else %}
-              <button disabled type="submit" class="btn btn-success">Buy {{ asset }} (Нужно авторизоваться)</button>
-            {% endif %}
-          </form>
-          <form class="sell-form">
-            <div class="form-group">
-                <label>Price ({{ currency }})</label>
-              <input type="text" id="sell-price" name="sell-price" value="{{ price2 }}">
-            </div>
-            <div class="form-group">
-                <label>Amount ({{ asset }})</label>
-              <input type="text" id="sell-amount" name="sell-amount">
-            </div>
-<!--            <div class="form-group">-->
-<!--              <input placeholder="Total ({{ currency }})" type="text" id="sell-total" name="sell-total" readonly>-->
-<!--            </div>-->
-              {% if request.user.is_authenticated %}
-            <button type="submit" class="btn btn-danger">Sell {{ asset }}</button>
-              {% else %}
-              <button disabled type="submit" class="btn btn-danger">Sell {{ asset }} (Нужно авторизоваться)</button>
-            {% endif %}
-          </form>
+            <form class="buy-form" method="post">
+                {% csrf_token %}
+                {% if request.user.is_authenticated %}
+                <div class="form-group">
+                    <label>Price ({{ currency }})</label>
+                    {{ buy_form.price }}
+                </div>
+                <div class="form-group">
+                    <label>Amount ({{ asset }})</label>
+                    {{ buy_form.amount }}
+                </div>
+                {% else %}
+                <div class="form-group">
+                    <label>Price ({{ currency }})</label>
+                    <input type="text" id="buy-price" name="buy-price" value="{{ price2 }}" disabled>
+                </div>
+                <div class="form-group">
+                    <label>Amount ({{ asset }})</label>
+                    <input type="text" id="buy-amount" name="buy-amount" disabled>
+                </div>
+                {% endif %}
+                <!--            <div class="form-group">-->
+                <!--              <input placeholder="Total ({{ currency }})" type="text" id="buy-total" name="buy-total" readonly>-->
+                <!--            </div>-->
+                <!-- Вот тут -->
+                {% if request.user.is_authenticated %}
+                <button type="submit" class="btn btn-success">Buy {{ asset }}</button>
+                {% else %}
+                <button class="btn btn-success">Зарегистрироваться</button>
+                <script>
+                  document.querySelector('.btn-success').addEventListener('click', function() {
+                    location.href = '{% url 'signup' %}';
+                  });
+                </script>
+                {% endif %}
+            </form>
+            <form class="sell-form">
+                {% if request.user.is_authenticated %}
+                <div class="form-group">
+                    <label>Price ({{ currency }})</label>
+                    <input type="text" id="sell-price" name="sell-price" value="{{ price2 }}">
+                </div>
+                <div class="form-group">
+                    <label>Amount ({{ asset }})</label>
+                    <input type="text" id="sell-amount" name="sell-amount">
+                </div>
+                {% else %}
+                <div class="form-group">
+                    <label>Price ({{ currency }})</label>
+                    <input type="text" id="sell-price" name="sell-price" value="{{ price2 }}" disabled>
+                </div>
+                <div class="form-group">
+                    <label>Amount ({{ asset }})</label>
+                    <input type="text" id="sell-amount" name="sell-amount" disabled>
+                </div>
+                {% endif %}
+                {% if request.user.is_authenticated %}
+                <button type="submit" class="btn btn-danger">Sell {{ asset }}</button>
+                {% else %}
+                <button class="btn btn-danger">Зарегистрироваться</button>
+                <script>
+                  document.querySelector('.btn-danger').addEventListener('click', function() {
+                    location.href = '{% url 'signup' %}';
+                  });
+                </script>
+                {% endif %}
+            </form>
         </div>
-      </div>
+    </div>
 </div>
 {% endblock %}
