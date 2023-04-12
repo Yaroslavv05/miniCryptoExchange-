@@ -51,10 +51,6 @@ def activateEmail(request, user, to_email):
                        f'Проблема с отправкой письма с подтверждением на {to_email}, посмотрите всели вы написали коректно.')
 
 
-def user_logout(request):
-    logout(request)
-    return render(request, 'main/index.html')
-
 def activate(request, uidb64, token):
     User = get_user_model()
     try:

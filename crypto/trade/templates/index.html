@@ -157,12 +157,9 @@
                 {% if request.user.is_authenticated %}
                 <button type="submit" class="btn btn-success">Buy {{ asset }}</button>
                 {% else %}
-                <button class="btn btn-success">Зарегистрироваться</button>
-                <script>
-                  document.querySelector('.btn-success').addEventListener('click', function() {
-                    location.href = '{% url 'signup' %}';
-                  });
-                </script>
+                <a href="{% url 'signup' %}">
+                <button type="submit" class="btn btn-success">Зарегистрироваться</button>
+                </a>
                 {% endif %}
             </form>
             <form class="sell-form">
@@ -188,12 +185,9 @@
                 {% if request.user.is_authenticated %}
                 <button type="submit" class="btn btn-danger">Sell {{ asset }}</button>
                 {% else %}
-                <button class="btn btn-danger">Зарегистрироваться</button>
-                <script>
-                  document.querySelector('.btn-danger').addEventListener('click', function() {
-                    location.href = '{% url 'signup' %}';
-                  });
-                </script>
+                <a href="{% url 'signup' %}">
+                <button type="submit" class="btn btn-danger">Зарегистрироваться</button>
+                </a>
                 {% endif %}
             </form>
         </div>
