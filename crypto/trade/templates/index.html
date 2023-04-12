@@ -129,6 +129,53 @@
     </script>
     <div class="form-wrapper">
         <div class="form-container">
+            {% if request.user.is_authenticated %}
+            <form class="buy-form" method="post">
+                {% csrf_token %}
+                {% if request.user.is_authenticated %}
+                <div class="form-group">
+                    <label>Price ({{ currency }})</label>
+                    {{ buy_form.price }}
+                </div>
+                <div class="form-group">
+                    <label>Amount ({{ asset }})</label>
+                    {{ buy_form.amount }}
+                </div>
+                {% else %}
+                <div class="form-group">
+                    <label>Price ({{ currency }})</label>
+                    <input type="text" id="buy-price" name="buy-price" value="{{ price2 }}">
+                </div>
+                <div class="form-group">
+                    <label>Amount ({{ asset }})</label>
+                    <input type="text" id="buy-amount" name="buy-amount">
+                </div>
+                {% endif %}
+                <button type="submit" class="btn btn-success">Buy {{ asset }}</button>
+            </form>
+            <form class="sell-form">
+                {% if request.user.is_authenticated %}
+                <div class="form-group">
+                    <label>Price ({{ currency }})</label>
+                    <input type="text" id="sell-price" name="sell-price" value="{{ price2 }}">
+                </div>
+                <div class="form-group">
+                    <label>Amount ({{ asset }})</label>
+                    <input type="text" id="sell-amount" name="sell-amount">
+                </div>
+                {% else %}
+                <div class="form-group">
+                    <label>Price ({{ currency }})</label>
+                    <input type="text" id="sell-price" name="sell-price" value="{{ price2 }}" >
+                </div>
+                <div class="form-group">
+                    <label>Amount ({{ asset }})</label>
+                    <input type="text" id="sell-amount" name="sell-amount">
+                </div>
+                {% endif %}
+                <button type="submit" class="btn btn-danger">Sell {{ asset }}</button>
+            </form>
+            {% else %}
             <form class="buy-form" method="post" action="{% url 'signup' %}">
                 {% csrf_token %}
                 {% if request.user.is_authenticated %}
@@ -150,16 +197,7 @@
                     <input type="text" id="buy-amount" name="buy-amount" disabled>
                 </div>
                 {% endif %}
-                <!--            <div class="form-group">-->
-                <!--              <input placeholder="Total ({{ currency }})" type="text" id="buy-total" name="buy-total" readonly>-->
-                <!--            </div>-->
-                <!-- Вот тут -->
-                {% if request.user.is_authenticated %}
-                <button type="submit" class="btn btn-success">Buy {{ asset }}</button>
-                {% else %}
                 <button type="submit" class="btn btn-success">Зарегистрироваться</button>
-
-                {% endif %}
             </form>
             <form class="sell-form"  action="{% url 'signup' %}">
                 {% if request.user.is_authenticated %}
@@ -181,14 +219,9 @@
                     <input type="text" id="sell-amount" name="sell-amount" disabled>
                 </div>
                 {% endif %}
-                {% if request.user.is_authenticated %}
-                <button type="submit" class="btn btn-danger">Sell {{ asset }}</button>
-                {% else %}
-                <a href="{% url 'signup' %}">
                 <button type="submit" class="btn btn-danger">Зарегистрироваться</button>
-                </a>
-                {% endif %}
             </form>
+            {% endif %}
         </div>
     </div>
 </div>

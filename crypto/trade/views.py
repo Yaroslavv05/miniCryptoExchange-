@@ -106,6 +106,7 @@ def spot(request):
     response.set_cookie('name', 'BTCUSDT')
     return response
 
+
 def spot_coin(request):
     client = binance.Client()
     data_price = [i[1] for i in client.get_klines(symbol=request.COOKIES['name'], interval='1m')][:100]

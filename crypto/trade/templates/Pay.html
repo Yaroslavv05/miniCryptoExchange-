@@ -1,111 +1,125 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Payment</title>
-	<style>
-		body {
-			font-family: Arial, sans-serif;
-			text-align: center;
-			background-color: #f9f9f9;
-		}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+            h1 {
+        margin-top: 50px;
+        font-size: 36px;
+        color: #0066cc;
+    }
 
-		h1 {
-			margin-top: 50px;
-			font-size: 36px;
-			color: #333;
-		}
+    .container {
+        margin-top: 30px;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
 
-		#wallet-address {
-			font-size: 24px;
-			color: #0066cc;
-			padding: 5px 10px;
-			border: 2px solid #0066cc;
-			border-radius: 5px;
-			background-color: #fff;
-			display: inline-block;
-			margin: 20px auto;
-		}
+    .input-label {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: #333;
+    }
 
-		#name_coin {
-			font-size: 24px;
-			color: #0066cc;
-			padding: 5px 10px;
-			border: 2px solid #0066cc;
-			border-radius: 5px;
-			background-color: #fff;
-			display: inline-block;
-			margin: 20px auto;
-		}
+    .input-field {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        color: #333;
+        margin-bottom: 20px;
+    }
 
-		#price {
-			font-size: 24px;
-			color: #0066cc;
-			padding: 5px 10px;
-			border: 2px solid #0066cc;
-			border-radius: 5px;
-			background-color: #fff;
-			display: inline-block;
-			margin: 20px auto;
-		}
+    .input-field:focus {
+        outline: none;
+        background-color: #fff;
+    }
 
-		#Amount {
-			font-size: 24px;
-			color: #0066cc;
-			padding: 5px 10px;
-			border: 2px solid #0066cc;
-			border-radius: 5px;
-			background-color: #fff;
-			display: inline-block;
-			margin: 20px auto;
-		}
+    .input-field::placeholder {
+        color: #999;
+    }
 
-		#summa {
-			font-size: 24px;
-			color: #0066cc;
-			padding: 5px 10px;
-			border: 2px solid #0066cc;
-			border-radius: 5px;
-			background-color: #fff;
-			display: inline-block;
-			margin: 20px auto;
-		}
+    .copy-button {
+        display: inline-block;
+        margin-left: 10px;
+        font-size: 16px;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 5px;
+        background-color: #0066cc;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 
-		button {
-			font-size: 20px;
-			padding: 10px 20px;
-			border: none;
-			border-radius: 5px;
-			background-color: #0066cc;
-			color: #fff;
-			cursor: pointer;
-			margin: 20px 10px;
-		}
-	</style>
+    .copy-button:hover {
+        background-color: #004b8e;
+    }
+
+    .pay-button {
+        font-size: 18px;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 5px;
+        background-color: #009688;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .pay-button:hover {
+        background-color: #00756a;
+    }
+
+    </style>
 </head>
 <body>
-	<h1>Покупка {{ asset }}</h1>
-	<div>
-        <p>Монета: <span id="name_coin">{{ name_coin }}</span></p>
-        <p>По цене: <span id="price">{{ price }} {{ currency }}</span></p>
-        <p>Количество: <span id="Amount">{{ amount }} {{ asset }}</span></p>
-		<p>На сумму: <span id="summa">{{ summa }} {{ currency }}</span></p>
-		<p>Адрес кошелька: <span id="wallet-address">{{ number_wallet }}</span><button onclick="copyToClipboard()">Копировать</button></p>
-		<button id='btn' class="btn btn-primary">Я оплатил</button>
-	</div>
-	<script>
-		const button = document.getElementById("btn");
-		button.addEventListener("click", function() {
-		  window.location.href = "{% url 'paid' %}";
-		});
-	</script>
-    <script>
-        function copyToClipboard() {
-			var address = document.getElementById('wallet-address').textContent;
-			navigator.clipboard.writeText(address);
-			alert("Address copied to clipboard!");
-		}
-    </script>
+<h1>Покупка {{ asset }}</h1>
+<div class="container">
+    <p class="input-label">Монета:</p>
+    <p>{{ name_coin }}</p>
+    <p class="input-label">По цене:</p>
+    <p>{{ price }} {{ currency }}</p>
+    <p class="input-label">Количество:</p>
+    <p>{{ amount }} {{ asset }}</p>
+    <p class="input-label">На сумму:</p>
+    <p>{{ summa }} {{ currency }}</p>
+    <p class="input-label">Адрес кошелька:</p>
+    <div style="display: flex; align-items: center;">
+        <input type="text" id="wallet-address" class="input-field" value="{{ number_wallet }}" readonly>
+        <button class="copy-button" onclick="copyToClipboard()">Копировать</button>
+    </div>
+    <button class="pay-button" id='btn' onclick="redirectToPaid()">Я оплатил</button>
+</div>
+<script>
+    function copyToClipboard() {
+        var walletAddress = document.getElementById("wallet-address");
+        walletAddress.select();
+        walletAddress.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+        alert("Адрес скопирован в буфер обмена: " + walletAddress.value);
+    }
+
+    function redirectToPaid() {
+        window.location.href = "{% url 'paid' %}";
+    }
+
+</script>
 </body>
 </html>
