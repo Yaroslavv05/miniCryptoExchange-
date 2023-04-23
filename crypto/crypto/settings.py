@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ed1+nxo@)x)nr^)!&d412kr52&-wi(bmcy$d77(pik0_*$^#bo'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['mytestexchange.fun' ]
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition

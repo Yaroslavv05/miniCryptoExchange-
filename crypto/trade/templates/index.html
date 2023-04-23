@@ -42,47 +42,47 @@
     }
 
     .listbox-container {
-  width: 30%;
-  background-color: #f8f8f8;
-  float: right;
-  overflow-y: auto;
-  max-height: 300px; /* Set the max height of the listbox container as needed */
-}
+      width: 30%;
+      background-color: white;
+      float: right;
+      overflow-y: auto;
+      max-height: 400px; /* Set the max height of the listbox container as needed */
+    }
 
-.cryptocurrency-listbox {
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-  overflow-y: auto;
-}
+    .cryptocurrency-listbox {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      list-style-type: none;
+      overflow-y: auto;
+    }
 
-.cryptocurrency-listbox li {
-  padding: 8px;
-  cursor: pointer;
-  display: flex; /* Use flexbox for two-column layout */
-}
+    .cryptocurrency-listbox li {
+      padding: 8px;
+      cursor: pointer;
+      display: flex; /* Use flexbox for two-column layout */
+    }
 
-.coin-name,
-.coin-price {
-  width: 50%; /* Set the width of each column as needed */
-}
-.container_main {
-  display: flex;
-}
+    .coin-name,
+    .coin-price {
+      width: 50%; /* Set the width of each column as needed */
+    }
+    .container_main {
+      display: flex;
+    }
 
-.div_1 {
-  margin-right: 15px;
-  flex: 1;
-  order: 1;
-}
+    .div_1 {
+      margin-right: 15px;
+      flex: 1;
+      order: 1;
+    }
 
-.listbox-container {
-  margin-top: 50px;
-  margin-left: 15px;
-  flex: 1;
-  order: 2;
-}
+    .listbox-container {
+      margin-top: 10px;
+      margin-left: 15px;
+      flex: 1;
+      order: 2;
+    }
 
 </style>
 <div class="container">
@@ -106,7 +106,6 @@
 
       setInterval(update_price_change, 20000); // update every 5 seconds
     });
-
     </script>
     <nav class="navbar">
         <div class="navbar-brand">
@@ -173,46 +172,13 @@
     <div class="listbox-container">
   <ul class="cryptocurrency-listbox">
     <!-- Replace the placeholder list items with actual data -->
-    <li>
-      <div class="coin-name">Bitcoin</div>
-      <div class="coin-price">$59,742.45</div>
-    </li>
-    <li>
-      <div class="coin-name">Ethereum</div>
-      <div class="coin-price">$2,104.62</div>
-    </li>
-    <li>
-      <div class="coin-name">Ripple</div>
-      <div class="coin-price">$0.98</div>
-    </li>
+      {% for i in infos %}
       <li>
-      <div class="coin-name">Bitcoin</div>
-      <div class="coin-price">$59,742.45</div>
-    </li>
-    <li>
-      <div class="coin-name">Ethereum</div>
-      <div class="coin-price">$2,104.62</div>
-    </li>
-    <li>
-      <div class="coin-name">Ripple</div>
-      <div class="coin-price">$0.98</div>
-    </li>
-      <li>
-      <div class="coin-name">Ripple</div>
-      <div class="coin-price">$0.98</div>
-    </li>
-      <li>
-      <div class="coin-name">Bitcoin</div>
-      <div class="coin-price">$59,742.45</div>
-    </li>
-    <li>
-      <div class="coin-name">Ethereum</div>
-      <div class="coin-price">$2,104.62</div>
-    </li>
-    <li>
-      <div class="coin-name">Ripple</div>
-      <div class="coin-price">$0.98</div>
-    </li>
+        <div class="coin-name">{{ i }}</div>
+          <div class="coin-price">${{ i }}</div>
+          <div class="coin-change" style="color: green;">+1%</div>
+      </li>
+      {% endfor %}
     <!-- Add more list items as needed -->
   </ul>
 </div>

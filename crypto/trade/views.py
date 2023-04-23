@@ -102,7 +102,7 @@ def spot(request):
     response = render(request, 'index.html',
                   {'form': form, 'symbol': info['symbol'], 'price': divine_number(data_price[-1], 4),
                    'change': round(float(info['priceChangePercent']), 2), 'asset': asset['baseAsset'],
-                   'currency': asset['quoteAsset'], 'buy_form': buy_form, 'price2': float(data_price[-1])})
+                   'currency': asset['quoteAsset'], 'buy_form': buy_form, 'price2': float(data_price[-1]), 'name_coins': list(INFO.keys())})
     response.set_cookie('name', 'BTCUSDT')
     return response
 
@@ -151,10 +151,15 @@ def spot_coin(request):
     data = {'min_data': min_data, 'max_data': max_data, 'data': data['data'][:100], 'data_len': data_len}
     if is_ajax(request=request):
         return JsonResponse(data, status=200)
+    infos = []
+    for i in range(len(list(INFO.keys()))):
+        infos.append(list(INFO.keys())[i])
+        infos.append('30000')
+    print(infos)
     return render(request, 'index.html',
                   {'form': form, 'symbol': info['symbol'], 'price': divine_number(data_price[-1], 4),
                    'change': round(float(info['priceChangePercent']), 2), 'asset': asset['baseAsset'],
-                   'currency': asset['quoteAsset'], 'buy_form': buy_form, 'price2': divine_number(data_price[-1], 4)})
+                   'currency': asset['quoteAsset'], 'buy_form': buy_form, 'price2': divine_number(data_price[-1], 4), 'infos': infos})
 
 
 def pay(request):
