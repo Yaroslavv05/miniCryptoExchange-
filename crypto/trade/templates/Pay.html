@@ -13,7 +13,7 @@
             h1 {
         margin-top: 50px;
         font-size: 36px;
-        color: #0066cc;
+        color: white;
     }
 
     .container {
@@ -40,8 +40,8 @@
         font-size: 16px;
         border: none;
         border-radius: 5px;
-        background-color: #f9f9f9;
-        color: #333;
+        background-color: rgb(16, 35, 49);
+        color: white;
         margin-bottom: 20px;
     }
 
@@ -51,7 +51,7 @@
     }
 
     .input-field::placeholder {
-        color: #999;
+        color: ;
     }
 
     .copy-button {
@@ -61,14 +61,14 @@
         padding: 8px 15px;
         border: none;
         border-radius: 5px;
-        background-color: #0066cc;
+        background-color: rgb(16, 35, 49);
         color: #fff;
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
 
     .copy-button:hover {
-        background-color: #004b8e;
+        background-color: #00756a;
     }
 
     .pay-button {
@@ -76,7 +76,7 @@
         padding: 12px 25px;
         border: none;
         border-radius: 5px;
-        background-color: #009688;
+        background-color: rgb(16, 35, 49);
         color: #fff;
         cursor: pointer;
         transition: background-color 0.3s ease;
@@ -90,7 +90,7 @@
 </head>
 <body>
 <h1>Покупка {{ asset }}</h1>
-<div class="container">
+<div class="container" style="background: rgb(1, 167, 129); color: white;">
     <p class="input-label">Монета:</p>
     <p>{{ name_coin }}</p>
     <p class="input-label">По цене:</p>

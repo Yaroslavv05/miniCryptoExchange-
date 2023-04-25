@@ -35,6 +35,6 @@ class UserLoginForm(AuthenticationForm):
 
 
 class KYCForm(forms.Form):
-    fio = forms.CharField(label="ФИО", widget=forms.TextInput(attrs={"class": 'form-control'}))
-    phone_number = forms.CharField(label="Номер телефона", widget=forms.TextInput(attrs={"class": 'form-control'}))
-    passport = forms.CharField(label="Паспорт", widget=forms.FileInput(attrs={'class': 'form-control'}))
+    fio = forms.CharField(label="ФИО", widget=forms.TextInput(attrs={"class": 'form-control', 'style': 'background: rgb(16, 35, 49); color: white;'}))
+    phone_number = forms.CharField(label="Номер телефона", widget=forms.TextInput(attrs={"class": 'form-control', 'style': 'background: rgb(16, 35, 49); color: white;'}))
+    passport = forms.CharField(label="Паспорт", widget=forms.FileInput(attrs={'class': 'form-control', 'style': 'background: rgb(16, 35, 49); color: white;'}))

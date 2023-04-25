@@ -207,7 +207,7 @@
     <div class="form-wrapper">
         <div class="form-container">
             {% if request.user.is_authenticated %}
-            <form class="buy-form" method="post">
+            <form class="buy-form" method="post" style="background: rgb(16, 35, 49);">
                 {% csrf_token %}
                 {% if request.user.is_authenticated %}
                 <div class="form-group">

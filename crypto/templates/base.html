@@ -13,94 +13,119 @@
 </head>
 <body style="background: rgb(16, 35, 49);">
 <style>
-.dropbtn {
-    background-color: #ffffff;
-    color: white;
+  .dropbtn {
+    background-color: rgb(16, 35, 49);
+    color: #000;
     padding: 9px;
     font-size: 16px;
     border: none;
-}
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+  }
 
-#right_nav {
+  .dropdown-content a:hover {
+      text-decoration: none;
+    }
+
+  #right_nav {
     margin-right: 150px;
-}
+  }
 
-.dropdown {
+  .dropdown {
     position: relative;
     display: inline-block;
-}
+  }
 
-.dropdown-content {
+  .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #ffffff;
+    background-color: rgb(1, 167, 129);
     min-width: 300px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-}
+    left: -240px; /* изменение положения контейнера влево */
+    border-radius: 5px;
+    padding: 10px;
+  }
 
-.dropdown-content a {
-    color: black;
+  .dropdown-content a {
+    color: white;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    transition: all 0.3s ease;
+  }
+
+  .dropdown-content a:hover {
+  background-color: #f1f1f1;
+  border-radius: 5px;
 }
 
-.dropdown-content a:hover {background-color: #ddd;}
+  .dropdown-content a:hover {
+    background-color: #444;
+  }
 
-.dropdown:hover .dropdown-content {display: block;}
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
 
-.dropdown:hover .dropbtn {background-color: #6c757d;}
+  .dropdown:hover .dropbtn {
+    background-color: #111;
+    color: #fff;
+  }
 
-.header_left li a:hover,
-.header_left li a:active,
-.header_left li a:focus {
-  text-decoration: none;
-}
+  .header_left li a:hover,
+  .header_left li a:active,
+  .header_left li a:focus {
+    text-decoration: none;
+  }
 
-.header_right li a:hover,
-.header_right li a:active,
-.header_right li a:focus {
-  text-decoration: none;
-}
+  .header_right li a:hover,
+  .header_right li a:active,
+  .header_right li a:focus {
+    text-decoration: none;
+  }
 
-.header_container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: rgb(16, 35, 49);
-}
+  .header_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgb(16, 35, 49);
+  }
 
-.header_left li a:hover {
-  color: rgb(1, 167, 129);
-}
+  .header_left li a:hover {
+    color: rgb(1, 167, 129);
+  }
 
-.header_right li a:hover {
-  color: rgb(1, 167, 129);
-}
+  .header_right li a:hover {
+    color: rgb(1, 167, 129);
+  }
 
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
+  li {
+    display: inline-block;
+    margin: 0 10px;
+  }
 
-a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 15px;
-}
+  a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 15px;
+  }
 
-a:hover {
-  text-decoration: underline;
-}
+  a:hover {
+    text-decoration: underline;
+  }
 </style>
+
 <!-- Navbar -->
 <header class="header header-prev bp3-dark  ru" id="header">
             <div class="header_container">
@@ -108,22 +133,31 @@ a:hover {
                     <!-- LOGO -->
                     <li class=""><a class="" target="_self" rel="noreferrer noopener"
                                     href="{% url 'spot' %}">Торговать</a></li>
-<!--                    <li class=""><span class="bp3-popover-wrapper"><span aria-haspopup="true"-->
-<!--                                                                         class="bp3-popover-target"><span class=""-->
-<!--                                                                                                          tabindex="0">Для кредиторов</span></span></span>-->
-<!--                    </li>-->
-<!--                    <li class=""><span class="bp3-popover-wrapper"><span aria-haspopup="true"-->
-<!--                                                                         class="bp3-popover-target"><span class=""-->
-<!--                                                                                                          tabindex="0">О нас</span></span></span>-->
-<!--                    </li>-->
-<!--                    <li class=""><a href="https://leo.bitfinex.com/" target="_blank" rel="noreferrer noopener" class="">UNUS-->
-<!--                        SED LEO</a></li>-->
-<!--                    <li class=""><a class="" rel="noreferrer noopener" href="https://www.bitfinex.com/affiliates">Партнерская-->
-<!--                        программа</a></li>-->
-<!--                    <li class="overflow"><span class="bp3-popover-wrapper"><span aria-haspopup="true"-->
-<!--                                                                                 class="bp3-popover-target"><span-->
-<!--                            class="" tabindex="0">Еще</span></span></span></li>-->
                 </ul>
+                {% if request.user.is_authenticated %}
+                <div class="d-flex align-items-center" id="right_nav">
+                    <div class="dropdown">
+                        <button class="dropbtn">
+                            <img
+                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png"
+                                class="rounded-circle"
+                                height="25"
+                                alt="Black and White Portrait of a Man"
+                                loading="lazy"
+                              />
+                        </button>
+                        <div class="dropdown-content">
+                            {% if request.user.is_authenticated %}
+                                <a href="{% url 'account' %}">Профиль</a>
+                                <a href="{% url 'exit' %}">Выйти</a>
+                            {% else %}
+                                <a href="{% url 'signup' %}">Зарегестрироваться</a>
+                                <a href="{% url 'signin' %}">Войти</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% else %}
                 <ul class="header_right">
                     <li class=""><a class="" target="_self" rel="noreferrer noopener"
                                     href="{% url 'signin' %}">Войти</a></li>
@@ -131,6 +165,7 @@ a:hover {
                                     href="{% url 'signup' %}" style="color: rgb(1, 167, 129);">Регистрация</a></li>
 
                 </ul>
+                {% endif %}
             </div>
         </header>
 <!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
