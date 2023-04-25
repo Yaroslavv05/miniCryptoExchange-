@@ -11,10 +11,8 @@
           data-gatsby-head="true">
     <meta name="referrer" content="origin" data-gatsby-head="true">
     <meta name="viewport" content="width=device-width" data-gatsby-head="true">
-    <meta property="og:image" content="https://bitfinex.com/images/thumbnails/bitfinex-1.png" data-gatsby-head="true">
     <meta name="twitter:card" content="summary" data-gatsby-head="true">
     <meta name="twitter:site" content="@bitfinex" data-gatsby-head="true">
-    <meta name="twitter:image" content="https://bitfinex.com/images/thumbnails/bitfinex-2.png" data-gatsby-head="true">
     <meta name="theme-color" content="#102331">
     <style data-href="/assets/styles.630c5212d912889234bc.css" data-identity="gatsby-global-css">@charset "UTF-8";.collapse-box{background:rgb(var(--background-color-variant));border-radius:4px;color:rgb(var(--text-color-variant));padding:14px}.collapse-box .collapse-box-title{display:flex;justify-content:space-between}.collapse-box .collapse-box-title>div{display:flex;gap:5px}.collapse-box .collapse-box-title span{cursor:pointer}.collapse-box .collapse-box-title span:hover{text-decoration:underline}.collapse-box .collapse-box-description{margin-top:10px}
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
@@ -124,12 +122,10 @@
     <div tabindex="-1" id="gatsby-focus-wrapper" style="outline: none;">
         <header class="header header-prev bp3-dark  ru" id="header">
             <div class="header_container">
-                <ul class="header_left">
+                <ul>
                     <!-- LOGO -->
-                    <li class=""><span class="bp3-popover-wrapper"><span aria-haspopup="true"
-                                                                         class="bp3-popover-target"><span class=""
-                                                                                                          tabindex="0">Для трейдеров</span></span></span>
-                    </li>
+                    <li class=""><a class="" target="_self" rel="noreferrer noopener"
+                                    href="{% url 'spot' %}">Торговать</a></li>
 <!--                    <li class=""><span class="bp3-popover-wrapper"><span aria-haspopup="true"-->
 <!--                                                                         class="bp3-popover-target"><span class=""-->
 <!--                                                                                                          tabindex="0">Для кредиторов</span></span></span>-->
@@ -148,9 +144,9 @@
                 </ul>
                 <ul class="header_right">
                     <li class=""><a class="" target="_self" rel="noreferrer noopener"
-                                    href="https://www.bitfinex.com/login">Войти</a></li>
+                                    href="{% url 'signin' %}">Войти</a></li>
                     <li class=""><a class="primary" target="_self" rel="noreferrer noopener"
-                                    href="https://www.bitfinex.com/sign-up">Регистрация</a></li>
+                                    href="{% url 'signup' %}">Регистрация</a></li>
 
                 </ul>
             </div>
@@ -224,11 +220,11 @@
 <path d="M14.9366 1.2L7.73804 8.4L0.539444 1.2" stroke="white"></path>
 </svg></div></div></span></a></div>
                         </li>
-                        <li class="button"><a href="https://www.bitfinex.com/login">
+                        <li class="button"><a href="{% url 'signin' %}">
                             <button type="button" class="bp3-button bp3-minimal"><span
                                     class="bp3-button-text">Войти</span></button>
                         </a></li>
-                        <li class="button"><a href="https://www.bitfinex.com/sign-up">
+                        <li class="button"><a href="{% url 'signup' %}">
                             <button type="button" class="bp3-button bp3-minimal primary"><span class="bp3-button-text">Регистрация</span>
                             </button>
                         </a></li>
@@ -245,10 +241,10 @@
                     </div>
                     <div class="extra_content">
                         <div id="" class="buttons_row" style="display: flex; flex-direction: row;"><a
-                                href="https://www.bitfinex.com/sign-up">
+                                href="{% url 'signup' %}">
                             <button type="button" class="bp3-button register_btn"><span class="bp3-button-text">Регистрация</span>
                             </button>
-                        </a><a href="https://trading.bitfinex.com/t?demo=true">
+                        </a><a href="{% url 'signin' %}">
                             <button type="button" class="bp3-button secondary_btn"><span class="bp3-button-text">Войти</span>
                             </button>
                         </a></div>
@@ -4009,7 +4005,7 @@
             </div>
             <div class="footer__bottom">
                 <div>
-                    <div class="footer__section">Copyright © 2013-2023 iFinex Inc. All rights reserved.</div>
+                    <div class="footer__section">&copy; 2019-2023 CryptoExhange. Все права защищены.</div>
                     <div class="footer__section">
 
                 </div>

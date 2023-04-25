@@ -84,6 +84,7 @@
       order: 2;
     }
 
+
 </style>
 <div class="container">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -106,12 +107,13 @@
 
       setInterval(update_price_change, 20000); // update every 5 seconds
     });
+
     </script>
     <nav class="navbar">
         <div class="navbar-brand">
-            <span>{{ symbol }}</span>
+            <span style="color: white;">{{ symbol }}</span>
         </div>
-        <div class="navbar-price" id="price">
+        <div class="navbar-price" id="price" style="color: white;">
             ${{ price }}
         </div>
         <div class="navbar-change">
@@ -127,10 +129,10 @@
         </form>
     </nav>
     <div class="container_main">
-    <div class='div_1' style="width: 800px; height: 400px;">
-        <canvas id="myChart"></canvas>
-    </div>
-    <script>
+        <div class='div_1' style="width: 800px; height: 400px;">
+            <canvas id="myChart"></canvas>
+        </div>
+        <script>
     var ctx = document.getElementById('myChart').getContext('2d');
                         var myChart = new Chart(ctx, {
                             type: 'line',
@@ -168,25 +170,26 @@
         updateElement();
         setInterval(updateElement, 1000 * 3); // Call updateElement every 3 minutes
 
-    </script>
-    <div class="listbox-container">
-  <ul class="cryptocurrency-listbox">
-    <!-- Replace the placeholder list items with actual data -->
-     {% for i in infos %}
-      <li>
-        <div class="coin-name" data-id="{{ i.id }}">{{ i.name }}</div>
-        <div class="coin-price">${{ i.price }}</div>
-          {% if i.change < 0 %}
-            <div class="coin-change" style="color: red;">{{ i.change }}%</div>
-          {% else %}
-            <div class="coin-change" style="color: green;">+{{ i.change }}%</div>
-          {% endif %}
-      </li>
-    {% endfor %}
 
-    <!-- Add more list items as needed -->
-  </ul>
-</div>
+        </script>
+        <div class="listbox-container" style="background: rgb(16, 35, 49);">
+            <ul class="cryptocurrency-listbox">
+                <!-- Replace the placeholder list items with actual data -->
+                {% for i in infos %}
+                <li>
+                    <div class="coin-name" data-id="{{ i.id }}" style="color: white;">{{ i.name }}</div>
+                    <div class="coin-price" style="color: white;">${{ i.price }}</div>
+                    {% if i.change < 0 %}
+                    <div class="coin-change" style="color: red;">{{ i.change }}%</div>
+                    {% else %}
+                    <div class="coin-change" style="color: green;">+{{ i.change }}%</div>
+                    {% endif %}
+                </li>
+                {% endfor %}
+
+                <!-- Add more list items as needed -->
+            </ul>
+        </div>
         <script>
           var coinNames = document.querySelectorAll(".coin-name");
 
@@ -198,8 +201,9 @@
               searchInput.value = coinName;
             });
           });
+
         </script>
-        </div>
+    </div>
     <div class="form-wrapper">
         <div class="form-container">
             {% if request.user.is_authenticated %}
@@ -207,20 +211,20 @@
                 {% csrf_token %}
                 {% if request.user.is_authenticated %}
                 <div class="form-group">
-                    <label>Price ({{ currency }})</label>
+                    <label style="color: white;">Price ({{ currency }})</label>
                     {{ buy_form.price }}
                 </div>
                 <div class="form-group">
-                    <label>Amount ({{ asset }})</label>
+                    <label style="color: white;">Amount ({{ asset }})</label>
                     {{ buy_form.amount }}
                 </div>
                 {% else %}
                 <div class="form-group">
-                    <label>Price ({{ currency }})</label>
+                    <label  style="color: white;">Price ({{ currency }})</label>
                     <input type="text" id="buy-price" name="buy-price" value="{{ price2 }}">
                 </div>
                 <div class="form-group">
-                    <label>Amount ({{ asset }})</label>
+                    <label  style="color: white;">Amount ({{ asset }})</label>
                     <input type="text" id="buy-amount" name="buy-amount">
                 </div>
                 {% endif %}
@@ -229,20 +233,20 @@
             <form class="sell-form">
                 {% if request.user.is_authenticated %}
                 <div class="form-group">
-                    <label>Price ({{ currency }})</label>
-                    <input type="text" id="sell-price" name="sell-price" value="{{ price2 }}">
+                    <label  style="color: white;">Price ({{ currency }})</label>
+                    <input type="text" id="sell-price" name="sell-price" value="{{ price2 }}" style="background: rgb(16, 35, 49); color: white;">
                 </div>
                 <div class="form-group">
-                    <label>Amount ({{ asset }})</label>
-                    <input type="text" id="sell-amount" name="sell-amount">
+                    <label  style="color: white;">Amount ({{ asset }})</label>
+                    <input type="text" id="sell-amount" name="sell-amount" style="background: rgb(16, 35, 49); color: white;">
                 </div>
                 {% else %}
                 <div class="form-group">
                     <label>Price ({{ currency }})</label>
-                    <input type="text" id="sell-price" name="sell-price" value="{{ price2 }}" >
+                    <input type="text" id="sell-price" name="sell-price" value="{{ price2 }}">
                 </div>
                 <div class="form-group">
-                    <label>Amount ({{ asset }})</label>
+                    <label  style="color: white;">Amount ({{ asset }})</label>
                     <input type="text" id="sell-amount" name="sell-amount">
                 </div>
                 {% endif %}
@@ -253,26 +257,26 @@
                 {% csrf_token %}
                 {% if request.user.is_authenticated %}
                 <div class="form-group">
-                    <label>Price ({{ currency }})</label>
+                    <label style="color: white;">Price ({{ currency }})</label>
                     {{ buy_form.price }}
                 </div>
                 <div class="form-group">
-                    <label>Amount ({{ asset }})</label>
+                    <label style="color: white;">Amount ({{ asset }})</label>
                     {{ buy_form.amount }}
                 </div>
                 {% else %}
                 <div class="form-group">
-                    <label>Price ({{ currency }})</label>
-                    <input type="text" id="buy-price" name="buy-price" value="{{ price2 }}" disabled>
+                    <label style="color: white;">Price ({{ currency }})</label>
+                    <input type="text" id="buy-price" name="buy-price" value="{{ price2 }}" style="color: white;" disabled>
                 </div>
                 <div class="form-group">
-                    <label>Amount ({{ asset }})</label>
-                    <input type="text" id="buy-amount" name="buy-amount" disabled>
+                    <label style="color: white;">Amount ({{ asset }})</label>
+                    <input type="text" id="buy-amount" name="buy-amount" style="color: white;" disabled>
                 </div>
                 {% endif %}
                 <button type="submit" class="btn btn-success">Зарегистрироваться</button>
             </form>
-            <form class="sell-form"  action="{% url 'signup' %}">
+            <form class="sell-form" action="{% url 'signup' %}">
                 {% if request.user.is_authenticated %}
                 <div class="form-group">
                     <label>Price ({{ currency }})</label>
@@ -284,12 +288,12 @@
                 </div>
                 {% else %}
                 <div class="form-group">
-                    <label>Price ({{ currency }})</label>
-                    <input type="text" id="sell-price" name="sell-price" value="{{ price2 }}" disabled>
+                    <label style="color: white;">Price ({{ currency }})</label>
+                    <input type="text" id="sell-price" name="sell-price" value="{{ price2 }}" style="color: white;" disabled>
                 </div>
                 <div class="form-group">
-                    <label>Amount ({{ asset }})</label>
-                    <input type="text" id="sell-amount" name="sell-amount" disabled>
+                    <label style="color: white;">Amount ({{ asset }})</label>
+                    <input style="color: white;" type="text" id="sell-amount" name="sell-amount" disabled>
                 </div>
                 {% endif %}
                 <button type="submit" class="btn btn-danger">Зарегистрироваться</button>

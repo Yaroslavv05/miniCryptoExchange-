@@ -5,7 +5,8 @@ class SearchCoinForm(forms.Form):
     name_coin = forms.CharField(widget=forms.TextInput(attrs={
         'placeholder': 'BTCUSDT',
         'type': 'text',
-        'id': 'search-input'
+        'id': 'search-input',
+        'style': 'color: white; background: rgb(16, 35, 49);'
     }))
 
 
@@ -17,10 +18,12 @@ class BUYForm(forms.Form):
             'type': 'text',
             'id': 'buy-price',
             'name': 'buy-price',
-            'value': initial_price
+            'value': initial_price,
+            'style': 'background: rgb(16, 35, 49); color: white;'
         }))
         self.fields['amount'] = forms.CharField(widget=forms.TextInput(attrs={
             'type': 'text',
             'id': 'buy-amount',
-            'name': 'buy-amount'
+            'name': 'buy-amount',
+            'style': 'background: rgb(16, 35, 49); color: white;'
         }))
