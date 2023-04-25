@@ -4,7 +4,8 @@ from django import forms
 class SearchCoinForm(forms.Form):
     name_coin = forms.CharField(widget=forms.TextInput(attrs={
         'placeholder': 'BTCUSDT',
-        'type': 'text'
+        'type': 'text',
+        'id': 'search-input'
     }))
 
 

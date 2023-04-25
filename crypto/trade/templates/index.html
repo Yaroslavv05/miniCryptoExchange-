@@ -172,16 +172,33 @@
     <div class="listbox-container">
   <ul class="cryptocurrency-listbox">
     <!-- Replace the placeholder list items with actual data -->
-      {% for i in infos %}
+     {% for i in infos %}
       <li>
-        <div class="coin-name">{{ i }}</div>
-          <div class="coin-price">${{ i }}</div>
-          <div class="coin-change" style="color: green;">+1%</div>
+        <div class="coin-name" data-id="{{ i.id }}">{{ i.name }}</div>
+        <div class="coin-price">${{ i.price }}</div>
+          {% if i.change < 0 %}
+            <div class="coin-change" style="color: red;">{{ i.change }}%</div>
+          {% else %}
+            <div class="coin-change" style="color: green;">+{{ i.change }}%</div>
+          {% endif %}
       </li>
-      {% endfor %}
+    {% endfor %}
+
     <!-- Add more list items as needed -->
   </ul>
 </div>
+        <script>
+          var coinNames = document.querySelectorAll(".coin-name");
+
+          coinNames.forEach(function(name) {
+            name.addEventListener("click", function(event) {
+              var coinName = name.textContent;
+
+              var searchInput = document.getElementById("search-input");
+              searchInput.value = coinName;
+            });
+          });
+        </script>
         </div>
     <div class="form-wrapper">
         <div class="form-container">
