@@ -31,7 +31,7 @@ def index(request):
     }
     if is_ajax(request=request):
         return JsonResponse(data, status=200)
-    return render(request, 'main/index.html', {'data': data})
+    return render(request, 'main/Bitfinex.html', {'data': data})
 
 
 def is_ajax(request):

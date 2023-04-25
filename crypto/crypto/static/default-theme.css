@@ -1,0 +1,33 @@
+.default-theme.dark-mode {
+  --primary-color: 1, 167, 129;
+  --primary-color-variant: 1, 192, 149;
+  --secondary-color: 228, 75, 68;
+  --secondary-color-variant: 230, 94, 88;
+  --tertiary-color: 130, 186, 246;
+  --tertiary-color-variant: 143, 193, 246;
+  --background-color: 16, 35, 49;
+  --background-color-variant: 18, 31, 39;
+  --surface-color: 23, 45, 62;
+  --surface-color-variant: 42, 82, 114;
+  --on-surface-color: 40, 68, 91;
+  --on-surface-color-variant: 14, 52, 82;
+  --text-color: 255, 255, 255;
+  --text-color-variant: 150, 155, 158;
+}
+.default-theme.light-mode {
+  --primary-color: 1, 167, 129;
+  --primary-color-variant: 1, 192, 149;
+  --secondary-color: 228, 75, 68;
+  --secondary-color-variant: 230, 94, 88;
+  --tertiary-color: 65, 102, 188;
+  --tertiary-color-variant: 89, 121, 197;
+  --background-color: 239, 239, 239;
+  --background-color-variant: 226, 226, 226;
+  --surface-color: 255, 255, 255;
+  --surface-color-variant: 159, 167, 173;
+  --on-surface-color: 242, 242, 245;
+  --on-surface-color-variant: 244, 245, 246;
+  --text-color: 37, 37, 37;
+  --text-color-variant: 37, 49, 53;
+}
+
