@@ -1,4 +1,3 @@
-import random
 from django.shortcuts import render, redirect
 import binance
 from django.http import JsonResponse
@@ -61,11 +60,16 @@ def spot(request):
     if request.method == 'POST':
         form = SearchCoinForm(request.POST)
         if form.is_valid():
-            name_coin = form.cleaned_data['name_coin']
-            response = redirect('spot_coin')
-            response.set_cookie('name', name_coin)
-            response.set_cookie('is_first', False)
-            return response
+            name_coin = form.cleaned_data['name_coin'].upper()
+            name_asset_list = list(INFO.keys())
+            for i in name_asset_list:
+                if i + 'USDT' != name_coin:
+                    return redirect('main')
+                else:
+                    response = redirect('spot_coin')
+                    response.set_cookie('name', name_coin)
+                    response.set_cookie('is_first', False)
+                    return response
         else:
             for error in list(form.errors.values()):
                 messages.error(request, error)
@@ -102,7 +106,7 @@ def spot(request):
     infos = []
     for i in range(len(list(INFO.keys()))):
         symbol = str((list(INFO.keys())[i])) + 'USDT'
-        full_info = {'name': symbol, 'price': float(client.get_ticker(symbol=symbol)['lastPrice']),
+        full_info = {'name': symbol, 'price': float(client.get_ticker(symbol=symbol)['lastPrice']) ,
                      'change': round(float(client.get_ticker(symbol=symbol)['priceChangePercent']), 2)}
         infos.append(full_info)
     response = render(request, 'index.html',
@@ -120,11 +124,16 @@ def spot_coin(request):
     if request.method == 'POST':
         form = SearchCoinForm(request.POST)
         if form.is_valid():
-            name_coin = form.cleaned_data['name_coin']
-            response = redirect('spot_coin')
-            response.set_cookie('name', name_coin)
-            response.set_cookie('is_first', False)
-            return response
+            name_coin = form.cleaned_data['name_coin'].upper()
+            name_asset_list = list(INFO.keys())
+            for i in name_asset_list:
+                if i + 'USDT' != name_coin:
+                    return redirect('main')
+                else:
+                    response = redirect('spot_coin')
+                    response.set_cookie('name', name_coin)
+                    response.set_cookie('is_first', False)
+                    return response
         else:
             for error in list(form.errors.values()):
                 messages.error(request, error)
@@ -160,10 +169,9 @@ def spot_coin(request):
     infos = []
     for i in range(len(list(INFO.keys()))):
         symbol = str((list(INFO.keys())[i])) + 'USDT'
-        full_info = {'name': symbol, 'price': float(client.get_ticker(symbol=symbol)['lastPrice']),
+        full_info = {'name': symbol, 'price': (float(client.get_ticker(symbol=symbol)['lastPrice']) + 3 / 100 * 100),
                      'change': round(float(client.get_ticker(symbol=symbol)['priceChangePercent']), 2)}
         infos.append(full_info)
-    print(infos)
     return render(request, 'index.html',
                   {'form': form, 'symbol': info['symbol'], 'price': divine_number(data_price[-1], 4),
                    'change': round(float(info['priceChangePercent']), 2), 'asset': asset['baseAsset'],

@@ -193,14 +193,16 @@
         <script>
           var coinNames = document.querySelectorAll(".coin-name");
 
-          coinNames.forEach(function(name) {
-            name.addEventListener("click", function(event) {
-              var coinName = name.textContent;
+            coinNames.forEach(function(name) {
+              name.addEventListener("click", function(event) {
+                var coinName = name.textContent;
+                var searchInput = document.getElementById("search-input");
+                searchInput.value = coinName;
 
-              var searchInput = document.getElementById("search-input");
-              searchInput.value = coinName;
+                var searchForm = document.getElementById("search-form");
+                searchForm.submit();
+              });
             });
-          });
 
         </script>
     </div>
