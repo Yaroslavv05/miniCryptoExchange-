@@ -61,15 +61,10 @@ def spot(request):
         form = SearchCoinForm(request.POST)
         if form.is_valid():
             name_coin = form.cleaned_data['name_coin'].upper()
-            name_asset_list = list(INFO.keys())
-            for i in name_asset_list:
-                if i + 'USDT' != name_coin:
-                    return redirect('main')
-                else:
-                    response = redirect('spot_coin')
-                    response.set_cookie('name', name_coin)
-                    response.set_cookie('is_first', False)
-                    return response
+            response = redirect('spot_coin')
+            response.set_cookie('name', name_coin)
+            response.set_cookie('is_first', False)
+            return response
         else:
             for error in list(form.errors.values()):
                 messages.error(request, error)
@@ -125,15 +120,10 @@ def spot_coin(request):
         form = SearchCoinForm(request.POST)
         if form.is_valid():
             name_coin = form.cleaned_data['name_coin'].upper()
-            name_asset_list = list(INFO.keys())
-            for i in name_asset_list:
-                if i + 'USDT' != name_coin:
-                    return redirect('main')
-                else:
-                    response = redirect('spot_coin')
-                    response.set_cookie('name', name_coin)
-                    response.set_cookie('is_first', False)
-                    return response
+            response = redirect('spot_coin')
+            response.set_cookie('name', name_coin)
+            response.set_cookie('is_first', False)
+            return response
         else:
             for error in list(form.errors.values()):
                 messages.error(request, error)
