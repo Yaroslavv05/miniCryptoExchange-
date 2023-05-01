@@ -183,33 +183,18 @@
                                                                 d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
                                                                 fill-rule="evenodd"></path></svg></span></button>
                                                 </td>
-                                                <td class="symbol-col symbol-cell">BTC/USD</td>
-                                                <td class="col-right price-cell">27,291</td>
-                                                <td class="col-right daily-change-cell"><span class="bfx-red-text">-0.87%</span>
+                                                <td class="symbol-col symbol-cell">BTC/USDT</td>
+                                                <td class="col-right price-cell">{{ data.BTC.price }}</td>
+                                                {% if data.BTC.per < 0 %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: red;">{{ data.BTC.per }}%</span>
                                                 </td>
-                                                <td class="col-right day-high-cell">27,735</td>
-                                                <td class="col-right day-low-cell">26,978</td>
-                                                <td class="col-right volume-col volume-cell"><span>32,856,606 USD</span>
+                                                {% else %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: green;">+{{ data.BTC.per }}%</span>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="landing-tickers__fav-column fav-cell">
-                                                    <button type="button"
-                                                            class="bp3-button bp3-minimal landing-tickers__fav-button">
-                                                        <span icon="star-empty" aria-hidden="true" tabindex="0"
-                                                              class="bp3-icon bp3-icon-star-empty"><svg
-                                                                data-icon="star-empty" width="16" height="16"
-                                                                viewBox="0 0 16 16"><path
-                                                                d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
-                                                                fill-rule="evenodd"></path></svg></span></button>
-                                                </td>
-                                                <td class="symbol-col symbol-cell">USDt/USD</td>
-                                                <td class="col-right price-cell">1.0007</td>
-                                                <td class="col-right daily-change-cell"><span class="bfx-red-text">-0.01%</span>
-                                                </td>
-                                                <td class="col-right day-high-cell">1.0008</td>
-                                                <td class="col-right day-low-cell">1.0006</td>
-                                                <td class="col-right volume-col volume-cell"><span>12,287,869 USD</span>
+                                                {% endif %}
+                                                <td class="col-right day-high-cell">{{ data.BTC.highPrice }}</td>
+                                                <td class="col-right day-low-cell">{{ data.BTC.lowPrice }}</td>
+                                                <td class="col-right volume-col volume-cell"><span>{{ data.BTC.volume }} BTC</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -223,33 +208,18 @@
                                                                 d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
                                                                 fill-rule="evenodd"></path></svg></span></button>
                                                 </td>
-                                                <td class="symbol-col symbol-cell">ETH/USD</td>
-                                                <td class="col-right price-cell">1,816.7</td>
-                                                <td class="col-right daily-change-cell"><span class="bfx-red-text">-2.00%</span>
+                                                <td class="symbol-col symbol-cell">ETH/USDT</td>
+                                                <td class="col-right price-cell">{{ data.ETH.price }}</td>
+                                                {% if data.ETH.per < 0 %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: red;">{{ data.ETH.per }}%</span>
                                                 </td>
-                                                <td class="col-right day-high-cell">1,877.1</td>
-                                                <td class="col-right day-low-cell">1,808.1</td>
-                                                <td class="col-right volume-col volume-cell"><span>8,658,200 USD</span>
+                                                {% else %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: green;">+{{ data.ETH.per }}%</span>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="landing-tickers__fav-column fav-cell">
-                                                    <button type="button"
-                                                            class="bp3-button bp3-minimal landing-tickers__fav-button">
-                                                        <span icon="star-empty" aria-hidden="true" tabindex="0"
-                                                              class="bp3-icon bp3-icon-star-empty"><svg
-                                                                data-icon="star-empty" width="16" height="16"
-                                                                viewBox="0 0 16 16"><path
-                                                                d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
-                                                                fill-rule="evenodd"></path></svg></span></button>
-                                                </td>
-                                                <td class="symbol-col symbol-cell">XRP/USD</td>
-                                                <td class="col-right price-cell">0.45525</td>
-                                                <td class="col-right daily-change-cell"><span class="bfx-red-text">-1.77%</span>
-                                                </td>
-                                                <td class="col-right day-high-cell">0.46737</td>
-                                                <td class="col-right day-low-cell">0.44742</td>
-                                                <td class="col-right volume-col volume-cell"><span>1,667,386 USD</span>
+                                                {% endif %}
+                                                <td class="col-right day-high-cell">{{ data.ETH.highPrice }}</td>
+                                                <td class="col-right day-low-cell">{{ data.ETH.lowPrice }}</td>
+                                                <td class="col-right volume-col volume-cell"><span>{{ data.ETH.volume }} ETH</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -263,33 +233,18 @@
                                                                 d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
                                                                 fill-rule="evenodd"></path></svg></span></button>
                                                 </td>
-                                                <td class="symbol-col symbol-cell">LTC/USD</td>
-                                                <td class="col-right price-cell">87.697</td>
-                                                <td class="col-right daily-change-cell"><span class="bfx-green-text">0.21%</span>
+                                                <td class="symbol-col symbol-cell">BNB/USDT</td>
+                                                <td class="col-right price-cell">{{ data.BNB.price }}</td>
+                                                {% if data.BNB.per < 0 %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: red;">{{ data.BNB.per }}%</span>
                                                 </td>
-                                                <td class="col-right day-high-cell">89.017</td>
-                                                <td class="col-right day-low-cell">86.020</td>
-                                                <td class="col-right volume-col volume-cell"><span>784,200 USD</span>
+                                                {% else %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: green;">+{{ data.BNB.per }}%</span>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="landing-tickers__fav-column fav-cell">
-                                                    <button type="button"
-                                                            class="bp3-button bp3-minimal landing-tickers__fav-button">
-                                                        <span icon="star-empty" aria-hidden="true" tabindex="0"
-                                                              class="bp3-icon bp3-icon-star-empty"><svg
-                                                                data-icon="star-empty" width="16" height="16"
-                                                                viewBox="0 0 16 16"><path
-                                                                d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
-                                                                fill-rule="evenodd"></path></svg></span></button>
-                                                </td>
-                                                <td class="symbol-col symbol-cell">SOL/USD</td>
-                                                <td class="col-right price-cell">20.925</td>
-                                                <td class="col-right daily-change-cell"><span class="bfx-red-text">-2.33%</span>
-                                                </td>
-                                                <td class="col-right day-high-cell">21.996</td>
-                                                <td class="col-right day-low-cell">20.824</td>
-                                                <td class="col-right volume-col volume-cell"><span>739,345 USD</span>
+                                                {% endif %}
+                                                <td class="col-right day-high-cell">{{ data.BNB.highPrice }}</td>
+                                                <td class="col-right day-low-cell">{{ data.BNB.lowPrice }}</td>
+                                                <td class="col-right volume-col volume-cell"><span>{{ data.BNB.volume }} BNB</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -303,33 +258,18 @@
                                                                 d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
                                                                 fill-rule="evenodd"></path></svg></span></button>
                                                 </td>
-                                                <td class="symbol-col symbol-cell">ADA/USD</td>
-                                                <td class="col-right price-cell">0.37942</td>
-                                                <td class="col-right daily-change-cell"><span class="bfx-red-text">-1.64%</span>
+                                                <td class="symbol-col symbol-cell">ADA/USDT</td>
+                                                <td class="col-right price-cell">{{ data.ADA.price }}</td>
+                                                {% if data.ADA.per < 0 %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: red;">{{ data.ADA.per }}%</span>
                                                 </td>
-                                                <td class="col-right day-high-cell">0.39418</td>
-                                                <td class="col-right day-low-cell">0.37625</td>
-                                                <td class="col-right volume-col volume-cell"><span>672,895 USD</span>
+                                                {% else %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: green;">+{{ data.ADA.per }}%</span>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="landing-tickers__fav-column fav-cell">
-                                                    <button type="button"
-                                                            class="bp3-button bp3-minimal landing-tickers__fav-button">
-                                                        <span icon="star-empty" aria-hidden="true" tabindex="0"
-                                                              class="bp3-icon bp3-icon-star-empty"><svg
-                                                                data-icon="star-empty" width="16" height="16"
-                                                                viewBox="0 0 16 16"><path
-                                                                d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
-                                                                fill-rule="evenodd"></path></svg></span></button>
-                                                </td>
-                                                <td class="symbol-col symbol-cell">USDC/USD</td>
-                                                <td class="col-right price-cell">1.0007</td>
-                                                <td class="col-right daily-change-cell"><span class="bfx-green-text">0.01%</span>
-                                                </td>
-                                                <td class="col-right day-high-cell">1.0012</td>
-                                                <td class="col-right day-low-cell">1.0005</td>
-                                                <td class="col-right volume-col volume-cell"><span>469,221 USD</span>
+                                                {% endif %}
+                                                <td class="col-right day-high-cell">{{ data.ADA.highPrice }}</td>
+                                                <td class="col-right day-low-cell">{{ data.ADA.lowPrice }}</td>
+                                                <td class="col-right volume-col volume-cell"><span>{{ data.ADA.volume }} ADA</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -343,13 +283,118 @@
                                                                 d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
                                                                 fill-rule="evenodd"></path></svg></span></button>
                                                 </td>
-                                                <td class="symbol-col symbol-cell">MATIC/USD</td>
-                                                <td class="col-right price-cell">0.96272</td>
-                                                <td class="col-right daily-change-cell"><span class="bfx-red-text">-2.95%</span>
+                                                <td class="symbol-col symbol-cell">XRP/USDT</td>
+                                                <td class="col-right price-cell">{{ data.XRP.price }}</td>
+                                                {% if data.XRP.per < 0 %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: red;">{{ data.XRP.per }}%</span>
                                                 </td>
-                                                <td class="col-right day-high-cell">1.0094</td>
-                                                <td class="col-right day-low-cell">0.95993</td>
-                                                <td class="col-right volume-col volume-cell"><span>351,803 USD</span>
+                                                {% else %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: green;">+{{ data.XRP.per }}%</span>
+                                                </td>
+                                                {% endif %}
+                                                <td class="col-right day-high-cell">{{ data.XRP.highPrice }}</td>
+                                                <td class="col-right day-low-cell">{{ data.XRP.lowPrice }}</td>
+                                                <td class="col-right volume-col volume-cell"><span>{{ data.XRP.volume }} XRP</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="landing-tickers__fav-column fav-cell">
+                                                    <button type="button"
+                                                            class="bp3-button bp3-minimal landing-tickers__fav-button">
+                                                        <span icon="star-empty" aria-hidden="true" tabindex="0"
+                                                              class="bp3-icon bp3-icon-star-empty"><svg
+                                                                data-icon="star-empty" width="16" height="16"
+                                                                viewBox="0 0 16 16"><path
+                                                                d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
+                                                                fill-rule="evenodd"></path></svg></span></button>
+                                                </td>
+                                                <td class="symbol-col symbol-cell">DOT/USDT</td>
+                                                <td class="col-right price-cell">{{ data.DOT.price }}</td>
+                                                {% if data.DOT.per < 0 %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: red;">{{ data.DOT.per }}%</span>
+                                                </td>
+                                                {% else %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: green;">+{{ data.DOT.per }}%</span>
+                                                </td>
+                                                {% endif %}
+                                                <td class="col-right day-high-cell">{{ data.DOT.highPrice }}</td>
+                                                <td class="col-right day-low-cell">{{ data.DOT.lowPrice }}</td>
+                                                <td class="col-right volume-col volume-cell"><span>{{ data.DOT.volume }} DOT</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="landing-tickers__fav-column fav-cell">
+                                                    <button type="button"
+                                                            class="bp3-button bp3-minimal landing-tickers__fav-button">
+                                                        <span icon="star-empty" aria-hidden="true" tabindex="0"
+                                                              class="bp3-icon bp3-icon-star-empty"><svg
+                                                                data-icon="star-empty" width="16" height="16"
+                                                                viewBox="0 0 16 16"><path
+                                                                d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
+                                                                fill-rule="evenodd"></path></svg></span></button>
+                                                </td>
+                                                <td class="symbol-col symbol-cell">UNI/USDT</td>
+                                                <td class="col-right price-cell">{{ data.UNI.price }}</td>
+                                                {% if data.UNI.per < 0 %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: red;">{{ data.UNI.per }}%</span>
+                                                </td>
+                                                {% else %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: green;">+{{ data.UNI.per }}%</span>
+                                                </td>
+                                                {% endif %}
+                                                <td class="col-right day-high-cell">{{ data.UNI.highPrice }}</td>
+                                                <td class="col-right day-low-cell">{{ data.UNI.lowPrice }}</td>
+                                                <td class="col-right volume-col volume-cell"><span>{{ data.UNI.volume }} UNI</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="landing-tickers__fav-column fav-cell">
+                                                    <button type="button"
+                                                            class="bp3-button bp3-minimal landing-tickers__fav-button">
+                                                        <span icon="star-empty" aria-hidden="true" tabindex="0"
+                                                              class="bp3-icon bp3-icon-star-empty"><svg
+                                                                data-icon="star-empty" width="16" height="16"
+                                                                viewBox="0 0 16 16"><path
+                                                                d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
+                                                                fill-rule="evenodd"></path></svg></span></button>
+                                                </td>
+                                                <td class="symbol-col symbol-cell">MATIC/USDT</td>
+                                                <td class="col-right price-cell">{{ data.MATIC.price }}</td>
+                                                {% if data.MATIC.per < 0 %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: red;">{{ data.MATIC.per }}%</span>
+                                                </td>
+                                                {% else %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: green;">+{{ data.MATIC.per }}%</span>
+                                                </td>
+                                                {% endif %}
+                                                <td class="col-right day-high-cell">{{ data.MATIC.highPrice }}</td>
+                                                <td class="col-right day-low-cell">{{ data.MATIC.lowPrice }}</td>
+                                                <td class="col-right volume-col volume-cell"><span>{{ data.MATIC.volume }} MATIC</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="landing-tickers__fav-column fav-cell">
+                                                    <button type="button"
+                                                            class="bp3-button bp3-minimal landing-tickers__fav-button">
+                                                        <span icon="star-empty" aria-hidden="true" tabindex="0"
+                                                              class="bp3-icon bp3-icon-star-empty"><svg
+                                                                data-icon="star-empty" width="16" height="16"
+                                                                viewBox="0 0 16 16"><path
+                                                                d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
+                                                                fill-rule="evenodd"></path></svg></span></button>
+                                                </td>
+                                                <td class="symbol-col symbol-cell">DOGE/USDT</td>
+                                                <td class="col-right price-cell">{{ data.DOGE.price }}</td>
+                                                {% if data.DOGE.per < 0 %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: red;">{{ data.DOGE.per }}%</span>
+                                                </td>
+                                                {% else %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: green;">+{{ data.DOGE.per }}%</span>
+                                                </td>
+                                                {% endif %}
+                                                <td class="col-right day-high-cell">{{ data.DOGE.highPrice }}</td>
+                                                <td class="col-right day-low-cell">{{ data.DOGE.lowPrice }}</td>
+                                                <td class="col-right volume-col volume-cell"><span>{{ data.DOGE.volume }} DOGE</span>
                                                 </td>
                                             </tr>
 
@@ -437,33 +482,18 @@
                                                                 d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
                                                                 fill-rule="evenodd"></path></svg></span></button>
                                                 </td>
-                                                <td class="symbol-col symbol-cell">BTC/USD</td>
-                                                <td class="col-right price-cell">27,291</td>
-                                                <td class="col-right daily-change-cell"><span class="bfx-red-text">-0.87%</span>
+                                                <td class="symbol-col symbol-cell">BTC/USDT</td>
+                                                <td class="col-right price-cell">{{ data.BTC.price }}</td>
+                                                {% if data.BTC.per < 0 %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: red;">{{ data.BTC.per }}%</span>
                                                 </td>
-                                                <td class="col-right day-high-cell">27,735</td>
-                                                <td class="col-right day-low-cell">26,978</td>
-                                                <td class="col-right volume-col volume-cell"><span>32,856,606 USD</span>
+                                                {% else %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: green;">+{{ data.BTC.per }}%</span>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="landing-tickers__fav-column fav-cell">
-                                                    <button type="button"
-                                                            class="bp3-button bp3-minimal landing-tickers__fav-button">
-                                                        <span icon="star-empty" aria-hidden="true" tabindex="0"
-                                                              class="bp3-icon bp3-icon-star-empty"><svg
-                                                                data-icon="star-empty" width="16" height="16"
-                                                                viewBox="0 0 16 16"><path
-                                                                d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
-                                                                fill-rule="evenodd"></path></svg></span></button>
-                                                </td>
-                                                <td class="symbol-col symbol-cell">USDt/USD</td>
-                                                <td class="col-right price-cell">1.0007</td>
-                                                <td class="col-right daily-change-cell"><span class="bfx-red-text">-0.01%</span>
-                                                </td>
-                                                <td class="col-right day-high-cell">1.0008</td>
-                                                <td class="col-right day-low-cell">1.0006</td>
-                                                <td class="col-right volume-col volume-cell"><span>12,287,869 USD</span>
+                                                {% endif %}
+                                                <td class="col-right day-high-cell">{{ data.BTC.highPrice }}</td>
+                                                <td class="col-right day-low-cell">{{ data.BTC.lowPrice }}</td>
+                                                <td class="col-right volume-col volume-cell"><span>{{ data.BTC.volume }} BTC</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -477,33 +507,18 @@
                                                                 d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
                                                                 fill-rule="evenodd"></path></svg></span></button>
                                                 </td>
-                                                <td class="symbol-col symbol-cell">ETH/USD</td>
-                                                <td class="col-right price-cell">1,816.7</td>
-                                                <td class="col-right daily-change-cell"><span class="bfx-red-text">-2.00%</span>
+                                                <td class="symbol-col symbol-cell">ETH/USDT</td>
+                                                <td class="col-right price-cell">{{ data.ETH.price }}</td>
+                                                {% if data.ETH.per < 0 %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: red;">{{ data.ETH.per }}%</span>
                                                 </td>
-                                                <td class="col-right day-high-cell">1,877.1</td>
-                                                <td class="col-right day-low-cell">1,808.1</td>
-                                                <td class="col-right volume-col volume-cell"><span>8,658,200 USD</span>
+                                                {% else %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: green;">+{{ data.ETH.per }}%</span>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="landing-tickers__fav-column fav-cell">
-                                                    <button type="button"
-                                                            class="bp3-button bp3-minimal landing-tickers__fav-button">
-                                                        <span icon="star-empty" aria-hidden="true" tabindex="0"
-                                                              class="bp3-icon bp3-icon-star-empty"><svg
-                                                                data-icon="star-empty" width="16" height="16"
-                                                                viewBox="0 0 16 16"><path
-                                                                d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
-                                                                fill-rule="evenodd"></path></svg></span></button>
-                                                </td>
-                                                <td class="symbol-col symbol-cell">XRP/USD</td>
-                                                <td class="col-right price-cell">0.45525</td>
-                                                <td class="col-right daily-change-cell"><span class="bfx-red-text">-1.77%</span>
-                                                </td>
-                                                <td class="col-right day-high-cell">0.46737</td>
-                                                <td class="col-right day-low-cell">0.44742</td>
-                                                <td class="col-right volume-col volume-cell"><span>1,667,386 USD</span>
+                                                {% endif %}
+                                                <td class="col-right day-high-cell">{{ data.ETH.highPrice }}</td>
+                                                <td class="col-right day-low-cell">{{ data.ETH.lowPrice }}</td>
+                                                <td class="col-right volume-col volume-cell"><span>{{ data.ETH.volume }} ETH</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -517,33 +532,18 @@
                                                                 d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
                                                                 fill-rule="evenodd"></path></svg></span></button>
                                                 </td>
-                                                <td class="symbol-col symbol-cell">LTC/USD</td>
-                                                <td class="col-right price-cell">87.697</td>
-                                                <td class="col-right daily-change-cell"><span class="bfx-green-text">0.21%</span>
+                                                <td class="symbol-col symbol-cell">BNB/USDT</td>
+                                                <td class="col-right price-cell">{{ data.BNB.price }}</td>
+                                                {% if data.BNB.per < 0 %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: red;">{{ data.BNB.per }}%</span>
                                                 </td>
-                                                <td class="col-right day-high-cell">89.017</td>
-                                                <td class="col-right day-low-cell">86.020</td>
-                                                <td class="col-right volume-col volume-cell"><span>784,200 USD</span>
+                                                {% else %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: green;">+{{ data.BNB.per }}%</span>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="landing-tickers__fav-column fav-cell">
-                                                    <button type="button"
-                                                            class="bp3-button bp3-minimal landing-tickers__fav-button">
-                                                        <span icon="star-empty" aria-hidden="true" tabindex="0"
-                                                              class="bp3-icon bp3-icon-star-empty"><svg
-                                                                data-icon="star-empty" width="16" height="16"
-                                                                viewBox="0 0 16 16"><path
-                                                                d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
-                                                                fill-rule="evenodd"></path></svg></span></button>
-                                                </td>
-                                                <td class="symbol-col symbol-cell">SOL/USD</td>
-                                                <td class="col-right price-cell">20.925</td>
-                                                <td class="col-right daily-change-cell"><span class="bfx-red-text">-2.33%</span>
-                                                </td>
-                                                <td class="col-right day-high-cell">21.996</td>
-                                                <td class="col-right day-low-cell">20.824</td>
-                                                <td class="col-right volume-col volume-cell"><span>739,345 USD</span>
+                                                {% endif %}
+                                                <td class="col-right day-high-cell">{{ data.BNB.highPrice }}</td>
+                                                <td class="col-right day-low-cell">{{ data.BNB.lowPrice }}</td>
+                                                <td class="col-right volume-col volume-cell"><span>{{ data.BNB.volume }} BNB</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -557,33 +557,18 @@
                                                                 d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
                                                                 fill-rule="evenodd"></path></svg></span></button>
                                                 </td>
-                                                <td class="symbol-col symbol-cell">ADA/USD</td>
-                                                <td class="col-right price-cell">0.37942</td>
-                                                <td class="col-right daily-change-cell"><span class="bfx-red-text">-1.64%</span>
+                                                <td class="symbol-col symbol-cell">ADA/USDT</td>
+                                                <td class="col-right price-cell">{{ data.ADA.price }}</td>
+                                                {% if data.ADA.per < 0 %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: red;">{{ data.ADA.per }}%</span>
                                                 </td>
-                                                <td class="col-right day-high-cell">0.39418</td>
-                                                <td class="col-right day-low-cell">0.37625</td>
-                                                <td class="col-right volume-col volume-cell"><span>672,895 USD</span>
+                                                {% else %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: green;">+{{ data.ADA.per }}%</span>
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="landing-tickers__fav-column fav-cell">
-                                                    <button type="button"
-                                                            class="bp3-button bp3-minimal landing-tickers__fav-button">
-                                                        <span icon="star-empty" aria-hidden="true" tabindex="0"
-                                                              class="bp3-icon bp3-icon-star-empty"><svg
-                                                                data-icon="star-empty" width="16" height="16"
-                                                                viewBox="0 0 16 16"><path
-                                                                d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
-                                                                fill-rule="evenodd"></path></svg></span></button>
-                                                </td>
-                                                <td class="symbol-col symbol-cell">USDC/USD</td>
-                                                <td class="col-right price-cell">1.0007</td>
-                                                <td class="col-right daily-change-cell"><span class="bfx-green-text">0.01%</span>
-                                                </td>
-                                                <td class="col-right day-high-cell">1.0012</td>
-                                                <td class="col-right day-low-cell">1.0005</td>
-                                                <td class="col-right volume-col volume-cell"><span>469,221 USD</span>
+                                                {% endif %}
+                                                <td class="col-right day-high-cell">{{ data.ADA.highPrice }}</td>
+                                                <td class="col-right day-low-cell">{{ data.ADA.lowPrice }}</td>
+                                                <td class="col-right volume-col volume-cell"><span>{{ data.ADA.volume }} ADA</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -597,13 +582,118 @@
                                                                 d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
                                                                 fill-rule="evenodd"></path></svg></span></button>
                                                 </td>
-                                                <td class="symbol-col symbol-cell">MATIC/USD</td>
-                                                <td class="col-right price-cell">0.96272</td>
-                                                <td class="col-right daily-change-cell"><span class="bfx-red-text">-2.95%</span>
+                                                <td class="symbol-col symbol-cell">XRP/USDT</td>
+                                                <td class="col-right price-cell">{{ data.XRP.price }}</td>
+                                                {% if data.XRP.per < 0 %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: red;">{{ data.XRP.per }}%</span>
                                                 </td>
-                                                <td class="col-right day-high-cell">1.0094</td>
-                                                <td class="col-right day-low-cell">0.95993</td>
-                                                <td class="col-right volume-col volume-cell"><span>351,803 USD</span>
+                                                {% else %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: green;">+{{ data.XRP.per }}%</span>
+                                                </td>
+                                                {% endif %}
+                                                <td class="col-right day-high-cell">{{ data.XRP.highPrice }}</td>
+                                                <td class="col-right day-low-cell">{{ data.XRP.lowPrice }}</td>
+                                                <td class="col-right volume-col volume-cell"><span>{{ data.XRP.volume }} XRP</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="landing-tickers__fav-column fav-cell">
+                                                    <button type="button"
+                                                            class="bp3-button bp3-minimal landing-tickers__fav-button">
+                                                        <span icon="star-empty" aria-hidden="true" tabindex="0"
+                                                              class="bp3-icon bp3-icon-star-empty"><svg
+                                                                data-icon="star-empty" width="16" height="16"
+                                                                viewBox="0 0 16 16"><path
+                                                                d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
+                                                                fill-rule="evenodd"></path></svg></span></button>
+                                                </td>
+                                                <td class="symbol-col symbol-cell">DOT/USDT</td>
+                                                <td class="col-right price-cell">{{ data.DOT.price }}</td>
+                                                {% if data.DOT.per < 0 %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: red;">{{ data.DOT.per }}%</span>
+                                                </td>
+                                                {% else %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: green;">+{{ data.DOT.per }}%</span>
+                                                </td>
+                                                {% endif %}
+                                                <td class="col-right day-high-cell">{{ data.DOT.highPrice }}</td>
+                                                <td class="col-right day-low-cell">{{ data.DOT.lowPrice }}</td>
+                                                <td class="col-right volume-col volume-cell"><span>{{ data.DOT.volume }} DOT</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="landing-tickers__fav-column fav-cell">
+                                                    <button type="button"
+                                                            class="bp3-button bp3-minimal landing-tickers__fav-button">
+                                                        <span icon="star-empty" aria-hidden="true" tabindex="0"
+                                                              class="bp3-icon bp3-icon-star-empty"><svg
+                                                                data-icon="star-empty" width="16" height="16"
+                                                                viewBox="0 0 16 16"><path
+                                                                d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
+                                                                fill-rule="evenodd"></path></svg></span></button>
+                                                </td>
+                                                <td class="symbol-col symbol-cell">UNI/USDT</td>
+                                                <td class="col-right price-cell">{{ data.UNI.price }}</td>
+                                                {% if data.UNI.per < 0 %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: red;">{{ data.UNI.per }}%</span>
+                                                </td>
+                                                {% else %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: green;">+{{ data.UNI.per }}%</span>
+                                                </td>
+                                                {% endif %}
+                                                <td class="col-right day-high-cell">{{ data.UNI.highPrice }}</td>
+                                                <td class="col-right day-low-cell">{{ data.UNI.lowPrice }}</td>
+                                                <td class="col-right volume-col volume-cell"><span>{{ data.UNI.volume }} UNI</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="landing-tickers__fav-column fav-cell">
+                                                    <button type="button"
+                                                            class="bp3-button bp3-minimal landing-tickers__fav-button">
+                                                        <span icon="star-empty" aria-hidden="true" tabindex="0"
+                                                              class="bp3-icon bp3-icon-star-empty"><svg
+                                                                data-icon="star-empty" width="16" height="16"
+                                                                viewBox="0 0 16 16"><path
+                                                                d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
+                                                                fill-rule="evenodd"></path></svg></span></button>
+                                                </td>
+                                                <td class="symbol-col symbol-cell">MATIC/USDT</td>
+                                                <td class="col-right price-cell">{{ data.MATIC.price }}</td>
+                                                {% if data.MATIC.per < 0 %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: red;">{{ data.MATIC.per }}%</span>
+                                                </td>
+                                                {% else %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: green;">+{{ data.MATIC.per }}%</span>
+                                                </td>
+                                                {% endif %}
+                                                <td class="col-right day-high-cell">{{ data.MATIC.highPrice }}</td>
+                                                <td class="col-right day-low-cell">{{ data.MATIC.lowPrice }}</td>
+                                                <td class="col-right volume-col volume-cell"><span>{{ data.MATIC.volume }} MATIC</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="landing-tickers__fav-column fav-cell">
+                                                    <button type="button"
+                                                            class="bp3-button bp3-minimal landing-tickers__fav-button">
+                                                        <span icon="star-empty" aria-hidden="true" tabindex="0"
+                                                              class="bp3-icon bp3-icon-star-empty"><svg
+                                                                data-icon="star-empty" width="16" height="16"
+                                                                viewBox="0 0 16 16"><path
+                                                                d="M16 6.11l-5.53-.84L8 0 5.53 5.27 0 6.11l4 4.1L3.06 16 8 13.27 12.94 16 12 10.21l4-4.1zM4.91 13.2l.59-3.62L3 7.02l3.45-.53L8 3.2l1.55 3.29 3.45.53-2.5 2.56.59 3.62L8 11.49 4.91 13.2z"
+                                                                fill-rule="evenodd"></path></svg></span></button>
+                                                </td>
+                                                <td class="symbol-col symbol-cell">DOGE/USDT</td>
+                                                <td class="col-right price-cell">{{ data.DOGE.price }}</td>
+                                                {% if data.DOGE.per < 0 %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: red;">{{ data.DOGE.per }}%</span>
+                                                </td>
+                                                {% else %}
+                                                <td class="col-right daily-change-cell"><span class="bfx-red-text" style="color: green;">+{{ data.DOGE.per }}%</span>
+                                                </td>
+                                                {% endif %}
+                                                <td class="col-right day-high-cell">{{ data.DOGE.highPrice }}</td>
+                                                <td class="col-right day-low-cell">{{ data.DOGE.lowPrice }}</td>
+                                                <td class="col-right volume-col volume-cell"><span>{{ data.DOGE.volume }} DOGE</span>
                                                 </td>
                                             </tr>
 
