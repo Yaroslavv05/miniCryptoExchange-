@@ -85,7 +85,6 @@ def spot(request):
     else:
         buy_form = BUYForm(initial_price=float(data_price[-1]))
     info = client.get_ticker(symbol=name)
-    # print(client.get_klines(symbol=name, interval='1m'))
     data = {'data': data_price}
     min_data = divine_number(min(data['data']), 4)
     max_data = divine_number(max(data['data']), 4)
