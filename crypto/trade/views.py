@@ -56,7 +56,7 @@ def spot(request):
     name = 'BTCUSDT'
     client = binance.Client()
     data_price = [i[4] for i in client.get_klines(symbol=name, interval='1m')][:100]
-    data_price = [str(float(i) + (float(i) * 0.03)) for i in data_price]
+    data_price = [str((float(i) * 1.03)) for i in data_price]
     if request.method == 'POST':
         form = SearchCoinForm(request.POST)
         if form.is_valid():
@@ -83,7 +83,7 @@ def spot(request):
             for error in list(form.errors.values()):
                 messages.error(request, error)
     else:
-        buy_form = BUYForm(initial_price=float(data_price[-1]))
+        buy_form = BUYForm(initial_price=round(float(data_price[-1]), 4))
     info = client.get_ticker(symbol=name)
     data = {'data': data_price}
     min_data = divine_number(min(data['data']), 4)
@@ -100,13 +100,13 @@ def spot(request):
     infos = []
     for i in range(len(list(INFO.keys()))):
         symbol = str((list(INFO.keys())[i])) + 'USDT'
-        full_info = {'name': symbol, 'price': float(client.get_ticker(symbol=symbol)['lastPrice']) ,
+        full_info = {'name': symbol, 'price': (round(float(client.get_ticker(symbol=symbol)['lastPrice']) * 1.03, 4)),
                      'change': round(float(client.get_ticker(symbol=symbol)['priceChangePercent']), 2)}
         infos.append(full_info)
     response = render(request, 'index.html',
                   {'form': form, 'symbol': info['symbol'], 'price': divine_number(data_price[-1], 4),
                    'change': round(float(info['priceChangePercent']), 2), 'asset': asset['baseAsset'],
-                   'currency': asset['quoteAsset'], 'buy_form': buy_form, 'price2': float(data_price[-1]), 'name_coins': list(INFO.keys()), 'infos': infos})
+                   'currency': asset['quoteAsset'], 'buy_form': buy_form, 'price2': round(float(data_price[-1]), 4), 'name_coins': list(INFO.keys()), 'infos': infos})
     response.set_cookie('name', 'BTCUSDT')
     return response
 
@@ -114,7 +114,7 @@ def spot(request):
 def spot_coin(request):
     client = binance.Client()
     data_price = [i[1] for i in client.get_klines(symbol=request.COOKIES['name'], interval='1m')][:100]
-    data_price = [str(float(i) + (float(i) * 0.03)) for i in data_price]
+    data_price = [str((float(i) * 1.03)) for i in data_price]
     if request.method == 'POST':
         form = SearchCoinForm(request.POST)
         if form.is_valid():
@@ -141,7 +141,7 @@ def spot_coin(request):
             for error in list(form.errors.values()):
                 messages.error(request, error)
     else:
-        buy_form = BUYForm(initial_price=float(data_price[-1]))
+        buy_form = BUYForm(initial_price=round(float(data_price[-1]), 4))
     data = {'data': data_price}
     min_data = divine_number(min(data['data']), 4)
     max_data = divine_number(max(data['data']), 4)
@@ -158,13 +158,13 @@ def spot_coin(request):
     infos = []
     for i in range(len(list(INFO.keys()))):
         symbol = str((list(INFO.keys())[i])) + 'USDT'
-        full_info = {'name': symbol, 'price': (float(client.get_ticker(symbol=symbol)['lastPrice']) + 3 / 100 * 100),
+        full_info = {'name': symbol, 'price': (round(float(client.get_ticker(symbol=symbol)['lastPrice']) * 1.03, 4)),
                      'change': round(float(client.get_ticker(symbol=symbol)['priceChangePercent']), 2)}
         infos.append(full_info)
     return render(request, 'index.html',
                   {'form': form, 'symbol': info['symbol'], 'price': divine_number(data_price[-1], 4),
                    'change': round(float(info['priceChangePercent']), 2), 'asset': asset['baseAsset'],
-                   'currency': asset['quoteAsset'], 'buy_form': buy_form, 'price2': divine_number(data_price[-1], 4), 'infos': infos})
+                   'currency': asset['quoteAsset'], 'buy_form': buy_form, 'price2': round(float(data_price[-1]), 4), 'infos': infos})
 
 
 def pay(request):
