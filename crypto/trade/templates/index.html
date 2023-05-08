@@ -264,7 +264,7 @@
                 <button type="submit" class="btn btn-danger">Sell {{ asset }}</button>
             </form>
             {% else %}
-            <form class="buy-form" method="post" action="{% url 'signup' %}">
+            <form class="buy-form" method="post" action="{% url 'signin' %}">
                 {% csrf_token %}
                 {% if request.user.is_authenticated %}
                 <div class="form-group">
@@ -285,9 +285,9 @@
                     <input type="text" id="buy-amount" name="buy-amount" style="color: white;" disabled>
                 </div>
                 {% endif %}
-                <button type="submit" class="btn btn-success">Зарегистрироваться</button>
+                <button type="submit" class="btn btn-success">Войти</button>
             </form>
-            <form class="sell-form" action="{% url 'signup' %}">
+            <form class="sell-form" action="{% url 'signin' %}">
                 {% if request.user.is_authenticated %}
                 <div class="form-group">
                     <label>Price ({{ currency }})</label>
@@ -307,7 +307,7 @@
                     <input style="color: white;" type="text" id="sell-amount" name="sell-amount" disabled>
                 </div>
                 {% endif %}
-                <button type="submit" class="btn btn-danger">Зарегистрироваться</button>
+                <button type="submit" class="btn btn-danger">Войти</button>
             </form>
             {% endif %}
         </div>
