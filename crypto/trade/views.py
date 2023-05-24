@@ -5,6 +5,9 @@ from django.contrib import messages
 from .forms import SearchCoinForm, BUYForm
 from .config import INFO
 from web3 import Web3
+import asyncio
+from asgiref.sync import async_to_sync
+import aiohttp
 
 
 def divine_number(number_str: str, length: int = 0) -> str:
@@ -52,11 +55,24 @@ def get_price_change(request):
     return JsonResponse(data)
 
 
+async def fetch_ticker(session, symbol):
+    async with session.get(f'https://api.binance.com/api/v3/ticker/24hr?symbol={symbol}') as response:
+        ticker = await response.json()
+        return {
+            'name': symbol,
+            'price': round(float(ticker['lastPrice']) * 1.03, 4),
+            'change': round(float(ticker['priceChangePercent']), 2)
+        }
+
+
 def spot(request):
     name = 'BTCUSDT'
     client = binance.Client()
-    data_price = [i[4] for i in client.get_klines(symbol=name, interval='1m')][:100]
-    data_price = [str((float(i) * 1.03)) for i in data_price]
+
+    # Получение данных о ценах
+    klines = client.get_klines(symbol=name, interval='1m')
+    data_price = [str((float(i[4]) * 1.03)) for i in klines[:100]]
+
     if request.method == 'POST':
         form = SearchCoinForm(request.POST)
         if form.is_valid():
@@ -70,6 +86,7 @@ def spot(request):
                 messages.error(request, error)
     else:
         form = SearchCoinForm()
+
     if request.method == 'POST':
         buy_form = BUYForm(request.POST)
         if buy_form.is_valid():
@@ -80,41 +97,61 @@ def spot(request):
             response.set_cookie('amount', amount)
             return response
         else:
-            for error in list(form.errors.values()):
+            for error in list(buy_form.errors.values()):
                 messages.error(request, error)
     else:
         buy_form = BUYForm(initial_price=round(float(data_price[-1]), 4))
+
     info = client.get_ticker(symbol=name)
-    data = {'data': data_price}
-    min_data = divine_number(min(data['data']), 4)
-    max_data = divine_number(max(data['data']), 4)
-    min_data = str(float(min_data) - (float(min_data) * 0.1 / 100))
-    max_data = str(float(max_data) + (float(max_data) * 0.1 / 100))
-    data_len = []
-    asset = client.get_symbol_info(symbol=name)
-    for i in reversed(range(len(data_price))):
-        data_len.append(str(i + 1) + 'm ago')
-    data = {'min_data': min_data, 'max_data': max_data, 'data': data['data'], 'data_len': data_len}
+    data_len = [str(i + 1) + 'm ago' for i in reversed(range(len(data_price)))]
+
+    # Подготовка данных для передачи в шаблон
+    data = {
+        'min_data': str(float(min(data_price)) - (float(min(data_price)) * 0.1 / 100)),
+        'max_data': str(float(max(data_price)) + (float(max(data_price)) * 0.1 / 100)),
+        'data': data_price,
+        'data_len': data_len
+    }
+
     if is_ajax(request=request):
         return JsonResponse(data, status=200)
-    infos = []
-    for i in range(len(list(INFO.keys()))):
-        symbol = str((list(INFO.keys())[i])) + 'USDT'
-        full_info = {'name': symbol, 'price': (round(float(client.get_ticker(symbol=symbol)['lastPrice']) * 1.03, 4)),
-                     'change': round(float(client.get_ticker(symbol=symbol)['priceChangePercent']), 2)}
-        infos.append(full_info)
-    response = render(request, 'index.html',
-                  {'form': form, 'symbol': info['symbol'], 'price': divine_number(data_price[-1], 4),
-                   'change': round(float(info['priceChangePercent']), 2), 'asset': asset['baseAsset'],
-                   'currency': asset['quoteAsset'], 'buy_form': buy_form, 'price2': round(float(data_price[-1]), 4), 'name_coins': list(INFO.keys()), 'infos': infos})
+
+    async def get_ticker_info():
+        async with aiohttp.ClientSession() as session:
+            symbols = [symbol + 'USDT' for symbol in INFO.keys()]
+            tasks = []
+            for symbol in symbols:
+                tasks.append(fetch_ticker(session, symbol))
+
+            return await asyncio.gather(*tasks)
+
+    infos = async_to_sync(get_ticker_info)()
+
+    asset = client.get_symbol_info(symbol='BTCUSDT')
+    response = render(request, 'index.html', {
+        'form': form,
+        'symbol': info['symbol'],
+        'price': divine_number(data_price[-1], 4),
+        'change': round(float(info['priceChangePercent']), 2),
+        'asset': asset['baseAsset'],
+        'currency': asset['quoteAsset'],
+        'buy_form': buy_form,
+        'price2': round(float(data_price[-1]), 4),
+        'name_coins': list(INFO.keys()),
+        'infos': infos
+    })
+
     response.set_cookie('name', 'BTCUSDT')
     return response
 
 
 def spot_coin(request):
     client = binance.Client()
-    data_price = [i[1] for i in client.get_klines(symbol=request.COOKIES['name'], interval='1m')][:100]
-    data_price = [str((float(i) * 1.03)) for i in data_price]
+
+    # Получение данных о ценах
+    klines = client.get_klines(symbol=request.COOKIES['name'], interval='1m')
+    data_price = [str((float(i[4]) * 1.03)) for i in klines[:100]]
+
     if request.method == 'POST':
         form = SearchCoinForm(request.POST)
         if form.is_valid():
@@ -128,6 +165,7 @@ def spot_coin(request):
                 messages.error(request, error)
     else:
         form = SearchCoinForm()
+
     if request.method == 'POST':
         buy_form = BUYForm(request.POST)
         if buy_form.is_valid():
@@ -138,33 +176,50 @@ def spot_coin(request):
             response.set_cookie('amount', amount)
             return response
         else:
-            for error in list(form.errors.values()):
+            for error in list(buy_form.errors.values()):
                 messages.error(request, error)
     else:
         buy_form = BUYForm(initial_price=round(float(data_price[-1]), 4))
-    data = {'data': data_price}
-    min_data = divine_number(min(data['data']), 4)
-    max_data = divine_number(max(data['data']), 4)
-    min_data = str(float(min_data) - (float(min_data) * 0.1 / 100))
-    max_data = str(float(max_data) + (float(max_data) * 0.1 / 100))
-    data_len = []
+
     info = client.get_ticker(symbol=request.COOKIES['name'])
-    asset = client.get_symbol_info(symbol=request.COOKIES['name'])
-    for i in reversed(range(len(data_price))):
-        data_len.append(str(i + 1) + 'm ago')
-    data = {'min_data': min_data, 'max_data': max_data, 'data': data['data'][:100], 'data_len': data_len}
+    data_len = [str(i + 1) + 'm ago' for i in reversed(range(len(data_price)))]
+
+    # Подготовка данных для передачи в шаблон
+    data = {
+        'min_data': str(float(min(data_price)) - (float(min(data_price)) * 0.1 / 100)),
+        'max_data': str(float(max(data_price)) + (float(max(data_price)) * 0.1 / 100)),
+        'data': data_price,
+        'data_len': data_len
+    }
+
     if is_ajax(request=request):
         return JsonResponse(data, status=200)
-    infos = []
-    for i in range(len(list(INFO.keys()))):
-        symbol = str((list(INFO.keys())[i])) + 'USDT'
-        full_info = {'name': symbol, 'price': (round(float(client.get_ticker(symbol=symbol)['lastPrice']) * 1.03, 4)),
-                     'change': round(float(client.get_ticker(symbol=symbol)['priceChangePercent']), 2)}
-        infos.append(full_info)
-    return render(request, 'index.html',
-                  {'form': form, 'symbol': info['symbol'], 'price': divine_number(data_price[-1], 4),
-                   'change': round(float(info['priceChangePercent']), 2), 'asset': asset['baseAsset'],
-                   'currency': asset['quoteAsset'], 'buy_form': buy_form, 'price2': round(float(data_price[-1]), 4), 'infos': infos})
+
+    async def get_ticker_info():
+        async with aiohttp.ClientSession() as session:
+            symbols = [symbol + 'USDT' for symbol in INFO.keys()]
+            tasks = []
+            for symbol in symbols:
+                tasks.append(fetch_ticker(session, symbol))
+
+            return await asyncio.gather(*tasks)
+
+    infos = async_to_sync(get_ticker_info)()
+    asset = client.get_symbol_info(symbol=request.COOKIES['name'])
+    response = render(request, 'index.html', {
+        'form': form,
+        'symbol': info['symbol'],
+        'price': divine_number(data_price[-1], 4),
+        'change': round(float(info['priceChangePercent']), 2),
+        'asset': asset['baseAsset'],
+        'currency': asset['quoteAsset'],
+        'buy_form': buy_form,
+        'price2': round(float(data_price[-1]), 4),
+        'name_coins': list(INFO.keys()),
+        'infos': infos
+    })
+    response.set_cookie('name', request.COOKIES['name'])
+    return response
 
 
 def pay(request):

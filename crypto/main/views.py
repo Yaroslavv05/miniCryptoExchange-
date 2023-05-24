@@ -6,9 +6,6 @@ client = binance.Client()
 
 
 def index(request):
-    # print(client.get_all_tickers())
-    # print(client.get_symbol_info('XRPUSDT')['baseAsset'])
-    # print(client.get_symbol_info('XRPUSDT')['priceChangePercent'])
     data = {
         'BTC': {'price': round(float(client.get_ticker(symbol='BTCUSDT')['lastPrice']) * 1.03, 4),
                 'per': round(float(client.get_ticker(symbol='BTCUSDT')['priceChangePercent']) + 2.5, 2),
@@ -48,13 +45,13 @@ def index(request):
         'MATIC': {'price': round(float(client.get_ticker(symbol='MATICUSDT')['lastPrice']) * 1.03, 4),
                   'per': round(float(client.get_ticker(symbol='MATICUSDT')['priceChangePercent']) + 2.5, 2),
                   'highPrice': round(float(client.get_ticker(symbol='MATICUSDT')['highPrice']), 4),
-                    'lowPrice': round(float(client.get_ticker(symbol='MATICUSDT')['lowPrice']), 4),
-                    'volume': float(client.get_ticker(symbol='MATICUSDT')['volume'])},
+                  'lowPrice': round(float(client.get_ticker(symbol='MATICUSDT')['lowPrice']), 4),
+                  'volume': float(client.get_ticker(symbol='MATICUSDT')['volume'])},
         'DOGE': {'price': round(float(client.get_ticker(symbol='DOGEUSDT')['lastPrice']) * 1.03, 4),
                  'per': round(float(client.get_ticker(symbol='DOGEUSDT')['priceChangePercent']) + 2.5, 2),
                  'highPrice': round(float(client.get_ticker(symbol='DOGEUSDT')['highPrice']), 4),
-                'lowPrice': round(float(client.get_ticker(symbol='DOGEUSDT')['lowPrice']), 4),
-                'volume': float(client.get_ticker(symbol='DOGEUSDT')['volume'])},
+                 'lowPrice': round(float(client.get_ticker(symbol='DOGEUSDT')['lowPrice']), 4),
+                 'volume': float(client.get_ticker(symbol='DOGEUSDT')['volume'])},
     }
     if is_ajax(request=request):
         return JsonResponse(data, status=200)
