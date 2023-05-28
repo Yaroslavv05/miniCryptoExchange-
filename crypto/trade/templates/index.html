@@ -76,8 +76,8 @@
           margin-right: 15px;
           flex: 1;
           order: 1;
-          width: 800px;
-          height: 400px;
+          width: 700px;
+          height: 350px;
         }
 
         .listbox-container {
@@ -138,9 +138,138 @@
         </form>
     </nav>
     <div class="container_main">
+        <style>
+        .glass {
+            width: 200px;
+            height: 330px;
+            background-color: rgb(16, 35, 49);
+            border: 2px solid rgb(16, 35, 49);
+            border-radius: 5px;
+            position: relative;
+            margin: 50px auto;
+            overflow: hidden;
+            color: white;
+        }
+
+        .container_main {
+            align-items: center;
+        }
+
+        .buy-side {
+            height: 50%;
+            background-color: rgb(16, 35, 49);
+            position: relative;
+        }
+
+        .sell-side {
+            height: 50%;
+            background-color: rgb(16, 35, 49);
+            position: relative;
+        }
+
+        .price-level {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            height: 20px;
+            background-color: rgb(16, 35, 49);
+            position: relative;
+        }
+
+        .price-level span:nth-child(2) {
+            color: white;
+        }
+
+        .price-up {
+            color: #00ff00;
+        }
+
+        .price-down {
+            color: #ff0000;
+        }
+    </style>
+        <div class="glass" id="order-book">
+        <div class="sell-side" id="sell-side"></div>
+        <div class="buy-side" id="buy-side"></div>
+    </div>
         <div class='div_1' style="background: rgb(184, 225, 221);">
             <canvas id="myChart"></canvas>
         </div>
+        <script>
+        // JavaScript для загрузки и обновления данных о ценах монеты
+        let prevPrice = null; // Предыдущая цена
+
+        function updateOrderBook() {
+            // Создание объекта XMLHttpRequest
+            const xhr = new XMLHttpRequest();
+
+            // Указание URL-адреса Binance API и параметров запроса
+            const symbol = '{{ symbol }}'; // Символ монеты (замените на нужный символ)
+            const apiUrl = `https://api.binance.com/api/v3/depth?symbol=${symbol}&limit=10`;
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const data = JSON.parse(xhr.responseText);
+                    const orderBookData = {
+                        buys: data.bids.map(item => ({ price: parseFloat(item[0]), quantity: parseFloat(item[1]) })),
+                        sells: data.asks.map(item => ({ price: parseFloat(item[0]), quantity: parseFloat(item[1]) }))
+                    };
+
+                    const buySideElement = document.getElementById('buy-side');
+                    const sellSideElement = document.getElementById('sell-side');
+
+                    buySideElement.innerHTML = ''; // Очистка предыдущих данных
+                    sellSideElement.innerHTML = ''; // Очистка предыдущих данных
+
+                    // Создание элементов стакана для каждого уровня цены
+                    orderBookData.buys.forEach((buy) => {
+                        const buyElement = createPriceLevelElement(buy.price, buy.quantity, 'buy');
+                        buySideElement.appendChild(buyElement);
+                    });
+
+                    orderBookData.sells.forEach((sell) => {
+                        const sellElement = createPriceLevelElement(sell.price, sell.quantity, 'sell');
+                        sellSideElement.appendChild(sellElement);
+                    });
+
+                    // Проверка изменения цены и применение стилей
+                    const currentPrice = orderBookData.buys[0].price;
+                    if (prevPrice !== null) {
+                        const glassElement = document.getElementById('sell-side');
+                        const glassElement2 = document.getElementById('buy-side');
+                        glassElement.classList.add('price-up');
+                        glassElement2.classList.add('price-down');
+                    }
+                    prevPrice = currentPrice;
+                }
+            };
+
+            // Отправка GET-запроса на Binance API
+            xhr.open('GET', apiUrl, true);
+            xhr.send();
+        }
+
+        function createPriceLevelElement(price, quantity, type) {
+            const priceLevelElement = document.createElement('div');
+            priceLevelElement.className = 'price-level';
+
+            const priceElement = document.createElement('span');
+            priceElement.innerText = price.toFixed(2);
+            priceLevelElement.appendChild(priceElement);
+
+            const quantityElement = document.createElement('span');
+            quantityElement.innerText = quantity;
+            priceLevelElement.appendChild(quantityElement);
+
+            return priceLevelElement;
+        }
+
+        // Обновление стакана каждые 5 секунд
+        setInterval(updateOrderBook, 5000);
+
+        // Инициализация стакана при загрузке страницы
+        updateOrderBook();
+    </script>
         <script>
     var ctx = document.getElementById('myChart').getContext('2d');
                         var myChart = new Chart(ctx, {
