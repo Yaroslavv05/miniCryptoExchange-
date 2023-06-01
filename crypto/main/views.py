@@ -12,7 +12,7 @@ def index(request):
     for symbol in symbols:
         ticker = client.get_ticker(symbol=f'{symbol}USDT')
         price = round(float(ticker['lastPrice']) * 1.03, 4)
-        price_change_percent = round(float(ticker['priceChangePercent']) + 2.5, 2)
+        price_change_percent = round(float(ticker['priceChangePercent']), 2)
         high_price = round(float(ticker['highPrice']), 4)
         low_price = round(float(ticker['lowPrice']), 4)
         volume = float(ticker['volume'])

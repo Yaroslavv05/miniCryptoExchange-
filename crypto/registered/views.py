@@ -10,6 +10,7 @@ from django.utils.encoding import force_bytes, force_str
 from django.core.mail import EmailMessage
 from .tokens import account_activation_token
 from .models import KCYModel
+import binance
 
 
 def user_register(request):
@@ -86,7 +87,13 @@ def user_login(request):
 
 
 def account(request):
-    return render(request, 'account.html')
+    client = binance.Client()
+    btc = client.get_ticker(symbol='BTCUSDT')
+    eth = client.get_ticker(symbol='ETHUSDT')
+    ltc = client.get_ticker(symbol='LTCUSDT')
+    return render(request, 'account.html', {'btc_price': round(float(btc['lastPrice']) * 1.03, 4), 'btc_change': round(float(btc['priceChangePercent']), 2),
+                                            'eth_price': round(float(eth['lastPrice']) * 1.03, 4), 'eth_change': round(float(eth['priceChangePercent']), 2),
+                                            'ltc_price': round(float(ltc['lastPrice']) * 1.03, 4), 'ltc_change': round(float(ltc['priceChangePercent']), 2)})
 
 
 def KYC(request):

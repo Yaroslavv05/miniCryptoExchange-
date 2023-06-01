@@ -13,7 +13,7 @@
     <h1 class="text-center mb-3" style="color: rgb(1, 167, 129);">Общий баланс</h1>
     <p class="text-center mb-5" style="font-size: 30px"><b>0.0 BTC</b> ≈ $0.0000000</p>
     <div class="table-responsive">
-      <table class="table table-bordered table-hover text-center">
+      <table class="table table-bordered text-center">
         <thead class="bg-primary text-white">
           <tr style="background: rgb(1, 167, 129);">
             <th scope="col">Name</th>
@@ -24,29 +24,40 @@
         </thead>
         <tbody>
           <tr style="color: white;">
-            <td scope="row">BTC</td>
+            <td scope="row">BTCUSDT</td>
             <td>0.0</td>
-            <td>$0.0000000</td>
-            <td class="text-success">+0.00%</td>
+            <td>${{btc_price}}</td>
+            {% if btc_change >= 0 %}
+            <td class="text-success">+{{ btc_change }}%</td>
+            {% else %}
+            <td class="text-danger">{{ btc_change }}%</td>
+            {% endif %}
           </tr>
           <tr style="color: white;">
-            <td scope="row">ETH</td>
+            <td scope="row">ETHUSDT</td>
             <td>0.0</td>
-            <td>$0.0000000</td>
-            <td class="text-danger">-0.00%</td>
+            <td>${{eth_price}}</td>
+            {% if eth_change >= 0 %}
+            <td class="text-success">+{{ eth_change }}%</td>
+            {% else %}
+            <td class="text-danger">{{ eth_change }}%</td>
+            {% endif %}
           </tr>
           <tr style="color: white;">
-            <td scope="row">LTC</td>
+            <td scope="row">LTCUSDT</td>
             <td>0.0</td>
-            <td>$0.0000000</td>
-            <td class="text-success">+0.00%</td>
+            <td>${{ltc_price}}</td>
+            {% if ltc_change >= 0 %}
+            <td class="text-success">+{{ ltc_change }}%</td>
+            {% else %}
+            <td class="text-danger">{{ ltc_change }}%</td>
+            {% endif %}
           </tr>
         </tbody>
       </table>
     </div>
   </div>
   <style>
-    /* Additional CSS for design */
     .alert {
       margin-top: 20px;
     }
@@ -103,6 +114,11 @@
 
     .table-responsive {
       overflow-x: auto;
+    }
+
+    tbody th:hover {
+      background-color: initial;
+      color: initial;
     }
   </style>
 {% endblock %}
