@@ -127,6 +127,9 @@ def spot(request):
 
     infos = async_to_sync(get_ticker_info)()
 
+    if is_ajax(request=request):
+        return JsonResponse(data, infos, status=200)
+
     asset = client.get_symbol_info(symbol='BTCUSDT')
     response = render(request, 'index.html', {
         'form': form,

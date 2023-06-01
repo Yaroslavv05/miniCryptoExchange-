@@ -321,7 +321,7 @@
                 <!-- Replace the placeholder list items with actual data -->
                 {% for i in infos %}
                 <li>
-                    <div class="coin-name" data-id="{{ i.id }}" style="color: white;">{{ i.name }}</div>
+                    <div class="coin-name" style="color: white;">{{ i.name }}</div>
                     <div class="coin-price" style="color: white;">${{ i.price }}</div>
                     {% if i.change < 0 %}
                     <div class="coin-change" style="color: red;">{{ i.change }}%</div>
@@ -330,8 +330,6 @@
                     {% endif %}
                 </li>
                 {% endfor %}
-
-                <!-- Add more list items as needed -->
             </ul>
         </div>
         <script>
@@ -347,7 +345,6 @@
                 searchForm.submit();
               });
             });
-
         </script>
     </div>
     <div class="form-wrapper">
